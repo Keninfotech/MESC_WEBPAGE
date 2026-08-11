@@ -268,48 +268,56 @@ body.menu-open{overflow:hidden}
 /* ------------------------------------------------------------- journey grid */
 .journey{
   margin-top:4rem;
-  display:grid;grid-template-columns:260px 1fr;gap:4rem;
+  display:grid;grid-template-columns:minmax(280px, 40%) 1fr;gap:4rem;
 }
-.route-panel{
+.map-panel{
   position:sticky;top:8rem;align-self:start;
-  height:fit-content;
+  height:auto;max-height:80vh;
+  overflow:hidden;
+  border-radius:var(--r-lg);
 }
-.route-track{position:relative;padding-left:1.5rem;margin-top:0.5rem}
-.route-track::before{
-  content:'';position:absolute;left:4px;top:6px;bottom:6px;width:2px;
-  background:var(--line);
+.india-map{
+  width:100%;height:auto;
+  display:block;
+  overflow:hidden;
 }
-.route-progress{
-  position:absolute;left:4px;top:6px;width:2px;height:0%;
-  background:linear-gradient(var(--chennai),var(--vellore),var(--bengaluru),var(--north-karnataka),var(--kerala));
-  transition:height .25s ease-out;
+#svg-map-container path:not(.map-route) {
+  fill: var(--paper-2) !important;
+  stroke: var(--line-strong) !important;
+  stroke-width: 2px !important;
 }
-.route-city{
-  position:relative;padding:0 0 2rem 1.25rem;cursor:default;
+.city-marker .marker-ring {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 2.5px;
+  transition: stroke 0.3s ease, r 0.3s ease;
 }
-.route-city:last-child{padding-bottom:0}
-.route-city .dot{
-  position:absolute;left:-23px;top:2px;width:10px;height:10px;border-radius:50%;
-  background:var(--white);border:2px solid var(--line-strong);
-  transition:all .3s ease;
+.city-marker .marker-dot {
+  fill: var(--white);
+  stroke: var(--line-strong);
+  stroke-width: 2px;
+  transition: fill 0.3s ease, stroke 0.3s ease;
 }
-.route-city.active .dot{
-  background:var(--city-color);border-color:var(--city-color);
-  box-shadow:0 0 0 4px color-mix(in srgb, var(--city-color) 18%, transparent);
-  transform:scale(1.2);
+.city-marker.is-active .marker-ring {
+  stroke: var(--blue-700);
+  r: 18;
 }
-.route-city .city-name{
-  font-family:var(--f-display);font-weight:600;font-size:1.15rem;
-  color:var(--mute);transition:color .3s ease;
+.city-marker.is-active .marker-dot {
+  fill: var(--blue-700);
+  stroke: var(--blue-700);
 }
-.route-city.active .city-name{color:var(--ink)}
-.route-city .city-meta{
-  font-family:var(--f-mono);font-size:0.7rem;letter-spacing:.06em;
-  text-transform:uppercase;color:var(--mute);opacity:.7;margin-top:3px;display:block;
+.city-marker .marker-label{
+  font-family:var(--f-mono);font-size:0.65rem;letter-spacing:0.1em;
+  text-transform:uppercase;fill:var(--mute);
+  transition:all 0.3s ease;
+  dominant-baseline:middle;
 }
-.route-note{
-  margin-top:2.5rem;font-size:0.85rem;color:var(--mute);line-height:1.5;
-  border-top:1px solid var(--line);padding-top:1.2rem;
+.city-marker.is-active .marker-label{
+  fill:var(--ink);font-weight:600;
+}
+.traveler-dot{
+  fill:var(--blue-500);stroke:var(--white);stroke-width:2px;
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,0.15));
 }
 .journey-grid{display:flex;flex-direction:column;gap:5rem}
 .city-group{display:flex;flex-direction:column;gap:2rem}
@@ -326,18 +334,9 @@ body.menu-open{overflow:hidden}
 
 @media (max-width:860px){
   .journey{grid-template-columns:1fr;gap:0}
-  .route-panel{
-    position:sticky;top:4.5rem;z-index:10;background:var(--bg);
-    padding:1rem 0;margin-bottom:2rem;border-bottom:1px solid var(--line);
-    margin-left:-1rem;margin-right:-1rem;padding-left:1rem;padding-right:1rem;
+  .map-panel{
+    display: none; /* Hide map on small screens to prioritize cards */
   }
-  .route-track{display:flex;padding-left:0;gap:1.5rem;overflow-x:auto}
-  .route-track::before{display:none}
-  .route-progress{display:none}
-  .route-city{padding:0;flex:0 0 auto}
-  .route-city .dot{position:static;display:block;margin:0 auto 0.4rem}
-  .route-city .city-meta{display:none}
-  .route-note{display:none}
 }
 
 /* ------------------------------------------------------------- stats cards */
