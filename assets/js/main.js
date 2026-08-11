@@ -103,7 +103,12 @@
   /* -------------------------------------------------------- smooth scroll */
   var lenis = null;
   if (!reduced && typeof window.Lenis !== "undefined" && window.innerWidth > 820) {
-    lenis = new Lenis({ duration: 1.15, smoothWheel: true, lerp: 0.09 });
+    /* Tuned snappier: higher lerp = scroll catches up to input faster,
+       shorter duration = less glide/overshoot. This pairs with the
+       lighter scrub values below so the two smoothing layers don't
+       stack into a laggy, heavy-feeling scroll. */
+    lenis = new Lenis({ duration: 0.9, smoothWheel: true, lerp: 0.12 });
+    window.lenis = lenis;
     if (hasGSAP) {
       lenis.on("scroll", ScrollTrigger.update);
       gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
@@ -350,7 +355,7 @@
       ease: "none",
       scrollTrigger: {
         trigger: wrap, start: "center center", end: function () { return "+=" + dist(); },
-        pin: true, scrub: 1, invalidateOnRefresh: true,
+        pin: true, scrub: 0.3, invalidateOnRefresh: true,
         onUpdate: function (self) { if (bar) gsap.set(bar, { scaleX: 0.05 + self.progress * 0.95 }); }
       }
     });
@@ -364,12 +369,12 @@
   });
 
   /* ---------------------------------------------- pinned scrub sequence */
-  document.querySelectorAll("[data-pinned-seq]").forEach(function(section) {
+  document.querySelectorAll("[data-pinned-seq]").forEach(function (section) {
     var texts = section.querySelectorAll(".seq-text");
     var figs = section.querySelectorAll(".seq-visual figure");
     if (!texts.length || reduced || !hasGSAP) return;
-    
-    texts.forEach(function(txt, i) {
+
+    texts.forEach(function (txt, i) {
       if (i === 0) {
         gsap.set(txt, { opacity: 1, y: 0, scale: 1, zIndex: 2, pointerEvents: "auto" });
       } else {
@@ -377,47 +382,53 @@
       }
     });
 
-    figs.forEach(function(fig, i) {
+    figs.forEach(function (fig, i) {
       if (i === 0) {
         gsap.set(fig, { opacity: 1, scale: 1 });
       } else {
         gsap.set(fig, { opacity: 0, scale: 1.05 });
       }
     });
-    
+
     var tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
         start: "top -60px",
-        end: function() { return "+=" + (texts.length * 100) + "%"; },
+        /* Shorter runway per slide (was 75%) — less physical scrolling
+           effort needed to move between panels. */
+        end: function () { return "+=" + (texts.length * 60) + "%"; },
         pin: true,
-        scrub: 1,
+        /* Lenis already smooths raw input, so the scrub tween itself
+           should track that smoothed value closely rather than adding
+           its own second of catch-up lag (was scrub: 1). This is the
+           main fix for the "heavy / fighting the page" feeling. */
+        scrub: 0.3,
         snap: {
           snapTo: 1 / (texts.length - 1),
-          duration: {min: 0.2, max: 0.8},
+          duration: { min: 0.15, max: 0.4 },
           directional: true,
-          ease: "power1.inOut"
+          ease: "power1.out"
         },
         invalidateOnRefresh: true
       }
     });
-    
-    window.addEventListener("keydown", function(e) {
+
+    window.addEventListener("keydown", function (e) {
       if (!tl.scrollTrigger || !tl.scrollTrigger.isActive) return;
       var activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : "";
       if (activeTag === "input" || activeTag === "textarea" || activeTag === "select") return;
-      
+
       if (e.key === "ArrowDown" || e.key === "ArrowUp") {
         e.preventDefault();
         var dir = e.key === "ArrowDown" ? 1 : -1;
         var st = tl.scrollTrigger;
         var step = (st.end - st.start) / (texts.length - 1);
-        
+
         // Find nearest step index based on progress
         var currentStep = Math.round(st.progress * (texts.length - 1));
         var nextStep = Math.max(0, Math.min(texts.length - 1, currentStep + dir));
         var nextScroll = st.start + nextStep * step;
-        
+
         if (window.lenis) {
           window.lenis.scrollTo(nextScroll, { duration: 0.8 });
         } else {
@@ -425,16 +436,19 @@
         }
       }
     });
-    
-    texts.forEach(function(txt, i) {
+
+    tl.to(section, { duration: texts.length - 1 }, 0); // pad timeline
+
+    texts.forEach(function (txt, i) {
       if (i === 0) return;
-      var start = i - 1;
-      
-      tl.to(texts[i-1], { opacity: 0, y: -80, scale: 0.95, zIndex: 1, pointerEvents: "none", duration: 1, ease: "power1.inOut" }, start);
-      tl.to(figs[i-1], { opacity: 0, scale: 1.05, duration: 1, ease: "power1.inOut" }, start);
-      
-      tl.to(txt, { opacity: 1, y: 0, scale: 1, zIndex: 2, pointerEvents: "auto", duration: 1, ease: "power1.inOut" }, start);
-      tl.to(figs[i], { opacity: 1, scale: 1, duration: 1, ease: "power1.inOut" }, start);
+      var start = i - 0.6;
+      var dur = 0.6;
+
+      tl.to(texts[i - 1], { opacity: 0, y: -80, scale: 0.95, zIndex: 1, pointerEvents: "none", duration: dur, ease: "power1.inOut" }, start);
+      tl.to(figs[i - 1], { opacity: 0, scale: 1.05, duration: dur, ease: "power1.inOut" }, start);
+
+      tl.to(txt, { opacity: 1, y: 0, scale: 1, zIndex: 2, pointerEvents: "auto", duration: dur, ease: "power1.inOut" }, start);
+      tl.to(figs[i], { opacity: 1, scale: 1, duration: dur, ease: "power1.inOut" }, start);
     });
   });
 

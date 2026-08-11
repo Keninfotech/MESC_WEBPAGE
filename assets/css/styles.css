@@ -464,12 +464,56 @@ body.menu-open{overflow:hidden}
   font-size:clamp(1.5rem,3.4vw,2.9rem);line-height:1.18;letter-spacing:-.03em;max-width:22ch;
 }
 
+/* ------------------------------------------------------------- review cards */
+.review-card{
+  width:320px;background:#fff;padding:2.5rem 1.8rem;
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.2rem;
+  box-shadow:0 12px 24px rgba(0,0,0,.06);border-radius:var(--r);
+}
+.review-avatar{
+  width:86px;height:86px;border-radius:50%;background:var(--paper-2);color:#b0b0b0;
+  display:flex;align-items:center;justify-content:center;font-size:2.4rem;font-family:var(--f-display);
+}
+.review-stars{color:#ffc107;font-size:1.4rem;letter-spacing:2px;line-height:1}
+.review-quote{font-size:.95rem;line-height:1.6;color:var(--ink);flex-grow:1}
+.review-link{color:var(--red);font-size:.9rem;text-decoration:none;margin-top:.4rem}
+.review-link:hover{opacity:.8}
+.review-author{font-family:var(--f-display);font-size:.85rem;font-weight:700;color:var(--blue-700);margin-top:.4rem;text-transform:uppercase;letter-spacing:.02em}
+
 /* --------------------------------------------------------------- stats */
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
-.stat{background:#fff;padding:1.5rem 1.4rem}
-.stat b{display:block;font-family:var(--f-display);font-size:1.35rem;letter-spacing:-.02em;color:var(--blue-700);margin-bottom:.3rem}
-.stat span{font-size:.95rem;color:var(--mute)}
-.stat a:hover{color:var(--red)}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(210px,1fr));
+  gap: 1.2rem;
+}
+.stat {
+  display: block;
+  text-decoration: none;
+  background: #fff;
+  padding: 1.8rem 1.4rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+.stat:hover {
+  border-color: var(--blue-700);
+  background: var(--blue-700);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(11, 43, 91, 0.2);
+}
+.stat:hover b, .stat:hover span {
+  color: #fff;
+}
+.stat b {
+  display:block;font-family:var(--f-display);font-size:1.35rem;letter-spacing:-.02em;color:var(--blue-700);margin-bottom:.3rem;
+  transition: color 0.3s;
+}
+.stat span {
+  display: block;
+  font-size:.95rem;color:var(--mute);
+  transition: color 0.3s;
+}
 
 /* ------------------------------------------------------------ cta band */
 .cta-band{
