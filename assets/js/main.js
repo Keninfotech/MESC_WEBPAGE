@@ -395,9 +395,34 @@
         snap: {
           snapTo: 1 / (texts.length - 1),
           duration: {min: 0.2, max: 0.8},
+          directional: true,
           ease: "power1.inOut"
         },
         invalidateOnRefresh: true
+      }
+    });
+    
+    window.addEventListener("keydown", function(e) {
+      if (!tl.scrollTrigger || !tl.scrollTrigger.isActive) return;
+      var activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : "";
+      if (activeTag === "input" || activeTag === "textarea" || activeTag === "select") return;
+      
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        e.preventDefault();
+        var dir = e.key === "ArrowDown" ? 1 : -1;
+        var st = tl.scrollTrigger;
+        var step = (st.end - st.start) / (texts.length - 1);
+        
+        // Find nearest step index based on progress
+        var currentStep = Math.round(st.progress * (texts.length - 1));
+        var nextStep = Math.max(0, Math.min(texts.length - 1, currentStep + dir));
+        var nextScroll = st.start + nextStep * step;
+        
+        if (window.lenis) {
+          window.lenis.scrollTo(nextScroll, { duration: 0.8 });
+        } else {
+          window.scrollTo({ top: nextScroll, behavior: "smooth" });
+        }
       }
     });
     
