@@ -360,6 +360,11 @@ body.menu-open{overflow:hidden}
 .story-item span{font-family:var(--f-display);font-size:clamp(1.15rem,1.9vw,1.7rem);letter-spacing:-.025em}
 .story-item.is-on{color:var(--ink);padding-left:.9rem}
 .story-item.is-on b{color:var(--red)}
+
+.story-item--rich{display:block;padding:3rem .2rem;opacity:.35;transition:opacity .45s var(--ease),padding-left .45s var(--ease)}
+.story-item--rich.is-on{opacity:1;padding-left:1.5rem}
+.story-item--rich .frow-num{transition:color .35s}
+.story-item--rich.is-on .frow-num{color:var(--red)}
 .story-visual{position:relative;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:4/3;background:var(--paper-2)}
 @media(min-width:960px){.story-visual{position:sticky;top:7rem}}
 .story-visual figure{position:absolute;inset:0;margin:0;opacity:0;transition:opacity .7s var(--ease)}
