@@ -369,11 +369,21 @@
     var figs = section.querySelectorAll(".seq-visual figure");
     if (!texts.length || reduced || !hasGSAP) return;
     
-    gsap.set(texts, { opacity: 0, y: 40 });
-    gsap.set(figs, { opacity: 0, scale: 1.05 });
-    
-    gsap.set(texts[0], { opacity: 1, y: 0 });
-    gsap.set(figs[0], { opacity: 1, scale: 1 });
+    texts.forEach(function(txt, i) {
+      if (i === 0) {
+        gsap.set(txt, { opacity: 1, y: 0, scale: 1, zIndex: 2, pointerEvents: "auto" });
+      } else {
+        gsap.set(txt, { opacity: 0, y: 80, scale: 0.95, zIndex: 1, pointerEvents: "none" });
+      }
+    });
+
+    figs.forEach(function(fig, i) {
+      if (i === 0) {
+        gsap.set(fig, { opacity: 1, scale: 1 });
+      } else {
+        gsap.set(fig, { opacity: 0, scale: 1.05 });
+      }
+    });
     
     var tl = gsap.timeline({
       scrollTrigger: {
@@ -382,17 +392,24 @@
         end: function() { return "+=" + (texts.length * 100) + "%"; },
         pin: true,
         scrub: 1,
+        snap: {
+          snapTo: 1 / (texts.length - 1),
+          duration: {min: 0.2, max: 0.8},
+          ease: "power1.inOut"
+        },
         invalidateOnRefresh: true
       }
     });
     
     texts.forEach(function(txt, i) {
       if (i === 0) return;
-      var start = i * 2;
-      tl.to(texts[i-1], { opacity: 0, y: -40, duration: 1 }, start);
-      tl.to(figs[i-1], { opacity: 0, scale: 1.05, duration: 1 }, start);
-      tl.to(txt, { opacity: 1, y: 0, duration: 1 }, start + 0.5);
-      tl.to(figs[i], { opacity: 1, scale: 1, duration: 1 }, start + 0.5);
+      var start = i - 1;
+      
+      tl.to(texts[i-1], { opacity: 0, y: -80, scale: 0.95, zIndex: 1, pointerEvents: "none", duration: 1, ease: "power1.inOut" }, start);
+      tl.to(figs[i-1], { opacity: 0, scale: 1.05, duration: 1, ease: "power1.inOut" }, start);
+      
+      tl.to(txt, { opacity: 1, y: 0, scale: 1, zIndex: 2, pointerEvents: "auto", duration: 1, ease: "power1.inOut" }, start);
+      tl.to(figs[i], { opacity: 1, scale: 1, duration: 1, ease: "power1.inOut" }, start);
     });
   });
 
