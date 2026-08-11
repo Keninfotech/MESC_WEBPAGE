@@ -23,6 +23,11 @@
   --line-strong:#c3d2e4;
   --red:#e01b26;
   --red-soft:#ffe7e8;
+  --chennai:#0E6B5C;
+  --vellore:#C07A2E;
+  --bengaluru:#3D4C99;
+  --north-karnataka:#458037;
+  --kerala:#BD4B2A;
 
   --bg:var(--white);
   --fg:var(--ink);
@@ -260,6 +265,129 @@ body.menu-open{overflow:hidden}
 .hero-marks span:nth-child(1){top:0;left:0}
 .hero-marks span:nth-child(2){top:0;right:0}
 .hero-marks .rule{position:absolute;left:0;right:0;top:1.6rem;height:1px;background:linear-gradient(90deg,var(--blue-100),transparent)}
+/* ------------------------------------------------------------- journey grid */
+.journey{
+  margin-top:4rem;
+  display:grid;grid-template-columns:260px 1fr;gap:4rem;
+}
+.route-panel{
+  position:sticky;top:8rem;align-self:start;
+  height:fit-content;
+}
+.route-track{position:relative;padding-left:1.5rem;margin-top:0.5rem}
+.route-track::before{
+  content:'';position:absolute;left:4px;top:6px;bottom:6px;width:2px;
+  background:var(--line);
+}
+.route-progress{
+  position:absolute;left:4px;top:6px;width:2px;height:0%;
+  background:linear-gradient(var(--chennai),var(--vellore),var(--bengaluru),var(--north-karnataka),var(--kerala));
+  transition:height .25s ease-out;
+}
+.route-city{
+  position:relative;padding:0 0 2rem 1.25rem;cursor:default;
+}
+.route-city:last-child{padding-bottom:0}
+.route-city .dot{
+  position:absolute;left:-23px;top:2px;width:10px;height:10px;border-radius:50%;
+  background:var(--white);border:2px solid var(--line-strong);
+  transition:all .3s ease;
+}
+.route-city.active .dot{
+  background:var(--city-color);border-color:var(--city-color);
+  box-shadow:0 0 0 4px color-mix(in srgb, var(--city-color) 18%, transparent);
+  transform:scale(1.2);
+}
+.route-city .city-name{
+  font-family:var(--f-display);font-weight:600;font-size:1.15rem;
+  color:var(--mute);transition:color .3s ease;
+}
+.route-city.active .city-name{color:var(--ink)}
+.route-city .city-meta{
+  font-family:var(--f-mono);font-size:0.7rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--mute);opacity:.7;margin-top:3px;display:block;
+}
+.route-note{
+  margin-top:2.5rem;font-size:0.85rem;color:var(--mute);line-height:1.5;
+  border-top:1px solid var(--line);padding-top:1.2rem;
+}
+.journey-grid{display:flex;flex-direction:column;gap:5rem}
+.city-group{display:flex;flex-direction:column;gap:2rem}
+
+.project-card .badge{
+  position:absolute;top:1rem;left:1rem;background:var(--ink);color:#fff;
+  font-family:var(--f-mono);font-size:0.75rem;letter-spacing:.08em;
+  padding:0.25rem 0.6rem;border-radius:var(--r);
+}
+.project-card .card-loc{
+  font-family:var(--f-mono);font-size:0.68rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--city-color);display:block;margin-bottom:0.5rem;font-weight:500;
+}
+
+@media (max-width:860px){
+  .journey{grid-template-columns:1fr;gap:0}
+  .route-panel{
+    position:sticky;top:4.5rem;z-index:10;background:var(--bg);
+    padding:1rem 0;margin-bottom:2rem;border-bottom:1px solid var(--line);
+    margin-left:-1rem;margin-right:-1rem;padding-left:1rem;padding-right:1rem;
+  }
+  .route-track{display:flex;padding-left:0;gap:1.5rem;overflow-x:auto}
+  .route-track::before{display:none}
+  .route-progress{display:none}
+  .route-city{padding:0;flex:0 0 auto}
+  .route-city .dot{position:static;display:block;margin:0 auto 0.4rem}
+  .route-city .city-meta{display:none}
+  .route-note{display:none}
+}
+
+/* ------------------------------------------------------------- stats cards */
+.stats--cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5rem;
+}
+.stat--card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 2.5rem 1.5rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.03);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.stat--card b {
+  font-family: var(--f-display);
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--blue-700);
+  margin-bottom: 0.75rem;
+  line-height: 1;
+}
+.stat--card span {
+  font-size: 1rem;
+  color: var(--mute);
+}
+.stat--card.stat--blue {
+  background: var(--blue-700);
+  border-color: var(--blue-700);
+}
+.stat--card.stat--blue b,
+.stat--card.stat--blue span {
+  color: var(--white);
+}
+
+@media (max-width: 900px) {
+  .stats--cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 500px) {
+  .stats--cards {
+    grid-template-columns: 1fr;
+  }
+}
 
 /* ------------------------------------------------------------- sections */
 .section{position:relative;padding:clamp(4.5rem,9vw,9rem) 0;overflow:hidden}

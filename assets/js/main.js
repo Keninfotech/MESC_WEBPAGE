@@ -286,6 +286,60 @@
     });
   });
 
+  /* ------------------------------------------------- journey grid */
+  var journey = document.querySelector(".journey");
+  if (journey) {
+    var routeCities = ["Chennai", "Vellore", "Bengaluru", "North Karnataka", "Kerala"];
+    var routeCityEls = document.querySelectorAll(".route-city");
+    var progressBar = document.getElementById("routeProgress");
+
+    function setActiveCity(cityName) {
+      var activeEl = null;
+      routeCityEls.forEach(function (el) {
+        if (el.dataset.city === cityName) {
+          el.classList.add("active");
+          activeEl = el;
+        } else {
+          el.classList.remove("active");
+        }
+      });
+      
+      if (activeEl && progressBar) {
+        // Only run height calc if we're not on mobile (where progress bar is hidden)
+        if (window.innerWidth > 860) {
+          var dot = activeEl.querySelector(".dot");
+          if (dot) {
+            // Distance from top of route-track + top of dot + half dot height
+            var height = activeEl.offsetTop + dot.offsetTop + (dot.offsetHeight / 2);
+            progressBar.style.height = height + "px";
+          }
+        }
+      }
+    }
+
+    // Default state
+    setActiveCity("Chennai");
+
+    // Journey card entrance
+    document.querySelectorAll(".city-group").forEach(function (group) {
+      var cards = group.querySelectorAll(".card");
+      gsap.set(cards, { opacity: 0, y: 34 });
+      gsap.to(cards, {
+        opacity: 1, y: 0, duration: 0.8, ease: "power2.out", stagger: 0.12,
+        scrollTrigger: { trigger: group, start: "top 82%" }
+      });
+      
+      // Route panel sync
+      ScrollTrigger.create({
+        trigger: group,
+        start: "top 55%",
+        end: "bottom 55%",
+        onEnter: function () { setActiveCity(group.dataset.city); },
+        onEnterBack: function () { setActiveCity(group.dataset.city); }
+      });
+    });
+  }
+
   /* section eyebrow rule draw-in */
   document.querySelectorAll(".eyebrow").forEach(function (e) {
     gsap.fromTo(e, { opacity: 0, x: -14 }, {

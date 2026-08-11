@@ -47,44 +47,114 @@
   </div>
   <div class="hero-marks" aria-hidden="true"><div class="shell"><span>MESC / BENGALURU</span><span>12.84&deg; N, 77.67&deg; E</span><i class="rule"></i></div></div>
   <div class="shell" style="position:absolute;left:0;right:0;pointer-events:none"><span class="scroll-hint">Scroll</span></div>
-</section><section class="section"><div class="grid-lines"></div><div class="shell">
+</section><section class="section section--paper" style="overflow: visible;"><div class="grid-lines"></div><div class="shell">
   <div class="section-head"><span class="eyebrow">01 / Track record</span>
-  <h2 class="h2" data-anim="text">Our Key Projects</h2>
-  <div class="prose lede" data-anim="blur"><p>Our extensive track record spans various regions throughout the country, where we&#x27;ve seamlessly collaborated with a diverse array of clients and suppliers, bringing together a wealth of expertise from different disciplines.</p><p>At MESC, our dedicated team possesses the exact experience required to advance your project with precision and excellence. Let&#x27;s delve into a few remarkable accomplishments that showcase the adept project management skills demonstrated by our team members over the course of their careers.</p><p>These achievements reflect not only the breadth of our experience but also the depth of our commitment to delivering successful outcomes. From overseeing intricate logistical operations to navigating complex stakeholder dynamics, our team has consistently demonstrated the ability to meet and exceed project goals. It is this proven track record that positions MESC as a reliable partner capable of turning your project aspirations into tangible success stories.</p></div></div>
-  <div class="cards" data-stagger><article class="card project-card">
-  <div class="card-media"><img src="assets/img/rk-diabetic.jpg" alt="Dr. RK Diabetic Foot and Podiatry Institute" loading="lazy"><span class="card-idx">01</span></div>
-  <div class="card-body"><div class="project-loc prose"><p><strong>Chennai</strong></p></div><h3 class="h4">Dr. RK Diabetic Foot and Podiatry Institute</h3></div>
-</article><article class="card project-card">
-  <div class="card-media"><img src="assets/img/whatsapp-image-2024-02-13-at-6.14.00-pm.jpeg" alt="Hycare Super Speciality Hospital" loading="lazy"><span class="card-idx">02</span></div>
-  <div class="card-body"><div class="project-loc prose"><p><strong>Chennai</strong></p></div><h3 class="h4">Hycare Super Speciality Hospital</h3></div>
-</article><article class="card project-card">
-  <div class="card-media"><img src="assets/img/naruvi-vellore.jpg" alt="Naruvi Multispecialty Hospital" loading="lazy"><span class="card-idx">03</span></div>
-  <div class="card-body"><div class="project-loc prose"><p><strong>Chennai</strong></p></div><h3 class="h4">Naruvi Multispecialty Hospital</h3></div>
-</article><article class="card project-card">
-  <div class="card-media"><img src="assets/img/people-tree-yeswantpur.jpg" alt="People Tree Multi Speciality Hospital" loading="lazy"><span class="card-idx">04</span></div>
-  <div class="card-body"><div class="project-loc prose"><p><strong>Yeswantpur, Bangalore</strong></p></div><h3 class="h4">People Tree Multi Speciality Hospital</h3></div>
-</article><article class="card project-card">
-  <div class="card-media"><img src="assets/img/apollo-hospital-banglore.jpg" alt="Apollo Hospitals" loading="lazy"><span class="card-idx">05</span></div>
-  <div class="card-body"><div class="project-loc prose"><p><strong>Bannerghatta Road, Bangalore</strong></p></div><h3 class="h4">Apollo Hospitals</h3></div>
-</article><article class="card project-card">
-  <div class="card-media"><img src="assets/img/rkm-ayurvedic-hospital.jpg" alt="RKM Ayurevedic Medical College and Truma care Hospital" loading="lazy"><span class="card-idx">06</span></div>
-  <div class="card-body"><div class="project-loc prose"><p><strong>Vijayapura, Karnataka</strong></p></div><h3 class="h4">RKM Ayurevedic Medical College and Truma care Hospital</h3></div>
-</article><article class="card project-card">
-  <div class="card-media"><img src="assets/img/siddantha-ayurvedic-hospital.jpg" alt="Siddantha Ayurvedic hospital and Medical Collage Athani" loading="lazy"><span class="card-idx">07</span></div>
-  <div class="card-body"><div class="project-loc prose"><p><strong>Sankonatti, Athani Rural</strong></p></div><h3 class="h4">Siddantha Ayurvedic hospital and Medical Collage Athani</h3></div>
-</article><article class="card project-card">
-  <div class="card-media"><img src="assets/img/the-bangalore-hospital.jpg" alt="Bangalore Hospital" loading="lazy"><span class="card-idx">08</span></div>
-  <div class="card-body"><div class="project-loc prose"><p><strong>Kengeri, Bangalore</strong></p></div><h3 class="h4">Bangalore Hospital</h3></div>
-</article><article class="card project-card">
-  <div class="card-media"><img src="assets/img/meitra-hospital-calicut.jpg" alt="Meitra Hospital" loading="lazy"><span class="card-idx">09</span></div>
-  <div class="card-body"><div class="project-loc prose"><p><strong>Calicut, Kerala</strong></p></div><h3 class="h4">Meitra Hospital</h3></div>
-</article></div>
-  <div class="stats" style="margin-top:3rem" data-stagger>
-    <div class="stat"><b data-count="9" data-suffix="+">0</b><span>Flagship hospitals</span></div>
-    <div class="stat"><b data-count="4">0</b><span>States served</span></div>
-    <div class="stat"><b data-count="12" data-suffix="+">0</b><span>Engineering verticals</span></div>
-    <div class="stat"><b data-count="2019">0</b><span>Established</span></div>
-  </div>
+  <h2 class="h2" data-anim="text">A journey across South India</h2>
+  <div class="prose lede" data-anim="blur"><p>From Chennai's diabetic-care clinics to Kerala's coastal wards — scroll through the route we've built, city by city.</p></div></div>
+  
+  <div class="journey">
+    <aside class="route-panel">
+      <div class="route-track">
+        <i class="route-progress" id="routeProgress"></i>
+        <div class="route-city" data-city="Chennai" style="--city-color:var(--chennai)">
+          <span class="dot"></span>
+          <span class="city-name">Chennai</span>
+          <span class="city-meta">2 projects</span>
+        </div>
+        <div class="route-city" data-city="Vellore" style="--city-color:var(--vellore)">
+          <span class="dot"></span>
+          <span class="city-name">Vellore</span>
+          <span class="city-meta">1 project</span>
+        </div>
+        <div class="route-city" data-city="Bengaluru" style="--city-color:var(--bengaluru)">
+          <span class="dot"></span>
+          <span class="city-name">Bengaluru</span>
+          <span class="city-meta">3 projects</span>
+        </div>
+        <div class="route-city" data-city="North Karnataka" style="--city-color:var(--north-karnataka)">
+          <span class="dot"></span>
+          <span class="city-name">North Karnataka</span>
+          <span class="city-meta">2 projects</span>
+        </div>
+        <div class="route-city" data-city="Kerala" style="--city-color:var(--kerala)">
+          <span class="dot"></span>
+          <span class="city-name">Kerala</span>
+          <span class="city-meta">1 project</span>
+        </div>
+      </div>
+      <p class="route-note">Scroll to move along the route — the highlighted region on the left always matches the projects in view.</p>
+    </aside>
+
+    <div class="journey-grid">
+      <div class="city-group" data-city="Chennai">
+        <div class="cards cards--2">
+          <article class="card project-card" style="--city-color:var(--chennai)">
+            <div class="card-media"><img src="assets/img/rk-diabetic.jpg" alt="Dr. RK Diabetic Foot and Podiatry Institute" loading="lazy"><span class="badge">01</span></div>
+            <div class="card-body"><span class="card-loc">Chennai</span><h3 class="card-title">Dr. RK Diabetic Foot and Podiatry Institute</h3></div>
+          </article>
+          <article class="card project-card" style="--city-color:var(--chennai)">
+            <div class="card-media"><img src="assets/img/whatsapp-image-2024-02-13-at-6.14.00-pm.jpeg" alt="Hycare Super Speciality Hospital" loading="lazy"><span class="badge">02</span></div>
+            <div class="card-body"><span class="card-loc">Chennai</span><h3 class="card-title">Hycare Super Speciality Hospital</h3></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="city-group" data-city="Vellore">
+        <div class="cards cards--2">
+          <article class="card project-card" style="--city-color:var(--vellore)">
+            <div class="card-media"><img src="assets/img/naruvi-vellore.jpg" alt="Naruvi Multispecialty Hospital" loading="lazy"><span class="badge">03</span></div>
+            <div class="card-body"><span class="card-loc">Vellore</span><h3 class="card-title">Naruvi Multispecialty Hospital</h3></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="city-group" data-city="Bengaluru">
+        <div class="cards cards--2">
+          <article class="card project-card" style="--city-color:var(--bengaluru)">
+            <div class="card-media"><img src="assets/img/people-tree-yeswantpur.jpg" alt="People Tree Multi Speciality Hospital" loading="lazy"><span class="badge">04</span></div>
+            <div class="card-body"><span class="card-loc">Yeswantpur, Bengaluru</span><h3 class="card-title">People Tree Multi Speciality Hospital</h3></div>
+          </article>
+          <article class="card project-card" style="--city-color:var(--bengaluru)">
+            <div class="card-media"><img src="assets/img/apollo-hospital-banglore.jpg" alt="Apollo Hospitals" loading="lazy"><span class="badge">05</span></div>
+            <div class="card-body"><span class="card-loc">Bannerghatta Road, Bengaluru</span><h3 class="card-title">Apollo Hospitals</h3></div>
+          </article>
+          <article class="card project-card" style="--city-color:var(--bengaluru)">
+            <div class="card-media"><img src="assets/img/the-bangalore-hospital.jpg" alt="Bangalore Hospital" loading="lazy"><span class="badge">06</span></div>
+            <div class="card-body"><span class="card-loc">Kengeri, Bengaluru</span><h3 class="card-title">Bangalore Hospital</h3></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="city-group" data-city="North Karnataka">
+        <div class="cards cards--2">
+          <article class="card project-card" style="--city-color:var(--north-karnataka)">
+            <div class="card-media"><img src="assets/img/rkm-ayurvedic-hospital.jpg" alt="RKM Ayurevedic Medical College and Truma care Hospital" loading="lazy"><span class="badge">07</span></div>
+            <div class="card-body"><span class="card-loc">Vijayapura</span><h3 class="card-title">RKM Ayurevedic Medical College</h3></div>
+          </article>
+          <article class="card project-card" style="--city-color:var(--north-karnataka)">
+            <div class="card-media"><img src="assets/img/siddantha-ayurvedic-hospital.jpg" alt="Siddantha Ayurvedic hospital and Medical Collage Athani" loading="lazy"><span class="badge">08</span></div>
+            <div class="card-body"><span class="card-loc">Athani Rural</span><h3 class="card-title">Siddantha Ayurvedic hospital</h3></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="city-group" data-city="Kerala">
+        <div class="cards cards--2">
+          <article class="card project-card" style="--city-color:var(--kerala)">
+            <div class="card-media"><img src="assets/img/meitra-hospital-calicut.jpg" alt="Meitra Hospital" loading="lazy"><span class="badge">09</span></div>
+            <div class="card-body"><span class="card-loc">Calicut, Kerala</span><h3 class="card-title">Meitra Hospital</h3></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="stats stats--cards" style="margin-top:2rem" data-stagger>
+        <div class="stat stat--card stat--blue"><b data-count="9" data-suffix="+">0</b><span>Flagship hospitals</span></div>
+        <div class="stat stat--card"><b data-count="4">0</b><span>States served</span></div>
+        <div class="stat stat--card"><b data-count="12" data-suffix="+">0</b><span>Engineering verticals</span></div>
+        <div class="stat stat--card"><b data-count="2019">0</b><span>Established</span></div>
+      </div>
+
+    </div>
 </div></section><section class="quote-band">
   <div class="shell"><blockquote data-anim="text">&ldquo;The hospital is not a place where one should be making money.&rdquo;</blockquote></div>
 </section><section class="section section--tight"><div class="shell">
