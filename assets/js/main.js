@@ -349,7 +349,7 @@
       x: function () { return -dist(); },
       ease: "none",
       scrollTrigger: {
-        trigger: wrap, start: "top top", end: function () { return "+=" + dist(); },
+        trigger: wrap, start: "center center", end: function () { return "+=" + dist(); },
         pin: true, scrub: 1, invalidateOnRefresh: true,
         onUpdate: function (self) { if (bar) gsap.set(bar, { scaleX: 0.05 + self.progress * 0.95 }); }
       }
