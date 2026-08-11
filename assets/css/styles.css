@@ -364,7 +364,9 @@ body.menu-open{overflow:hidden}
 .story-item.is-on{color:var(--ink);padding-left:.9rem}
 .story-item.is-on b{color:var(--red)}
 
-.story-item--rich{display:block;padding:3rem .2rem;opacity:.35;transition:opacity .45s var(--ease),padding-left .45s var(--ease)}
+.story-item--rich{display:block;padding:3rem .2rem;opacity:.35;transition:opacity .45s var(--ease),padding-left .45s var(--ease);margin-bottom:25vh}
+.story-item--rich:first-child{margin-top:25vh}
+.story-item--rich:last-child{margin-bottom:0}
 .story-item--rich.is-on{opacity:1;padding-left:1.5rem}
 .story-item--rich .frow-num{transition:color .35s}
 .story-item--rich.is-on .frow-num{color:var(--red)}
