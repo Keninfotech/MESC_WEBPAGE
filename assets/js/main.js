@@ -363,6 +363,39 @@
     });
   });
 
+  /* ---------------------------------------------- pinned scrub sequence */
+  document.querySelectorAll("[data-pinned-seq]").forEach(function(section) {
+    var texts = section.querySelectorAll(".seq-text");
+    var figs = section.querySelectorAll(".seq-visual figure");
+    if (!texts.length || reduced || !hasGSAP) return;
+    
+    gsap.set(texts, { opacity: 0, y: 40 });
+    gsap.set(figs, { opacity: 0, scale: 1.05 });
+    
+    gsap.set(texts[0], { opacity: 1, y: 0 });
+    gsap.set(figs[0], { opacity: 1, scale: 1 });
+    
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top -60px",
+        end: function() { return "+=" + (texts.length * 100) + "%"; },
+        pin: true,
+        scrub: 1,
+        invalidateOnRefresh: true
+      }
+    });
+    
+    texts.forEach(function(txt, i) {
+      if (i === 0) return;
+      var start = i * 2;
+      tl.to(texts[i-1], { opacity: 0, y: -40, duration: 1 }, start);
+      tl.to(figs[i-1], { opacity: 0, scale: 1.05, duration: 1 }, start);
+      tl.to(txt, { opacity: 1, y: 0, duration: 1 }, start + 0.5);
+      tl.to(figs[i], { opacity: 1, scale: 1, duration: 1 }, start + 0.5);
+    });
+  });
+
   /* ---------------------------------------------- sticky storytelling */
   document.querySelectorAll("[data-story]").forEach(function (story) {
     var items = story.querySelectorAll(".story-item");
