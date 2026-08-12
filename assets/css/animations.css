@@ -108,11 +108,11 @@
 .page-service .btn:hover .arw{transform:translateX(7px)}
 .page-service .link-more:hover .bar{transform:scaleX(1.35);transform-origin:0 50%}
 .page-service .cta-band .btn{position:relative;overflow:hidden}
-.page-service .cta-band .btn::after{
+.page-service .cta-band .btn::before{
   content:"";position:absolute;inset:0;background:var(--red);
   transform:scaleX(0);transform-origin:0 50%;transition:transform .5s cubic-bezier(.65,0,.35,1);z-index:-1;
 }
-.page-service .cta-band .btn:hover::after{transform:scaleX(1)}
+.page-service .cta-band .btn:hover::before{transform:scaleX(1)}
 
 /* interactive blueprint grid */
 .page-service .grid-lines{transition:opacity .8s ease}
