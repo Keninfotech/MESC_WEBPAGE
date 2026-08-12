@@ -82,22 +82,131 @@
   })();
 
   /* ------------------------------------------------ page transition wipe */
-  var wipe = document.querySelector(".wipe");
+  // var wipe = document.querySelector(".wipe");
+  // function playWipe(dir, done) {
+  //   if (!wipe || !hasGSAP || reduced) { if (done) done(); return; }
+  //   var cols = wipe.querySelectorAll("i");
+  //   gsap.killTweensOf(cols);
+  //   if (dir === "out") {
+  //     gsap.set(cols, { transformOrigin: "50% 100%" });
+  //     gsap.fromTo(cols, { scaleY: 0 }, {
+  //       scaleY: 1, duration: .5, ease: "power3.inOut", stagger: .045,
+  //       onComplete: done
+  //     });
+  //   } else {
+  //     gsap.set(cols, { transformOrigin: "50% 0%", scaleY: 1 });
+  //     gsap.to(cols, { scaleY: 0, duration: .6, ease: "power3.inOut", stagger: .045 });
+  //   }
+  // }
+  
+  var wipe = document.querySelector(".wipe"); // Kept to satisfy existing listeners
+  
+  var videoLoaderContainer = document.createElement("div");
+  videoLoaderContainer.style.position = "fixed";
+  videoLoaderContainer.style.inset = "0";
+  videoLoaderContainer.style.zIndex = "9999";
+  videoLoaderContainer.style.backgroundColor = "#ffffff";
+  videoLoaderContainer.style.pointerEvents = "none";
+  videoLoaderContainer.style.opacity = "1";
+  videoLoaderContainer.style.transition = "opacity 0.8s ease";
+  videoLoaderContainer.style.display = "flex";
+  videoLoaderContainer.style.alignItems = "center";
+  videoLoaderContainer.style.justifyContent = "center";
+
+  var videoLoader = document.createElement("video");
+  videoLoader.src = "assets/MESC2videoloader.mp4";
+  videoLoader.muted = true;
+  videoLoader.playsInline = true;
+  videoLoader.style.width = "100%";
+  videoLoader.style.height = "100%";
+  videoLoader.style.objectFit = "cover";
+  videoLoader.style.transition = "opacity 0.6s ease";
+  videoLoader.style.opacity = "1";
+  
+  videoLoaderContainer.appendChild(videoLoader);
+  // Wait for body to be available if script is in head (fallback)
+  if (document.body) {
+    document.body.appendChild(videoLoaderContainer);
+  } else {
+    document.addEventListener("DOMContentLoaded", function() {
+      document.body.appendChild(videoLoaderContainer);
+    });
+  }
+
   function playWipe(dir, done) {
-    if (!wipe || !hasGSAP || reduced) { if (done) done(); return; }
-    var cols = wipe.querySelectorAll("i");
-    gsap.killTweensOf(cols);
+    if (reduced) { if (done) done(); return; }
+    
     if (dir === "out") {
-      gsap.set(cols, { transformOrigin: "50% 100%" });
-      gsap.fromTo(cols, { scaleY: 0 }, {
-        scaleY: 1, duration: .5, ease: "power3.inOut", stagger: .045,
-        onComplete: done
-      });
+      videoLoaderContainer.style.opacity = "1";
+      videoLoader.style.opacity = "1";
+      videoLoader.playbackRate = 1.5;
+      videoLoader.currentTime = 0;
+      var playPromise = videoLoader.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(function(e) { console.log(e); });
+      }
+      
+      var maxWait = 2500;
+      var navigated = false;
+      function go() {
+        if (!navigated) {
+          navigated = true;
+          // Fade video out to white before navigating
+          videoLoader.style.opacity = "0";
+          setTimeout(function() {
+            sessionStorage.setItem("mesc_video_played", "true");
+            if (done) done();
+          }, 600); // Wait for the video fade to finish
+        }
+      }
+      
+      videoLoader.onended = go;
+      videoLoader.onerror = go;
+      setTimeout(go, maxWait); // Fallback if video takes too long
+
     } else {
-      gsap.set(cols, { transformOrigin: "50% 0%", scaleY: 1 });
-      gsap.to(cols, { scaleY: 0, duration: .6, ease: "power3.inOut", stagger: .045 });
+      if (sessionStorage.getItem("mesc_video_played") === "true") {
+        // Video already played fully on the previous page
+        sessionStorage.removeItem("mesc_video_played");
+        videoLoaderContainer.style.opacity = "1";
+        videoLoader.style.opacity = "0"; // Start hidden to prevent flash
+        
+        setTimeout(function() {
+          videoLoaderContainer.style.opacity = "0";
+          setTimeout(function() {
+            videoLoader.pause();
+          }, 800); // Wait for CSS transition
+        }, 100); // Small delay to ensure render
+      } else {
+        // First load or refresh: play video
+        videoLoaderContainer.style.opacity = "1";
+        videoLoader.style.opacity = "1";
+        videoLoader.playbackRate = 1.5;
+        videoLoader.currentTime = 0;
+        var playPromise = videoLoader.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(function(e) { console.log(e); });
+        }
+        
+        var finished = false;
+        function finishIn() {
+          if (!finished) {
+            finished = true;
+            // Fade out the entire container to reveal page
+            videoLoaderContainer.style.opacity = "0";
+            setTimeout(function() {
+              videoLoader.pause();
+            }, 800); // Wait for CSS transition
+          }
+        }
+        
+        videoLoader.onended = finishIn;
+        videoLoader.onerror = finishIn;
+        setTimeout(finishIn, 2500); // Fallback
+      }
     }
   }
+
   playWipe("in");
   document.addEventListener("click", function (e) {
     var a = e.target.closest && e.target.closest("a");
