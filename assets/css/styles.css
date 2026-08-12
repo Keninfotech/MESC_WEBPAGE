@@ -1127,3 +1127,37 @@ html.no-js [data-anim],html.no-js [data-hero-text],html.no-js [data-hero-fade]{o
     left: 20px;
   }
 }
+
+/* Leaders Section */
+.leaders-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem;
+}
+.leader-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: center;
+}
+.leader-media {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.leader-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 3/4;
+}
+@media (max-width: 900px) {
+  .leaders-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .leaders-grid {
+    grid-template-columns: 1fr;
+  }
+}
