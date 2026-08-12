@@ -117,7 +117,7 @@ h1,h2,h3,h4,h5{font-family:var(--f-display);font-weight:600;letter-spacing:-.025
 .brand-txt b{font-family:var(--f-display);font-size:1.18rem;letter-spacing:.02em;color:var(--blue-700)}
 .brand-txt small{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
 
-.mainnav{display:flex;align-items:center;gap:.2rem;list-style:none;margin:0;padding:0}
+.mainnav{display:flex;align-items:center;gap:.2rem;list-style:none;margin:0 1.5rem 0 auto;padding:0}
 .mainnav>li{position:relative}
 .mainnav>li>a,.mainnav>li>button{
   display:inline-flex;align-items:center;gap:.4rem;padding:.6rem .85rem;border:0;background:none;cursor:pointer;
@@ -129,8 +129,8 @@ h1,h2,h3,h4,h5{font-family:var(--f-display);font-weight:600;letter-spacing:-.025
 }
 .mainnav>li>a:hover::after,.mainnav>li>button:hover::after,
 .mainnav>li:hover>button::after{transform:scaleX(1);transform-origin:0 50%}
-.mainnav>li>a.is-active{color:var(--blue-600)}
-.mainnav>li>a.is-active::after{transform:scaleX(1)}
+.mainnav>li>a.is-active, .mainnav>li>button.is-active{color:var(--blue-600)}
+.mainnav>li>a.is-active::after, .mainnav>li>button.is-active::after{transform:scaleX(1)}
 .chev{width:11px;height:11px;transition:transform .35s var(--ease)}
 .mainnav>li:hover .chev{transform:rotate(180deg)}
 
@@ -153,8 +153,8 @@ h1,h2,h3,h4,h5{font-family:var(--f-display);font-weight:600;letter-spacing:-.025
   content:"";position:absolute;left:.35rem;top:50%;width:10px;height:1px;background:var(--red);
   transform:scaleX(0);transform-origin:0 50%;transition:transform .3s var(--ease);
 }
-.dropdown a:hover{background:var(--blue-050);color:var(--blue-700);padding-left:1.35rem}
-.dropdown a:hover::before{transform:scaleX(1)}
+.dropdown a:hover, .dropdown a.is-active{background:var(--blue-050);color:var(--blue-700);padding-left:1.35rem}
+.dropdown a:hover::before, .dropdown a.is-active::before{transform:scaleX(1)}
 
 /* buttons */
 .btn{
@@ -215,7 +215,7 @@ body.menu-open{overflow:hidden}
 .drawer-sub>*{overflow:hidden}
 .drawer-sub{overflow:hidden}
 .drawer-sub a{display:block;padding:.55rem .2rem .55rem 1.1rem;color:var(--mute);font-size:1rem;border-left:1px solid var(--line)}
-.drawer-sub a:hover{color:var(--blue-600)}
+.drawer-sub a:hover, .drawer-sub a.is-active{color:var(--blue-600)}
 .drawer-group.open .drawer-sub{padding-bottom:.9rem}
 
 /* ------------------------------------------------------------------ hero */

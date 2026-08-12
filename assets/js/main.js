@@ -67,7 +67,17 @@
     var here = location.pathname.split("/").pop() || "index.html";
     document.querySelectorAll('.mainnav a, .dropdown a, .drawer a').forEach(function (a) {
       var href = (a.getAttribute("href") || "").split("/").pop();
-      if (href && href === here) a.classList.add("is-active");
+      if (href && href === here) {
+        a.classList.add("is-active");
+        
+        var dropdown = a.closest('.dropdown');
+        if (dropdown) {
+          var btn = dropdown.previousElementSibling;
+          if (btn && btn.tagName === 'BUTTON') {
+            btn.classList.add('is-active');
+          }
+        }
+      }
     });
   })();
 
