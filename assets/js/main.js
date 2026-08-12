@@ -286,38 +286,57 @@
     });
   });
 
-  /* ------------------------------------------------- journey grid & map */
+  /* ------------------------------------------------- journey grid & map ---
+     City coordinates below are calibrated directly against the real
+     South_India.svg artwork (viewBox "0 0 566.25 573.749983"), not an
+     arbitrary/assumed coordinate space. They were derived by rendering
+     the SVG, isolating the filled state shapes, and mapping each city's
+     true latitude/longitude onto that pixel space via the shape's own
+     north/south/east/west extremes — so the dots land on the correct
+     state and in the correct relative position to one another. */
   var journey = document.querySelector(".journey");
   if (journey && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     var container = document.getElementById("svg-map-container");
     if (container) {
       fetch('assets/South_India.svg')
-        .then(response => response.text())
-        .then(svgData => {
+        .then(function (response) { return response.text(); })
+        .then(function (svgData) {
           container.innerHTML = svgData;
           var svgEl = container.querySelector("svg");
           if (svgEl) {
             svgEl.classList.add("india-map");
-            // Zoom in on South India — viewBox shifted left to center the peninsula
-            svgEl.setAttribute("viewBox", "150 950 900 720");
+
+            // Tight crop around the drawn artwork (the source canvas has
+            // empty margin above/below/right of the actual map shape).
+            svgEl.setAttribute("viewBox", "70 60 410 420");
             svgEl.setAttribute("preserveAspectRatio", "xMidYMid meet");
 
-            // City coordinates in the SVG's 1476x1680 coordinate space.
-            // Shifted left relative to previous attempt based on visual feedback.
+            // City coordinates in the SVG's own 566.25 x 573.75 space,
+            // calibrated against the true shape of the artwork.
             var cities = {
-              "Chennai":         { x: 850, y: 1330 },
-              "Vellore":         { x: 770, y: 1265 },
-              "Bengaluru":       { x: 660, y: 1340 },
-              "North Karnataka": { x: 490, y: 1080 },
-              "Kerala":          { x: 580, y: 1500 }
+              "Chennai": { x: 295.9, y: 297.8 },
+              "Vellore": { x: 258.1, y: 303.4 },
+              "Bengaluru": { x: 207.2, y: 301.6 },
+              "North Karnataka": { x: 133.6, y: 178.9 },
+              "Kerala": { x: 162.8, y: 399.8 }
+            };
+
+            // Per-city label offsets, tuned so labels for the closely
+            // clustered Chennai / Vellore / Bengaluru trio don't overlap.
+            var labelPos = {
+              "Chennai": { dx: 16, dy: 4, anchor: "start" },
+              "Vellore": { dx: 0, dy: -16, anchor: "middle" },
+              "Bengaluru": { dx: -16, dy: 4, anchor: "end" },
+              "North Karnataka": { dx: 16, dy: 4, anchor: "start" },
+              "Kerala": { dx: 16, dy: 4, anchor: "start" }
             };
 
             // Build smooth route path through cities in journey order
-            var order = ["Chennai","Vellore","Bengaluru","North Karnataka","Kerala"];
-            var pts = order.map(function(c){ return cities[c]; });
+            var order = ["Chennai", "Vellore", "Bengaluru", "North Karnataka", "Kerala"];
+            var pts = order.map(function (c) { return cities[c]; });
             var pathD = "M " + pts[0].x + "," + pts[0].y;
             for (var i = 1; i < pts.length; i++) {
-              var p0 = pts[i-1], p1 = pts[i];
+              var p0 = pts[i - 1], p1 = pts[i];
               // Offset control points slightly to create a natural curve
               var dx = (p1.x - p0.x) * 0.4;
               var dy = (p1.y - p0.y) * 0.4;
@@ -326,20 +345,21 @@
 
             // Build the overlay SVG elements
             var overlay = '';
-            overlay += '<path id="route-path" class="map-route" d="' + pathD + '" fill="none" stroke="var(--blue-500)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>';
+            overlay += '<path id="route-path" class="map-route" d="' + pathD + '" fill="none" stroke="var(--blue-500)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
 
-            order.forEach(function(city) {
+            order.forEach(function (city) {
               var c = cities[city];
-              var anchor = c.x > 630 ? 'start' : 'end';
-              var tx = anchor === 'start' ? c.x + 22 : c.x - 22;
+              var lp = labelPos[city] || { dx: 16, dy: 4, anchor: "start" };
+              var tx = c.x + lp.dx;
+              var ty = c.y + lp.dy;
               overlay += '<g class="city-marker" data-city="' + city + '">';
-              overlay += '  <circle cx="' + c.x + '" cy="' + c.y + '" r="14" class="marker-ring"/>';
-              overlay += '  <circle cx="' + c.x + '" cy="' + c.y + '" r="7"  class="marker-dot"/>';
-              overlay += '  <text x="' + tx + '" y="' + (c.y + 5) + '" class="marker-label" text-anchor="' + anchor + '">' + city + '</text>';
+              overlay += '  <circle cx="' + c.x + '" cy="' + c.y + '" r="7"  class="marker-ring"/>';
+              overlay += '  <circle cx="' + c.x + '" cy="' + c.y + '" r="3.5"  class="marker-dot"/>';
+              overlay += '  <text x="' + tx + '" y="' + ty + '" class="marker-label" text-anchor="' + lp.anchor + '">' + city + '</text>';
               overlay += '</g>';
             });
 
-            overlay += '<circle id="traveler" class="traveler-dot" cx="' + cities["Chennai"].x + '" cy="' + cities["Chennai"].y + '" r="10"/>';
+            overlay += '<circle id="traveler" class="traveler-dot" cx="' + cities["Chennai"].x + '" cy="' + cities["Chennai"].y + '" r="5"/>';
 
             svgEl.insertAdjacentHTML('beforeend', overlay);
             initMapJourney(cities);
@@ -368,7 +388,7 @@
           start: "top bottom",
           end: "bottom top",
           scrub: 1,
-          onUpdate: function(self) {
+          onUpdate: function (self) {
             var p = self.progress;
             gsap.set(routePath, { strokeDashoffset: routeLength * (1 - p) });
             var pt = routePath.getPointAtLength(routeLength * p);
@@ -378,7 +398,7 @@
       }
 
       function updateActiveMarker(cityName) {
-        markers.forEach(function(m) {
+        markers.forEach(function (m) {
           m.classList.toggle("is-active", m.dataset.city === cityName);
         });
       }
@@ -395,22 +415,22 @@
         });
 
         var cards = group.querySelectorAll(".project-card");
-        cards.forEach(function(card) {
-          var img   = card.querySelector(".card-media img");
+        cards.forEach(function (card) {
+          var img = card.querySelector(".card-media img");
           var badge = card.querySelector(".badge");
-          var loc   = card.querySelector(".card-loc");
+          var loc = card.querySelector(".card-loc");
           var title = card.querySelector(".card-title");
 
           gsap.set(card, { opacity: 1, y: 0 });
-          if (img)   gsap.set(img,   { clipPath: "inset(0 100% 0 0)" });
+          if (img) gsap.set(img, { clipPath: "inset(0 100% 0 0)" });
           if (badge) gsap.set(badge, { opacity: 0, y: 20 });
-          if (loc)   gsap.set(loc,   { opacity: 0, y: 20 });
+          if (loc) gsap.set(loc, { opacity: 0, y: 20 });
           if (title) gsap.set(title, { opacity: 0, y: 20 });
 
           var tl = gsap.timeline({ scrollTrigger: { trigger: card, start: "top 85%" } });
-          if (img)   tl.to(img,   { clipPath: "inset(0 0% 0 0)", duration: 1,   ease: "power2.inOut" }, 0);
+          if (img) tl.to(img, { clipPath: "inset(0 0% 0 0)", duration: 1, ease: "power2.inOut" }, 0);
           if (badge) tl.to(badge, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.2);
-          if (loc)   tl.to(loc,   { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.25);
+          if (loc) tl.to(loc, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.25);
           if (title) tl.to(title, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.35);
         });
       });
