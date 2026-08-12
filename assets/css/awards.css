@@ -1,0 +1,180 @@
+/* awards.css - Cinematic Document Scanner Animation */
+
+.scanner-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scanner-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+.scanner-doc {
+  position: absolute;
+  width: 90%;
+  max-width: 600px;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0; /* Hidden initially, GSAP will handle */
+  transform: translateZ(-200px) scale(0.9);
+  pointer-events: none;
+  border-radius: 8px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  will-change: transform, opacity, clip-path;
+}
+
+.scanner-doc.is-active {
+  pointer-events: auto;
+}
+
+/* Base image (dim and slightly desaturated) */
+.doc-base {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f4f4f4;
+}
+
+.doc-base img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%) brightness(0.6) contrast(1.1);
+}
+
+/* The active scan area (sharp, bright) */
+.doc-scan-area {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  /* GSAP will animate clip-path: inset(0 0 100% 0) -> inset(0 0 0% 0) */
+  clip-path: inset(0 0 100% 0);
+  will-change: clip-path;
+}
+
+.doc-bright {
+  position: absolute;
+  inset: 0;
+}
+
+.doc-bright img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0%) brightness(1.1) contrast(1.05);
+}
+
+/* The scanning line itself */
+.scanner-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5),
+              0 -10px 20px rgba(255, 255, 255, 0.1);
+  /* The line sits at the bottom of the mask boundary */
+}
+
+/* Document Info Overlay (Editorial Typography) */
+.doc-info {
+  position: absolute;
+  right: -2rem;
+  bottom: -2rem;
+  background: var(--bg);
+  padding: 1.5rem 2rem;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  z-index: 10;
+  max-width: 320px;
+  opacity: 0; /* Hidden, GSAP will fade/slide in */
+  transform: translateY(20px);
+}
+
+/* Number indicator */
+.doc-num {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--fg-mute);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.doc-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.25rem;
+  color: var(--fg);
+}
+
+.doc-category {
+  font-size: 0.9rem;
+  color: var(--fg-mute);
+}
+
+/* Progress Indicator */
+.scanner-progress {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--fg-mute);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.progress-track {
+  width: 60px;
+  height: 1px;
+  background: var(--border);
+  position: relative;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--fg);
+}
+
+@media (max-width: 768px) {
+  .scanner-doc {
+    width: 85%;
+  }
+  .doc-info {
+    right: 0;
+    bottom: -4rem;
+    left: 0;
+    margin: 0 auto;
+    max-width: 90%;
+    text-align: center;
+  }
+}
