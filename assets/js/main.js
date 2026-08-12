@@ -335,12 +335,29 @@
             var order = ["Chennai", "Vellore", "Bengaluru", "North Karnataka", "Kerala"];
             var pts = order.map(function (c) { return cities[c]; });
             var pathD = "M " + pts[0].x + "," + pts[0].y;
+            var tempPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            var currentLen = 0;
+            var cityProgress = [0];
+
             for (var i = 1; i < pts.length; i++) {
               var p0 = pts[i - 1], p1 = pts[i];
               // Offset control points slightly to create a natural curve
               var dx = (p1.x - p0.x) * 0.4;
               var dy = (p1.y - p0.y) * 0.4;
-              pathD += " C " + (p0.x + dx) + "," + p0.y + " " + (p1.x - dx) + "," + p1.y + " " + p1.x + "," + p1.y;
+              var seg = " C " + (p0.x + dx) + "," + p0.y + " " + (p1.x - dx) + "," + p1.y + " " + p1.x + "," + p1.y;
+              pathD += seg;
+              
+              tempPath.setAttribute("d", "M " + p0.x + "," + p0.y + seg);
+              svgEl.appendChild(tempPath);
+              var len = tempPath.getTotalLength();
+              svgEl.removeChild(tempPath);
+              currentLen += len;
+              cityProgress.push(currentLen);
+            }
+            
+            var totalLen = currentLen || 1;
+            for (var i = 1; i < cityProgress.length; i++) {
+               cityProgress[i] /= totalLen;
             }
 
             // Build the overlay SVG elements
@@ -362,12 +379,12 @@
             overlay += '<circle id="traveler" class="traveler-dot" cx="' + cities["Chennai"].x + '" cy="' + cities["Chennai"].y + '" r="5"/>';
 
             svgEl.insertAdjacentHTML('beforeend', overlay);
-            initMapJourney(cities);
+            initMapJourney(cities, cityProgress);
           }
         });
     }
 
-    function initMapJourney(cities) {
+    function initMapJourney(cities, cityProgress) {
       var routePath = document.getElementById("route-path");
       var traveler = document.getElementById("traveler");
       var markers = document.querySelectorAll(".city-marker");
@@ -382,19 +399,75 @@
         var firstCity = cities ? cities["Chennai"] : null;
         if (firstCity) gsap.set(traveler, { attr: { cx: firstCity.x, cy: firstCity.y } });
 
+        var journeyTrigger = document.querySelector(".journey") || document.querySelector(".journey-grid");
+        var proxy = { p: 0 };
+
+        function renderMap() {
+          var p = proxy.p;
+          gsap.set(routePath, { strokeDashoffset: routeLength * (1 - p) });
+          var pt = routePath.getPointAtLength(routeLength * p);
+          gsap.set(traveler, { attr: { cx: pt.x, cy: pt.y } });
+        }
+
         ScrollTrigger.create({
-          trigger: ".journey-grid",
-          // Start ONLY when the section first enters the bottom of the viewport
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1,
+          trigger: journeyTrigger,
+          start: "top 75%",
+          end: "bottom 25%",
+          invalidateOnRefresh: true,
           onUpdate: function (self) {
-            var p = self.progress;
-            gsap.set(routePath, { strokeDashoffset: routeLength * (1 - p) });
-            var pt = routePath.getPointAtLength(routeLength * p);
-            gsap.set(traveler, { attr: { cx: pt.x, cy: pt.y } });
+            var groups = document.querySelectorAll(".city-group");
+            if (!groups.length || !cityProgress) return;
+            
+            var viewportCenter = window.innerHeight * 0.5;
+            var currentP = 0;
+            
+            for (var i = 0; i < groups.length; i++) {
+              var rect = groups[i].getBoundingClientRect();
+              var top = rect.top;
+              var bottom = rect.bottom;
+              
+              if (viewportCenter >= top && viewportCenter <= bottom) {
+                var height = rect.height;
+                var progressInsideGroup = (viewportCenter - top) / height;
+                
+                // Stay perfectly still at the current city for the first 60% of the cards
+                if (progressInsideGroup < 0.6) {
+                  currentP = cityProgress[i];
+                } else {
+                  // Scrub smoothly to the next city during the bottom 40% of the cards
+                  if (i < groups.length - 1) {
+                    var transitionP = (progressInsideGroup - 0.6) / 0.4;
+                    currentP = cityProgress[i] + (cityProgress[i+1] - cityProgress[i]) * transitionP;
+                  } else {
+                    currentP = cityProgress[i];
+                  }
+                }
+                break;
+              } else if (viewportCenter < top && i === 0) {
+                currentP = cityProgress[0];
+                break;
+              } else if (viewportCenter > bottom && i === groups.length - 1) {
+                currentP = cityProgress[groups.length - 1];
+                break;
+              } else if (i < groups.length - 1) {
+                var nextRect = groups[i+1].getBoundingClientRect();
+                if (viewportCenter > bottom && viewportCenter < nextRect.top) {
+                   var gap = nextRect.top - bottom;
+                   var pGap = gap > 0 ? Math.min(1, Math.max(0, (viewportCenter - bottom) / gap)) : 0;
+                   currentP = cityProgress[i] + (cityProgress[i+1] - cityProgress[i]) * pGap;
+                   break;
+                }
+              }
+            }
+            
+            // GSAP tween applies smoothing to the movement so it feels native
+            gsap.to(proxy, { p: currentP, duration: 0.8, ease: "power2.out", onUpdate: renderMap, overwrite: true });
           }
         });
+
+        // Lock the trigger to final layout once the map (and any images
+        // already loaded) have settled, so start/end don't drift.
+        requestAnimationFrame(function () { ScrollTrigger.refresh(); });
       }
 
       function updateActiveMarker(cityName) {
