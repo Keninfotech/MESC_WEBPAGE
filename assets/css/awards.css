@@ -145,7 +145,7 @@
   left: 2rem;
   font-family: var(--font-mono);
   font-size: 0.85rem;
-  color: var(--fg-mute);
+  color: var(--blue-100);
   z-index: 20;
   display: flex;
   align-items: center;
@@ -155,7 +155,7 @@
 .progress-track {
   width: 60px;
   height: 1px;
-  background: var(--border);
+  background: rgba(255, 255, 255, 0.3);
   position: relative;
 }
 
@@ -165,7 +165,7 @@
   left: 0;
   height: 100%;
   width: 0%;
-  background: var(--fg);
+  background: #ffffff;
 }
 
 @media (max-width: 768px) {
