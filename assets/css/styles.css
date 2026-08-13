@@ -79,6 +79,7 @@ h1,h2,h3,h4,h5{font-family:var(--f-display);font-weight:600;letter-spacing:-.025
   color:var(--blue-600);margin:0 0 1rem;display:inline-flex;align-items:center;gap:.7rem;
 }
 .eyebrow::before{content:"";width:26px;height:1px;background:var(--red);display:inline-block}
+.hero .eyebrow { color:#fff; font-size:.9rem; }
 
 /* masked word reveal support */
 .word{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.06em}
@@ -245,19 +246,20 @@ body.menu-open{overflow:hidden}
 }
 .hero-inner{position:relative;z-index:3;width:100%;padding-left:clamp(1rem, 3vw, 2.5rem)}
 .hero-media{
-  position:absolute;top:0;right:0;bottom:0;width:50%;z-index:1;overflow:hidden;
+  position:absolute;top:0;right:0;bottom:0;width:65%;z-index:1;overflow:hidden;
 }
 .hero-media::after{
   content:"";position:absolute;inset:0;
-  background:linear-gradient(90deg,var(--blue-700) 0%,rgba(14,55,129,0) 80%);
+  background:linear-gradient(90deg,var(--blue-700) 0%,var(--blue-700) 15%,rgba(14,55,129,0) 100%);
 }
 .hero-media img{width:100%;height:100%;object-fit:cover;object-position:right center}
 .hero::before{
-  content:"";position:absolute;inset:0;z-index:0;
+  content:"";position:absolute;inset:0;z-index:2;
   background:
-    linear-gradient(180deg,var(--blue-700),rgba(14,55,129,0) 55%),
+    linear-gradient(180deg,var(--blue-700),rgba(14,55,129,0) 45%),
     repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 88px),
     repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 1px,transparent 1px 88px);
+  pointer-events:none;
 }
 .hero .display{max-width:16ch;color:#fff}
 .hero .display em{font-style:normal;color:var(--blue-300)}
