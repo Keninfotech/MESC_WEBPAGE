@@ -228,6 +228,11 @@ body.menu-open{overflow:hidden}
   isolation:isolate;
 }
 .hero--inner{height:100svh;padding:6rem 0 2rem}
+/* smaller laptops — reduce hero height so content doesn't clip */
+@media(max-width:1350px) and (min-width:821px){
+  .hero{height:auto;min-height:88svh;padding-top:7rem}
+  .hero--inner{height:auto;min-height:80svh}
+}
 .hero-inner{position:relative;z-index:3;width:100%;padding-left:clamp(1rem, 3vw, 2.5rem)}
 .hero-media{
   position:absolute;top:0;right:0;bottom:0;width:52%;z-index:1;overflow:hidden;
@@ -394,6 +399,11 @@ body.menu-open{overflow:hidden}
 /* ------------------------------------------------------------- sections */
 .section{position:relative;padding:clamp(4.5rem,9vw,9rem) 0;overflow:hidden}
 .section--tight{padding:clamp(3rem,5vw,5rem) 0}
+/* compact padding for 14-inch laptops */
+@media(max-width:1350px) and (min-width:821px){
+  .section{padding:clamp(3rem,6vw,6rem) 0}
+  .section--tight{padding:clamp(2rem,4vw,4rem) 0}
+}
 .section--paper{background:var(--paper)}
 .section--tint{background:linear-gradient(180deg,var(--blue-050),var(--white))}
 .section--deep{background:var(--blue-900);color:#eaf1fb}
@@ -549,18 +559,23 @@ body.menu-open{overflow:hidden}
   cursor:pointer;transition:color .35s,padding-left .45s var(--ease);color:var(--mute);
 }
 .story-item b{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.16em;color:var(--blue-300)}
-.story-item span{font-family:var(--f-display);font-size:clamp(1.15rem,1.9vw,1.7rem);letter-spacing:-.025em}
+.story-item span{font-family:var(--f-display);font-size:clamp(1rem,1.5vw,1.5rem);letter-spacing:-.025em}
 .story-item.is-on{color:var(--ink);padding-left:.9rem}
 .story-item.is-on b{color:var(--red)}
 
-.story-item--rich{display:block;padding:3rem .2rem;opacity:.35;transition:opacity .45s var(--ease),padding-left .45s var(--ease);margin-bottom:25vh}
-.story-item--rich:first-child{margin-top:25vh}
+.story-item--rich{display:block;padding:3rem .2rem;opacity:.35;transition:opacity .45s var(--ease),padding-left .45s var(--ease);margin-bottom:20vh}
+.story-item--rich:first-child{margin-top:20vh}
 .story-item--rich:last-child{margin-bottom:0}
 .story-item--rich.is-on{opacity:1;padding-left:1.5rem}
 .story-item--rich .frow-num{transition:color .35s}
 .story-item--rich.is-on .frow-num{color:var(--red)}
-.story-visual{position:relative;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:4/3;background:var(--paper-2)}
-@media(min-width:960px){.story-visual{position:sticky;top:7rem}}
+/* use max-height instead of pure aspect-ratio to prevent oversized image on small laptops */
+.story-visual{
+  position:relative;border-radius:var(--r-lg);overflow:hidden;
+  aspect-ratio:4/3;max-height:min(55vh,480px);
+  background:var(--paper-2);
+}
+@media(min-width:960px){.story-visual{position:sticky;top:6rem}}
 .story-visual figure{position:absolute;inset:0;margin:0;opacity:0;transition:opacity .7s var(--ease)}
 .story-visual figure.is-on{opacity:1}
 .story-visual img{width:100%;height:100%;object-fit:cover}
@@ -574,7 +589,7 @@ body.menu-open{overflow:hidden}
 @media(min-width: 960px) {
   .seq-wrap {
     grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
-    gap: clamp(3rem, 6vw, 6rem);
+    gap: clamp(2rem, 4vw, 5rem);
   }
 }
 .seq-texts {
@@ -593,11 +608,13 @@ body.menu-open{overflow:hidden}
 .seq-text .frow-num {
   margin-bottom: 1rem;
 }
+/* Cap visual height so it doesn't clip on 14-inch laptops */
 .seq-visual {
   position: relative;
   border-radius: var(--r-lg);
   overflow: hidden;
   aspect-ratio: 4/3;
+  max-height: min(52vh, 460px);
   background: var(--paper-2);
   display: grid;
   grid-template-columns: 1fr;
@@ -798,6 +815,17 @@ body.menu-open{overflow:hidden}
   .nav-cta{display:none}
   .hero-media{width:100%;clip-path:none;opacity:.5}
   .hero-media::after{background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.7) 45%,rgba(8,33,79,.25))}
+}
+/* ---- 14-inch laptop tweaks (1100–1350px) ---- */
+@media(max-width:1350px) and (min-width:1101px){
+  .hero-media{width:46%;clip-path:polygon(12% 0,100% 0,100% 100%,0 100%)}
+  .hero .display{font-size:clamp(2rem,3.5vw,3.2rem)}
+  .hero-meta b{font-size:clamp(1.3rem,2vw,1.8rem)}
+  .story-item span{font-size:clamp(.95rem,1.3vw,1.35rem)}
+  .seq-wrap,.story{gap:clamp(1.5rem,3vw,3rem)}
+  .frow{gap:clamp(1.5rem,3vw,3rem)}
+  .philosophy-card{gap:0}
+  .pc-body{padding:2.5rem 3rem}
 }
 @media(max-width:820px){
   :root{--shell:min(1320px, 100% - 2.2rem)}
