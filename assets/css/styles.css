@@ -793,14 +793,25 @@ body.menu-open {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, var(--blue-700) 0%, var(--blue-700) 5%, rgba(14, 55, 129, 0) 90%);
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    var(--blue-700) 0%,
+    rgba(14, 55, 129, 0.65) 18%,
+    rgba(14, 55, 129, 0) 55%
+  );
+  box-shadow: inset 2px 0 0 var(--blue-700);
+  z-index: 2;
 }
 
 .hero-media img {
+  position: relative;
+  z-index: 1;
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: right center
+  object-position: right center;
 }
 
 .hero .display {
@@ -2954,10 +2965,7 @@ html.no-js [data-hero-fade] {
   margin: -0.5px;
 }
 
-/* 3. clean up the hero-media gradient so it doesn't leave a hard edge */
-.hero-media::after {
-  background: linear-gradient(90deg, var(--blue-700) 0%, rgba(14, 55, 129, 0) 100%);
-}
+
 
 /* 4. safety net: strip any stray borders/outlines on direct hero children */
 .hero,
