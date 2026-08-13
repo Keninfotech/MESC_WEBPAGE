@@ -6,6 +6,9 @@
   height: 100vh;
   overflow: hidden;
   background-color: var(--bg);
+  background-image: url('../img/awards-bg.svg');
+  background-size: cover;
+  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;

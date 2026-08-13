@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0f7ff" />
+      <stop offset="100%" stop-color="#e8f2fc" />
+    </linearGradient>
+    
+    <!-- Dark Blue Blob Gradient -->
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e3781" />
+      <stop offset="100%" stop-color="#1857c4" />
+    </linearGradient>
+
+    <!-- Light Blue Blob Gradient -->
+    <linearGradient id="blueGradLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#134aa8" />
+      <stop offset="100%" stop-color="#1857c4" />
+    </linearGradient>
+
+    <!-- Dot Patterns -->
+    <pattern id="dotGridWhite" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="2" fill="#ffffff" opacity="0.3" />
+    </pattern>
+    <pattern id="dotGridBlue" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="2" fill="#cce0ff" />
+    </pattern>
+  </defs>
+
+  <!-- Base Layer -->
+  <rect width="1440" height="900" fill="url(#bgGrad)" />
+
+  <!-- Abstract Waves at Bottom Right -->
+  <g fill="none" stroke-linecap="round">
+    <path d="M 500 950 C 700 800, 1000 950, 1500 650" stroke="#dbe8f8" stroke-width="1.5" />
+    <path d="M 400 980 C 650 820, 1050 1000, 1600 680" stroke="#e1eefa" stroke-width="2" />
+    <path d="M 300 1000 C 600 850, 1100 1050, 1700 700" stroke="#dbe8f8" stroke-width="1" />
+    <path d="M 600 900 C 800 750, 1100 850, 1500 550" stroke="#e8f2fc" stroke-width="4" opacity="0.6"/>
+  </g>
+
+  <!-- Large Soft Abstract Blobs -->
+  <circle cx="1300" cy="150" r="300" fill="#ffffff" opacity="0.4" filter="blur(60px)" />
+  <circle cx="150" cy="750" r="400" fill="#ffffff" opacity="0.3" filter="blur(80px)" />
+
+  <!-- Left Side Dark Blue Wave -->
+  <path d="M 0 0 L 320 0 C 180 250, 400 600, 150 900 L 0 900 Z" fill="url(#blueGradLight)" opacity="0.8" />
+  <path d="M 0 0 L 280 0 C 120 280, 350 650, 80 900 L 0 900 Z" fill="url(#blueGrad)" />
+
+  <!-- Medical Cross Icon -->
+  <g transform="translate(1250, 180)" fill="#dbe8f8" opacity="0.8">
+    <rect x="-12" y="-45" width="24" height="90" rx="6" />
+    <rect x="-45" y="-12" width="90" height="24" rx="6" />
+  </g>
+
+  <!-- Dot Grid Accents -->
+  <!-- Top Left (on blue) -->
+  <rect x="40" y="80" width="120" height="96" fill="url(#dotGridWhite)" />
+  <!-- Bottom Left (on blue) -->
+  <rect x="60" y="720" width="96" height="96" fill="url(#dotGridWhite)" />
+  <!-- Middle Right (on light bg) -->
+  <rect x="1280" y="450" width="120" height="120" fill="url(#dotGridBlue)" />
+</svg>
