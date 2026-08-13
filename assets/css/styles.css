@@ -7,8 +7,8 @@
 /* ---------------------------------------------------------------- tokens */
 :root {
   --white: #ffffff;
-  --paper: #f6f8fb;
-  --paper-2: #eef3f9;
+  --paper: #e1eefa;
+  --paper-2: #dbe8f8;
   --blue-050: #eaf1fb;
   --blue-100: #d3e2f7;
   --blue-300: #7ba7e3;
@@ -16,11 +16,11 @@
   --blue-600: #134aa8;
   --blue-700: #0e3781;
   --blue-900: #08214f;
-  --ink: #0b1524;
-  --ink-2: #22344c;
-  --mute: #5b6c85;
-  --line: #dde5ef;
-  --line-strong: #c3d2e4;
+  --ink: #0a1931;
+  --ink-2: #1e304b;
+  --mute: #4c6a99;
+  --line: #cce0ff;
+  --line-strong: #a4c6f5;
   --red: #e01b26;
   --red-soft: #ffe7e8;
   --chennai: #0E6B5C;
@@ -29,7 +29,7 @@
   --north-karnataka: #458037;
   --kerala: #BD4B2A;
 
-  --bg: var(--white);
+  --bg: #f0f7ff;
   --fg: var(--ink);
   --fg-mute: var(--mute);
   --accent: var(--blue-500);
@@ -1051,7 +1051,7 @@ body.menu-open {
 }
 
 .stat--card {
-  background: var(--white);
+  background: linear-gradient(145deg, #ffffff, #e1eefa);
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
   padding: 2.5rem 1.5rem;
@@ -1102,7 +1102,8 @@ body.menu-open {
 .section {
   position: relative;
   padding: clamp(4.5rem, 9vw, 9rem) 0;
-  overflow: hidden
+  overflow: hidden;
+  background: linear-gradient(180deg, #f0f7ff, #e8f2fc);
 }
 
 .section--tight {
@@ -1121,11 +1122,11 @@ body.menu-open {
 }
 
 .section--paper {
-  background: var(--paper)
+  background: linear-gradient(180deg, #e8f2fc, #dbe8f8);
 }
 
 .section--tint {
-  background: linear-gradient(180deg, var(--blue-050), var(--white))
+  background: linear-gradient(180deg, #dbe8f8, #f0f7ff);
 }
 
 .section--deep {
@@ -1222,7 +1223,7 @@ body.menu-open {
   position: relative;
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: linear-gradient(145deg, #ffffff, #e1eefa);
   border: 1px solid var(--line);
   border-radius: var(--r);
   overflow: hidden;
@@ -1339,7 +1340,7 @@ body.menu-open {
 
 .card--compact {
   border-radius: var(--r);
-  background: #fff;
+  background: linear-gradient(145deg, #ffffff, #e1eefa);
   border: 1px solid var(--line);
   display: flex;
   flex-direction: column;
@@ -1818,7 +1819,7 @@ body.menu-open {
 /* ------------------------------------------------------------- review cards */
 .review-card {
   width: 320px;
-  background: #fff;
+  background: linear-gradient(145deg, #ffffff, #e1eefa);
   padding: 2.5rem 1.8rem;
   display: flex;
   flex-direction: column;
@@ -1887,8 +1888,8 @@ body.menu-open {
 .stat {
   display: block;
   text-decoration: none;
-  background: #fff;
-  padding: 1.8rem 1.4rem;
+  padding: 1.5rem 1.2rem;
+  background: linear-gradient(145deg, #ffffff, #e1eefa);
   border: 1px solid var(--line);
   border-radius: var(--r);
   transition: all 0.3s ease;
@@ -1990,7 +1991,7 @@ body.menu-open {
 
 .award {
   margin: 0;
-  background: #fff;
+  background: linear-gradient(145deg, #ffffff, #e1eefa);
   border: 1px solid var(--line);
   border-radius: var(--r);
   overflow: hidden;
@@ -2067,7 +2068,7 @@ body.menu-open {
 }
 
 .panel {
-  background: #fff;
+  background: linear-gradient(145deg, #ffffff, #e1eefa);
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
   padding: clamp(1.5rem, 3vw, 2.4rem)
@@ -2489,7 +2490,7 @@ html.no-js [data-hero-fade] {
 /* -------------------------------------------------------- philosophy card */
 .philosophy-card {
   display: flex;
-  background: #fff;
+  background: linear-gradient(145deg, #ffffff, #e1eefa);
   border-radius: 24px;
   box-shadow: 0 30px 60px -20px rgba(8, 33, 79, 0.15);
   position: relative;
@@ -2831,7 +2832,7 @@ html.no-js [data-hero-fade] {
 }
 
 .philosophy-features {
-  background: #fff;
+  background: linear-gradient(145deg, #ffffff, #e1eefa);
   border-radius: 100px;
   padding: 3rem 4rem;
   display: grid;
