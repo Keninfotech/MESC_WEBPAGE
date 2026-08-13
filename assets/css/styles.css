@@ -102,18 +102,18 @@ h3,
 h4,
 h5 {
   font-family: var(--f-display);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -.025em;
-  line-height: 1.04;
+  line-height: 1.1;
   margin: 0;
-  color: var(--ink)
+  color: var(--blue-700);
 }
 
 .display {
   font-size: clamp(2.4rem, 5.5vw, 5.4rem);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -.04em;
-  line-height: 1
+  line-height: 1.05;
 }
 
 .h2 {
@@ -138,11 +138,40 @@ h5 {
 }
 
 .prose {
-  color: var(--ink-2)
+  color: var(--ink-2);
+}
+
+.prose h2,
+.prose h3,
+.prose h4 {
+  color: var(--blue-700);
+  margin-top: 2.5rem;
+  margin-bottom: 1.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.prose h2 {
+  font-size: clamp(1.7rem, 2.5vw, 2.2rem);
+  letter-spacing: -.03em;
+  border-bottom: 2px solid var(--blue-100);
+  padding-bottom: 0.6rem;
+}
+
+.prose h3 {
+  font-size: clamp(1.35rem, 1.8vw, 1.6rem);
+  letter-spacing: -.02em;
+}
+
+.prose h4 {
+  font-size: clamp(1.1rem, 1.3vw, 1.3rem);
+  letter-spacing: 0.02em;
+  color: var(--blue-600);
+  text-transform: uppercase;
 }
 
 .prose p {
-  margin: 0 0 1rem
+  margin: 0 0 1.2rem;
 }
 
 .prose p:last-child {
@@ -1776,17 +1805,15 @@ body.menu-open {
 }
 
 .marquee-track img {
-  height: 64px;
-  width: auto;
+  height: 90px;
+  width: 200px;
   object-fit: contain;
-  filter: grayscale(1);
-  opacity: .62;
-  transition: filter .4s, opacity .4s
+  opacity: 1;
+  transition: transform .4s;
 }
 
 .marquee-track img:hover {
-  filter: none;
-  opacity: 1
+  transform: scale(1.05);
 }
 
 /* ------------------------------------------------------------- quote band */
@@ -2445,7 +2472,8 @@ body.menu-open {
   }
 
   .marquee-track img {
-    height: 46px
+    height: 64px;
+    width: 140px;
   }
 }
 
