@@ -448,6 +448,65 @@ body.menu-open{overflow:hidden}
 .card-foot{padding:0 1.4rem 1.4rem}
 .project-loc{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem}
 
+/* ----------------------------------------------- compact service table grid */
+.services-table-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+@media (min-width: 520px) {
+  .services-table-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 820px) {
+  .services-table-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 1120px) {
+  .services-table-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card--compact {
+  border-radius: var(--r);
+  background: #fff;
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+}
+.card--compact .card-media {
+  aspect-ratio: 16 / 9;
+  max-height: 145px;
+}
+.card--compact .card-body {
+  padding: 1rem 1.1rem 0.6rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.card--compact .card-body .h4 {
+  font-size: 1.05rem;
+  line-height: 1.3;
+  margin-bottom: 0.35rem;
+}
+.card--compact .card-body .prose p {
+  font-size: 0.86rem;
+  line-height: 1.42;
+  color: var(--fg-mute, #475569);
+  margin: 0;
+}
+.card--compact .card-foot {
+  padding: 0 1.1rem 1rem;
+  margin-top: auto;
+}
+.card--compact .link-more {
+  font-size: 0.82rem;
+}
+
 /* --------------------------------------------------------- feature rows */
 .frows{display:grid;gap:clamp(3rem,6vw,6rem)}
 .frow{display:grid;gap:2rem;align-items:center}
