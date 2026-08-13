@@ -38,7 +38,7 @@
   transform: translateZ(-200px) scale(0.9);
   pointer-events: none;
   border-radius: 8px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  /* box-shadow removed to avoid background border */
   will-change: transform, opacity, clip-path;
 }
 
@@ -52,13 +52,13 @@
   inset: 0;
   border-radius: 8px;
   overflow: hidden;
-  background: #f4f4f4;
+  background: transparent;
 }
 
 .doc-base img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   filter: grayscale(40%) brightness(0.6) contrast(1.1);
 }
 
@@ -81,7 +81,7 @@
 .doc-bright img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   filter: grayscale(0%) brightness(1.1) contrast(1.05);
 }
 
