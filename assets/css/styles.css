@@ -296,11 +296,9 @@ h5 {
   background: rgba(255, 255, 255, 0);
 }
 
-.masthead:not(.is-stuck) {
-  border-bottom-color: transparent !important
-}
 
-.masthead.is-stuck {
+
+.masthead {
   padding: .5rem 0;
   background: rgba(255, 255, 255, .94);
   backdrop-filter: blur(14px);
@@ -327,11 +325,9 @@ h5 {
   transition: height .4s var(--ease), filter .4s
 }
 
-.masthead:not(.is-stuck) .brand img {
-  filter: brightness(0) invert(1)
-}
 
-.masthead.is-stuck .brand img {
+
+.masthead .brand img {
   height: 40px;
   filter: none
 }
@@ -350,9 +346,7 @@ h5 {
   transition: color .4s
 }
 
-.masthead:not(.is-stuck) .brand-txt b {
-  color: #fff
-}
+
 
 .brand-txt small {
   font-family: var(--f-mono);
@@ -363,9 +357,7 @@ h5 {
   transition: color .4s
 }
 
-.masthead:not(.is-stuck) .brand-txt small {
-  color: rgba(255, 255, 255, .75)
-}
+
 
 .mainnav {
   display: flex;
@@ -396,10 +388,7 @@ h5 {
   transition: color .4s;
 }
 
-.masthead:not(.is-stuck) .mainnav>li>a,
-.masthead:not(.is-stuck) .mainnav>li>button {
-  color: #fff
-}
+
 
 .mainnav>li>a::after,
 .mainnav>li>button::after {
@@ -427,10 +416,7 @@ h5 {
   color: var(--blue-600)
 }
 
-.masthead:not(.is-stuck) .mainnav>li>a.is-active,
-.masthead:not(.is-stuck) .mainnav>li>button.is-active {
-  color: #fff
-}
+
 
 .mainnav>li>a.is-active::after,
 .mainnav>li>button.is-active::after {
@@ -605,15 +591,9 @@ h5 {
   font-size: .88rem
 }
 
-.masthead:not(.is-stuck) .nav-cta {
-  --btn-bg: transparent;
-  --btn-fg: #fff;
-  border-color: rgba(255, 255, 255, .3)
-}
 
-.masthead:not(.is-stuck) .nav-cta:hover {
-  border-color: #fff
-}
+
+
 
 .link-more {
   display: inline-flex;
