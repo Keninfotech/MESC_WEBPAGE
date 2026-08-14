@@ -1,0 +1,199 @@
+/* Custom Redesign for About MESC section */
+.about-mesc-redesign {
+    position: relative;
+    background: linear-gradient(135deg, #f2f7fd 0%, #e6f1fe 100%);
+    overflow: hidden;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+}
+
+.about-mesc-redesign::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    /* Soft waves */
+    background-image: 
+        radial-gradient(circle at 100% 0%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 40%),
+        radial-gradient(circle at 0% 100%, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 60%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.about-mesc-redesign .shell {
+    position: relative;
+    z-index: 2;
+}
+
+/* Decoration elements */
+.am-deco {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.am-dots {
+    background-image: radial-gradient(circle, #8fa8e0 1.5px, transparent 2px);
+    background-size: 20px 20px;
+    opacity: 0.7;
+}
+
+.am-dots-1 {
+    top: 20%;
+    right: 5%;
+    width: 140px;
+    height: 140px;
+}
+
+.am-dots-2 {
+    bottom: 25%;
+    left: 2%;
+    width: 100px;
+    height: 140px;
+}
+
+.am-grid-lines {
+    position: absolute;
+    bottom: -10%;
+    right: 5%;
+    width: 50%;
+    height: 50%;
+    background-image: 
+        linear-gradient(to right, rgba(143, 168, 224, 0.12) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(143, 168, 224, 0.12) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.am-crosshair {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    bottom: 15%;
+    left: 45%;
+    z-index: 1;
+}
+.am-crosshair::before, .am-crosshair::after {
+    content: '';
+    position: absolute;
+    background-color: rgba(143, 168, 224, 0.4);
+}
+.am-crosshair::before {
+    top: 50%; left: 0; right: 0; height: 1px;
+}
+.am-crosshair::after {
+    left: 50%; top: 0; bottom: 0; width: 1px;
+}
+
+/* Image frame styling for About MESC right side */
+.about-mesc-redesign .seq-visual {
+    position: relative;
+}
+
+.about-mesc-redesign .seq-visual figure img {
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Blue Angle Bracket behind image */
+.am-bracket {
+    position: absolute;
+    bottom: -15px;
+    right: -25px;
+    width: 80px;
+    height: 120px;
+    border-right: 2px solid #004fb6;
+    border-bottom: 2px solid #004fb6;
+    z-index: -1;
+}
+.am-bracket::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    right: 55px;
+    width: 25px;
+    height: 2px;
+    background-color: #f05a41; /* red line */
+}
+
+/* Redesign text elements */
+.about-mesc-redesign .section-head .eyebrow {
+    color: #004fb6;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+.about-mesc-redesign .section-head .h2 {
+    color: #002c77;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+.about-mesc-redesign .section-head {
+    border-bottom: 2px solid #004fb6;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+    margin-bottom: 3rem;
+    position: relative;
+}
+.about-mesc-redesign .section-head::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    right: -30px;
+    width: 30px;
+    height: 2px;
+    background-color: #f05a41;
+}
+
+.about-mesc-redesign .seq-text .frow-num {
+    color: #f05a41;
+    font-weight: 700;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.about-mesc-redesign .seq-text .frow-num::after {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 2px;
+    background-color: currentColor;
+}
+
+.about-mesc-redesign .seq-text .h3 {
+    color: #002c77;
+    font-size: clamp(1.8rem, 3vw, 2.2rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.about-mesc-redesign .seq-text .prose {
+    color: #4a5568;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.about-mesc-redesign .link-more {
+    color: #2b6cb0;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.about-mesc-redesign .link-more .bar {
+    display: none; /* hide default bar */
+}
+.about-mesc-redesign .link-more::after {
+    content: '→';
+    font-size: 1.2rem;
+    color: #e53e3e;
+}
