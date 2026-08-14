@@ -75,6 +75,13 @@
   will-change:clip-path;
   box-shadow:0 30px 60px -30px rgba(8,33,79,.35);
 }
+
+/* Specific sizing for operation theatres image frame */
+.page-operation-theatres .steps-frame {
+  max-width: 75%;
+  margin: 0 auto;
+  margin-top: 4rem;
+}
 .steps-layer{
   position:absolute;inset:0;overflow:hidden;
   clip-path:inset(0 0 0 0);
