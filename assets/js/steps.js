@@ -257,9 +257,10 @@
 
     stepEls.forEach(function (n, i) {
       ScrollTrigger.create({
-        trigger: n, start: "top 55%", end: "bottom 55%",
-        onEnter: function () { transition(i); },
-        onEnterBack: function () { transition(i); }
+        trigger: n, start: "top 50%", end: "bottom 50%",
+        onToggle: function (self) {
+          if (self.isActive) transition(i);
+        }
       });
 
       /* masked reveal for the step head + comfortable fade for the prose */
