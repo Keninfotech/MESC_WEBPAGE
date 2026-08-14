@@ -2,21 +2,32 @@
 .about-mesc-redesign {
     position: relative;
     background: linear-gradient(135deg, #f2f7fd 0%, #e6f1fe 100%);
-    overflow: hidden;
     padding-top: 6rem;
     padding-bottom: 6rem;
 }
 
-.about-mesc-redesign::before {
-    content: '';
+.am-pinned-bg-container {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.am-pinned-bg {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.am-bg-waves {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     /* Soft waves */
     background-image: 
         radial-gradient(circle at 100% 0%, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 40%),
         radial-gradient(circle at 0% 100%, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 60%);
-    pointer-events: none;
-    z-index: 0;
 }
 
 .about-mesc-redesign .shell {
