@@ -2218,7 +2218,8 @@ body.menu-open {
 }
 
 .site-foot .brand img {
-  height: 56px
+  height: 56px;
+  filter: brightness(0) invert(1);
 }
 
 .site-foot .lede {
