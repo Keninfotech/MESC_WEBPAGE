@@ -40,9 +40,8 @@
     }
   }
 
-  /* seed varies the motion language per page so no two sections animate alike */
-  var seed = 0, path = (location.pathname.split("/").pop() || "index");
-  for (var s = 0; s < path.length; s++) seed = (seed + path.charCodeAt(s)) % 97;
+  /* Force a consistent seed so all pages use the same animation and layout */
+  var seed = 41;
 
   var SHAPES = [
     "inset(0 0 0 0 round 2px)",
