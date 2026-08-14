@@ -82,6 +82,10 @@
   margin: 0 auto;
   margin-top: 4rem;
 }
+
+.page-operation-theatres .steps-count {
+  display: none;
+}
 .steps-layer{
   position:absolute;inset:0;overflow:hidden;
   clip-path:inset(0 0 0 0);
