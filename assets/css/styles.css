@@ -723,9 +723,7 @@ body.menu-open {
   grid-template-rows: 1fr
 }
 
-.drawer-sub>* {
-  overflow: hidden
-}
+.drawer-sub>* { overflow: hidden; min-height: 0; }
 
 .drawer-sub {
   overflow: hidden
