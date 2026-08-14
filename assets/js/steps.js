@@ -177,19 +177,26 @@
     unclip(sec);
 
     /* ---------------------------------------------------------- motion */
-    var current = 0, busy = false;
+    var current = 0, busy = false, queued = -1;
     layers.forEach(function (l, i) { gsap.set(l, { autoAlpha: i === 0 ? 1 : 0 }); });
     gsap.set(layers[0].querySelector("img"), { scale: 1, filter: "grayscale(0)" });
     stepEls[0].classList.add("is-active");
     var tickN = frame.querySelector(".m-n");
 
     function transition(to) {
-      if (to === current || busy) { current = to; return; }
+      if (to === current) { queued = -1; return; }
+      if (busy) { queued = to; return; }
       var from = current; current = to; busy = true;
       var inL = layers[to], outL = layers[from];
       var inImg = inL.querySelector("img"), outImg = outL.querySelector("img");
       var dir = to > from ? 1 : -1;
-      var tl = gsap.timeline({ onComplete: function () { busy = false; } });
+      var tl = gsap.timeline({ onComplete: function () { 
+        busy = false; 
+        if (queued !== -1) { 
+          var q = queued; queued = -1; 
+          transition(q); 
+        } 
+      } });
 
       gsap.set(inL, { autoAlpha: 1, zIndex: 3 });
       gsap.set(outL, { zIndex: 2 });
@@ -250,7 +257,7 @@
 
     stepEls.forEach(function (n, i) {
       ScrollTrigger.create({
-        trigger: n, start: "top 62%", end: "bottom 45%",
+        trigger: n, start: "top 55%", end: "bottom 55%",
         onEnter: function () { transition(i); },
         onEnterBack: function () { transition(i); }
       });

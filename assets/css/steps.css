@@ -62,6 +62,7 @@
   align-self:start;
   z-index:1;
 }
+
 .steps-frame{
   position:relative;
   aspect-ratio:4/3.15;
