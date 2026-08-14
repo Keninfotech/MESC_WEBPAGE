@@ -797,6 +797,7 @@
 
   /* ---------------------------------------------- sticky storytelling */
   document.querySelectorAll("[data-story]").forEach(function (story) {
+    if (window.matchMedia("(max-width: 959px)").matches) return;
     var items = story.querySelectorAll(".story-item");
     var figs = story.querySelectorAll(".story-visual figure");
     if (!items.length) return;

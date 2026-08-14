@@ -18,6 +18,7 @@
 
   var MOBILE = "(max-width: 960px)";
   var mq = window.matchMedia(MOBILE);
+  if (mq.matches) return;
 
   /* ------------------------------------------------------------- helpers */
   function pad(n) { return (n < 10 ? "0" : "") + n; }
