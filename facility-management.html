@@ -19,7 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/styles.css">
-<link rel="stylesheet" href="assets/css/steps.css">
+  <link rel="stylesheet" href="assets/css/steps.css">
+  <link rel="stylesheet" href="assets/css/facility-story.css">
 <link rel="stylesheet" href="assets/css/animations.css">
 </head>
 <body class="page-service">
@@ -48,57 +49,124 @@
   </div>
   <div class="hero-marks" aria-hidden="true"><div class="shell"><span></span><span></span><i class="rule"></i></div></div>
   <div class="shell" style="position:absolute;left:0;right:0;pointer-events:none"><span class="scroll-hint">Scroll</span></div>
-</section><section class="section"><div class="grid-lines"></div><div class="shell" style="position: relative;">
-    <!-- Chapter 01 -->
-    <div class="editorial-chapter" data-anim="fade">
-      <div class="editorial-bg-num">01</div>
-      <div class="editorial-media">
-        <img src="assets/img/img-20240205-wa0004.jpg" alt="MESC" loading="lazy">
-      </div>
-      <div class="editorial-content">
+</section><section class="section" style="padding-bottom: 0;"><div class="grid-lines"></div>
+
+    <div class="shell" style="position: relative; margin-bottom: 4rem; padding-top: 2rem;">
+      <div class="editorial-content" style="max-width: 900px; margin: 0 auto; text-align: center;">
         <span class="editorial-label">01 / OVERVIEW</span>
-        <div class="prose">
-          <p>In facility management, MESC takes on the crucial responsibility of overseeing and maintaining healthcare facilities to ensure their continuous and optimal operation. This comprehensive approach encompasses the management of various aspects, including the upkeep of facilities, equipment, infrastructure, and utilities. MESC is dedicated to not only preserving the physical assets of the facility but also creating an environment that prioritizes safety, security, regulatory compliance, and the overall well-being of patients, visitors, and staff.</p>
+        <div class="prose" style="margin-top: 2rem;">
+          <p style="font-size: 1.25rem;">In facility management, MESC takes on the crucial responsibility of overseeing and maintaining healthcare facilities to ensure their continuous and optimal operation. This comprehensive approach encompasses the management of various aspects, including the upkeep of facilities, equipment, infrastructure, and utilities. MESC is dedicated to not only preserving the physical assets of the facility but also creating an environment that prioritizes safety, security, regulatory compliance, and the overall well-being of patients, visitors, and staff.</p>
         </div>
-        <ul class="lifecycle-timeline">
-          <li>
-            <span class="timeline-marker">01</span>
-            <div class="timeline-content">
-              <strong>Upkeep of Facilities, Equipment, and Infrastructure</strong>
-              <p>MESC's facility management involves a proactive approach to the maintenance and upkeep of healthcare facilities. This includes routine inspections, preventive maintenance, and prompt repairs to ensure that all components, from structural elements to medical equipment, are in optimal condition. By maintaining the physical assets of the facility, MESC contributes to its longevity and functionality.</p>
-            </div>
-          </li>
-          <li>
-            <span class="timeline-marker">02</span>
-            <div class="timeline-content">
-              <strong>Utilities Management</strong>
-              <p>Efficient management of utilities is a critical aspect of facility management. MESC oversees the proper functioning of utilities such as water, electricity, heating, and ventilation systems. This proactive management ensures uninterrupted operations and contributes to energy efficiency, aligning with sustainability goals and cost-effectiveness.</p>
-            </div>
-          </li>
-          <li>
-            <span class="timeline-marker">03</span>
-            <div class="timeline-content">
-              <strong>Safety and Security Management</strong>
-              <p>MESC places a paramount focus on managing the safety and security of healthcare facilities. This involves implementing comprehensive safety protocols, conducting regular safety audits, and ensuring that security measures are in place to protect both physical assets and individuals within the facility. By prioritizing safety and security, MESC creates an environment conducive to the well-being of patients, visitors, and staff.</p>
-            </div>
-          </li>
-          <li>
-            <span class="timeline-marker">04</span>
-            <div class="timeline-content">
-              <strong>Regulatory Compliance</strong>
-              <p>Compliance with regulatory requirements is a fundamental aspect of facility management at MESC. Our team stays abreast of evolving healthcare regulations and standards to ensure that the facility operates in full compliance. This includes adherence to guidelines related to healthcare practices, building codes, and other industry-specific regulations.</p>
-            </div>
-          </li>
-          <li>
-            <span class="timeline-marker">05</span>
-            <div class="timeline-content">
-              <strong>Creating a Comfortable Environment</strong>
-              <p>Beyond the physical aspects, MESC is committed to creating a comfortable and welcoming environment within healthcare facilities. This involves factors such as temperature control, lighting, and aesthetics, all contributing to the overall well-being and satisfaction of patients, visitors, and staff.</p>
-            </div>
-          </li>
-        </ul>
       </div>
     </div>
+
+    <!-- START OF SCROLL STORY -->
+    <div class="story-wrapper">
+      <div class="story-sticky">
+        
+        <!-- VISUAL PANE (LEFT) -->
+        <div class="story-visual-pane">
+          <img src="assets/img/img-20240205-wa0004.jpg" alt="MESC Facility Management" loading="lazy">
+          
+          <!-- STAGE 01: Annotations Overlay -->
+          <div class="story-overlay story-annotations">
+            <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
+              <!-- HVAC -->
+              <path class="annot-line" d="M 300 200 L 400 300 L 600 300" />
+              <circle class="annot-circle" cx="300" cy="200" r="8" />
+              <text class="annot-text" x="610" y="305">HVAC SYS</text>
+              
+              <!-- Equipment -->
+              <path class="annot-line" d="M 700 600 L 600 700 L 400 700" />
+              <circle class="annot-circle" cx="700" cy="600" r="8" />
+              <text class="annot-text" x="230" y="705">INFRASTRUCTURE</text>
+            </svg>
+          </div>
+          
+          <!-- STAGE 02: Utilities Overlay -->
+          <div class="story-overlay story-utilities">
+            <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
+              <path class="util-path util-water" d="M -100 800 Q 200 600 500 800 T 1100 800" />
+              <path class="util-path util-elec" d="M -100 200 L 200 200 L 200 600 L 800 600 L 800 1100" />
+              <path class="util-path util-heat" d="M 1100 300 Q 700 200 700 500 T 400 900" />
+              <path class="util-path util-air" d="M 500 -100 L 500 300 L 1100 300" />
+            </svg>
+          </div>
+          
+          <!-- STAGE 03: Scanner Overlay -->
+          <div class="story-overlay story-scanner">
+            <div class="scanner-line"></div>
+            <div class="scanner-target" data-label="EMERGENCY EXIT" style="top: 30%; left: 20%; width: 60px; height: 80px;"></div>
+            <div class="scanner-target" data-label="SECURITY CAM" style="top: 15%; left: 75%; width: 40px; height: 40px;"></div>
+            <div class="scanner-target" data-label="ACCESS POINT" style="top: 60%; left: 50%; width: 100px; height: 120px;"></div>
+          </div>
+          
+          <!-- STAGE 04: Blueprint Overlay -->
+          <div class="story-overlay story-blueprint"></div>
+          <div class="blueprint-stamp">APPROVED</div>
+          
+          <!-- STAGE 05: Comfort Overlay -->
+          <div class="story-overlay story-comfort"></div>
+        </div>
+
+        <!-- CONTENT PANE (RIGHT) -->
+        <div class="story-content-pane">
+          
+          <div class="story-progress-indicator">
+            <div class="story-progress-count">
+              <span class="current">01</span> / 05
+            </div>
+            <div class="story-progress-track">
+              <div class="story-progress-fill"></div>
+            </div>
+          </div>
+
+          <!-- Step 1 -->
+          <div class="story-step is-active">
+            <h2 class="story-step-title">Upkeep of Facilities, Equipment, and Infrastructure</h2>
+            <div class="story-step-desc">
+              <p>MESC's facility management involves a proactive approach to the maintenance and upkeep of healthcare facilities. This includes routine inspections, preventive maintenance, and prompt repairs to ensure that all components, from structural elements to medical equipment, are in optimal condition. By maintaining the physical assets of the facility, MESC contributes to its longevity and functionality.</p>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="story-step">
+            <h2 class="story-step-title">Utilities Management</h2>
+            <div class="story-step-desc">
+              <p>Efficient management of utilities is a critical aspect of facility management. MESC oversees the proper functioning of utilities such as water, electricity, heating, and ventilation systems. This proactive management ensures uninterrupted operations and contributes to energy efficiency, aligning with sustainability goals and cost-effectiveness.</p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="story-step">
+            <h2 class="story-step-title">Safety and Security Management</h2>
+            <div class="story-step-desc">
+              <p>MESC places a paramount focus on managing the safety and security of healthcare facilities. This involves implementing comprehensive safety protocols, conducting regular safety audits, and ensuring that security measures are in place to protect both physical assets and individuals within the facility. By prioritizing safety and security, MESC creates an environment conducive to the well-being of patients, visitors, and staff.</p>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="story-step">
+            <h2 class="story-step-title">Regulatory Compliance</h2>
+            <div class="story-step-desc">
+              <p>Compliance with regulatory requirements is a fundamental aspect of facility management at MESC. Our team stays abreast of evolving healthcare regulations and standards to ensure that the facility operates in full compliance. This includes adherence to guidelines related to healthcare practices, building codes, and other industry-specific regulations.</p>
+            </div>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="story-step">
+            <h2 class="story-step-title">Creating a Comfortable Environment</h2>
+            <div class="story-step-desc">
+              <p>Beyond the physical aspects, MESC is committed to creating a comfortable and welcoming environment within healthcare facilities. This involves factors such as temperature control, lighting, and aesthetics, all contributing to the overall well-being and satisfaction of patients, visitors, and staff.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- END OF SCROLL STORY -->
+
+    <div class="shell" style="position: relative;">
 
     <!-- Chapter 02 -->
     <div class="editorial-chapter reverse" style="margin-top: 8rem;" data-anim="fade">
@@ -172,6 +240,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="assets/js/main.js"></script>
 <script src="assets/js/steps.js" defer></script>
+<script src="assets/js/facility-story.js" defer></script>
 <script src="assets/js/animations.js" defer></script>
 <script>
 (function(){var p=document.getElementById('progress');function u(){var h=document.documentElement;var s=h.scrollTop/(h.scrollHeight-h.clientHeight||1);p.style.transform='scaleX('+s+')';}u();addEventListener('scroll',u,{passive:true});})();

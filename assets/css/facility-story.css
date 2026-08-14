@@ -1,0 +1,264 @@
+/* facility-story.css */
+
+.story-wrapper {
+  position: relative;
+  height: 600vh; /* 5 stages + buffer */
+  background: var(--bg);
+  z-index: 10;
+}
+
+.story-sticky {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  align-items: stretch;
+}
+
+.story-visual-pane {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.story-visual-pane img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform, filter;
+  transform-origin: center center;
+}
+
+.story-content-pane {
+  flex: 0 0 500px;
+  height: 100%;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  background: var(--bg);
+  z-index: 2;
+  box-shadow: -10px 0 30px rgba(0,0,0,0.03);
+}
+
+.story-progress-indicator {
+  position: absolute;
+  left: 2.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+}
+
+.story-progress-count {
+  font-family: var(--f-mono);
+  font-size: 0.8rem;
+  color: var(--fg-mute);
+  margin-bottom: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  display: flex;
+  overflow: hidden;
+  height: 1.2em;
+}
+
+.story-progress-count .current {
+  display: inline-block;
+}
+
+.story-progress-track {
+  width: 2px;
+  height: 200px;
+  background: var(--line);
+  position: relative;
+  overflow: hidden;
+}
+
+.story-progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--blue);
+  transform: scaleY(0);
+  transform-origin: top center;
+  will-change: transform;
+}
+
+.story-step {
+  position: absolute;
+  top: 0;
+  left: 7rem;
+  right: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  will-change: opacity, transform;
+}
+
+.story-step.is-active {
+  pointer-events: auto;
+  visibility: visible;
+  opacity: 1;
+}
+
+.story-step-title {
+  font-family: var(--f-display);
+  font-size: clamp(2rem, 3vw, 2.5rem);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  color: var(--fg);
+}
+
+.story-step-desc {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--fg-mute);
+}
+
+/* Overlays */
+.story-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+}
+
+/* Stage 01: Annotations */
+.story-annotations svg {
+  width: 100%;
+  height: 100%;
+}
+.annot-line {
+  stroke: rgba(255,255,255,0.7);
+  stroke-width: 2;
+  fill: none;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+.annot-circle {
+  fill: rgba(255,255,255,0.9);
+  opacity: 0;
+}
+.annot-text {
+  font-family: var(--f-mono);
+  font-size: 14px;
+  fill: white;
+  font-weight: bold;
+  opacity: 0;
+}
+
+/* Stage 02: Utilities */
+.story-utilities svg {
+  width: 100%;
+  height: 100%;
+}
+.util-path {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+}
+.util-water { stroke: #00bcd4; stroke-width: 4; fill: none; filter: drop-shadow(0 0 5px rgba(0,188,212,0.8)); }
+.util-elec { stroke: #ffc107; stroke-width: 4; fill: none; filter: drop-shadow(0 0 5px rgba(255,193,7,0.8)); }
+.util-heat { stroke: #f44336; stroke-width: 4; fill: none; filter: drop-shadow(0 0 5px rgba(244,67,54,0.8)); }
+.util-air { stroke: #ffffff; stroke-width: 4; fill: none; filter: drop-shadow(0 0 5px rgba(255,255,255,0.8)); stroke-dasharray: 8 8; }
+
+/* Stage 03: Scanner */
+.story-scanner {
+  z-index: 3;
+}
+.scanner-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #00ff00;
+  box-shadow: 0 0 20px 2px #00ff00;
+  transform: translateY(-100vh);
+}
+.scanner-target {
+  position: absolute;
+  border: 2px solid #00ff00;
+  opacity: 0;
+  background: rgba(0, 255, 0, 0.1);
+}
+.scanner-target::after {
+  content: attr(data-label);
+  position: absolute;
+  top: -28px;
+  left: -2px;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  color: #00ff00;
+  white-space: nowrap;
+  background: rgba(0,0,0,0.6);
+  padding: 2px 6px;
+  border: 1px solid #00ff00;
+}
+
+/* Stage 04: Blueprint Overlay */
+.story-blueprint {
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: 1;
+}
+.blueprint-stamp {
+  position: absolute;
+  bottom: 4rem;
+  right: 4rem;
+  border: 6px solid #fff;
+  color: #fff;
+  font-family: var(--f-display);
+  font-size: 3rem;
+  font-weight: bold;
+  padding: 1rem 2rem;
+  transform: rotate(-10deg) scale(2);
+  opacity: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Stage 05: Comfort */
+.story-comfort {
+  background: radial-gradient(circle at center, rgba(255,200,150,0.2) 0%, transparent 70%);
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .story-sticky {
+    flex-direction: column;
+  }
+  .story-visual-pane {
+    flex: 0 0 50vh;
+  }
+  .story-content-pane {
+    flex: 1;
+    width: 100%;
+    padding: 2rem 2rem 2rem 4.5rem; 
+  }
+  .story-progress-indicator {
+    left: 1.5rem;
+  }
+  .story-step {
+    left: 4.5rem;
+    right: 2rem;
+  }
+  .blueprint-stamp {
+    font-size: 1.5rem;
+    bottom: 2rem;
+    right: 2rem;
+  }
+}
