@@ -6,74 +6,131 @@
    when JS is off or on small screens.
    ========================================================================= */
 
-.steps{
-  position:relative;
-  padding:clamp(3.5rem,7vw,7rem) 0 clamp(3.5rem,7vw,7rem);
-  background:var(--white);
-  transition:background-color .6s linear;
-  isolation:isolate;
+.steps {
+  position: relative;
+  padding: clamp(3.5rem, 7vw, 7rem) 0 clamp(3.5rem, 7vw, 7rem);
+  background: var(--white);
+  transition: background-color .6s linear;
+  isolation: isolate;
 }
-.steps::before{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background-image:linear-gradient(to right,var(--line) 1px,transparent 1px);
-  background-size:calc(100% / 12) 100%;
-  opacity:.35;
-  -webkit-mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 88%,transparent);
-  mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 88%,transparent);
+
+.steps::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(to right, var(--line) 1px, transparent 1px);
+  background-size: calc(100% / 12) 100%;
+  opacity: .35;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
 }
-.steps-shell{width:var(--shell);margin-inline:auto;position:relative;z-index:1}
-.has-steps{overflow:visible !important}
-.steps--nested{padding-block:clamp(1.5rem,3vw,3rem)}
-.steps--nested .steps-shell{width:100%}
-.steps--nested::before{display:none}
+
+.steps-shell {
+  width: var(--shell);
+  margin-inline: auto;
+  position: relative;
+  z-index: 1
+}
+
+.has-steps {
+  overflow: visible !important
+}
+
+.steps--nested {
+  padding-block: clamp(1.5rem, 3vw, 3rem)
+}
+
+.steps--nested .steps-shell {
+  width: 100%
+}
+
+.steps--nested::before {
+  display: none
+}
 
 /* ------------------------------------------------------------ section head */
-.steps-head{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;margin-bottom:clamp(1.6rem,3vw,3rem)}
-.steps-kicker{
-  font-family:var(--f-mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--blue-500);display:flex;align-items:center;gap:.75rem;
+.steps-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: clamp(1.6rem, 3vw, 3rem)
 }
-.steps-kicker i{display:block;width:clamp(2rem,6vw,5rem);height:1px;background:var(--red);flex:none}
-.steps-count{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.18em;color:var(--mute)}
+
+.steps-kicker {
+  font-family: var(--f-mono);
+  font-size: .72rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--blue-500);
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+
+.steps-kicker i {
+  display: block;
+  width: clamp(2rem, 6vw, 5rem);
+  height: 1px;
+  background: var(--red);
+  flex: none
+}
+
+.steps-count {
+  font-family: var(--f-mono);
+  font-size: .72rem;
+  letter-spacing: .18em;
+  color: var(--mute)
+}
 
 /* ------------------------------------------------------------------ layout */
-.steps-grid{
-  display:grid;
-  grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
-  gap:clamp(2rem,5vw,5.5rem);
-  align-items:start;
+.steps-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5.5rem);
+  align-items: start;
   /* runway: guarantees the sticky stage always has scroll room to fully
      release before the section ends, regardless of how short the track
      copy is — this is what stops the pinned image from being cut off
      by whatever follows (footer or next section). */
-  padding-bottom:clamp(4rem,22vh,14rem);
+  padding-bottom: clamp(4rem, 22vh, 14rem);
 }
-.steps--right .steps-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}
-.steps--right .steps-stage{order:2}
-.steps--right .steps-track{order:1}
+
+.steps--right .steps-grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr)
+}
+
+.steps--right .steps-stage {
+  order: 2
+}
+
+.steps--right .steps-track {
+  order: 1
+}
 
 /* --------------------------------------------------------------- the stage */
-.steps-stage{
-  position:sticky;
+.steps-stage {
+  position: sticky;
   /* anchored a fixed distance under the header instead of vertically
      centred by viewport height — centring pushed the frame very low on
      short/wide viewports, leaving no runway before it hit the footer */
-  top:clamp(5.5rem,10vh,8rem);
-  align-self:start;
-  z-index:1;
+  top: clamp(5.5rem, 10vh, 8rem);
+  align-self: start;
+  z-index: 1;
 }
 
-.steps-frame{
-  position:relative;
-  aspect-ratio:4/3.15;
-  max-height:calc(100svh - 11rem);
-  overflow:hidden;
-  background:var(--blue-050);
-  border:1px solid var(--line);
-  clip-path:inset(0 0 0 0 round 2px);
-  transition:clip-path .9s var(--ease), border-radius .9s var(--ease);
-  will-change:clip-path;
-  box-shadow:0 30px 60px -30px rgba(8,33,79,.35);
+.steps-frame {
+  position: relative;
+  aspect-ratio: 4/3.15;
+  max-height: calc(100svh - 11rem);
+  overflow: hidden;
+  background: var(--blue-050);
+  border: 1px solid var(--line);
+  clip-path: inset(0 0 0 0 round 2px);
+  transition: clip-path .9s var(--ease), border-radius .9s var(--ease);
+  will-change: clip-path;
+  box-shadow: 0 30px 60px -30px rgba(8, 33, 79, .35);
 }
 
 /* Global sizing for image frame */
@@ -86,109 +143,431 @@
 .steps-count {
   display: none;
 }
-.steps-layer{
-  position:absolute;inset:0;overflow:hidden;
-  clip-path:inset(0 0 0 0);
-  opacity:0;visibility:hidden;
+
+.steps-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  clip-path: inset(0 0 0 0);
+  opacity: 0;
+  visibility: hidden;
 }
-.steps-layer.is-active{opacity:1;visibility:visible}
-.steps-layer img{
-  width:100%;height:120%;object-fit:cover;position:absolute;inset:0;
-  transform:scale(1.06);
-  filter:grayscale(.55) contrast(1.03);
+
+.steps-layer.is-active {
+  opacity: 1;
+  visibility: visible
 }
-.steps-layer.is-active img{filter:grayscale(0)}
+
+.steps-layer img {
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+  object-position: 50% 12%;
+  position: absolute;
+  inset: 0;
+  transform: scale(1.06);
+  filter: grayscale(.55) contrast(1.03);
+}
+
+.steps-layer.is-active img {
+  filter: grayscale(0)
+}
 
 /* geometric wipe used between images */
-.steps-wipe{
-  position:absolute;inset:0;pointer-events:none;display:flex;
+.steps-wipe {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
 }
-.steps-wipe i{
-  flex:1;display:block;transform:scaleY(0);transform-origin:50% 100%;
-  background:var(--blue-500);
+
+.steps-wipe i {
+  flex: 1;
+  display: block;
+  transform: scaleY(0);
+  transform-origin: 50% 100%;
+  background: var(--blue-500);
 }
-.steps-wipe i:nth-child(2n){background:var(--blue-700)}
-.steps-wipe i:nth-child(3n){background:var(--red)}
+
+.steps-wipe i:nth-child(2n) {
+  background: var(--blue-700)
+}
+
+.steps-wipe i:nth-child(3n) {
+  background: var(--red)
+}
 
 /* blueprint marks over the frame */
-.steps-marks{position:absolute;inset:0;pointer-events:none}
-.steps-marks .m-rule{position:absolute;background:rgba(255,255,255,.72)}
-.steps-marks .m-rule.h{left:6%;right:6%;height:1px;top:12%;transform-origin:0 50%}
-.steps-marks .m-rule.v{top:8%;bottom:8%;width:1px;right:12%;transform-origin:50% 100%}
-.steps-marks .m-tick{position:absolute;bottom:1rem;left:1rem;display:flex;gap:.6rem;align-items:center;
-  font-family:var(--f-mono);font-size:.62rem;letter-spacing:.16em;color:#fff;text-transform:uppercase;
-  text-shadow:0 1px 8px rgba(8,33,79,.55)}
-.steps-marks .m-tick b{font-weight:500;color:#fff}
-.steps-marks .m-corner{position:absolute;width:22px;height:22px;border:1px solid rgba(255,255,255,.85)}
-.steps-marks .m-corner.tl{top:.9rem;left:.9rem;border-right:0;border-bottom:0}
-.steps-marks .m-corner.br{bottom:.9rem;right:.9rem;border-left:0;border-top:0}
+.steps-marks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none
+}
+
+.steps-marks .m-rule {
+  position: absolute;
+  background: rgba(255, 255, 255, .72)
+}
+
+.steps-marks .m-rule.h {
+  left: 6%;
+  right: 6%;
+  height: 1px;
+  top: 12%;
+  transform-origin: 0 50%
+}
+
+.steps-marks .m-rule.v {
+  top: 8%;
+  bottom: 8%;
+  width: 1px;
+  right: 12%;
+  transform-origin: 50% 100%
+}
+
+.steps-marks .m-tick {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  display: flex;
+  gap: .6rem;
+  align-items: center;
+  font-family: var(--f-mono);
+  font-size: .62rem;
+  letter-spacing: .16em;
+  color: #fff;
+  text-transform: uppercase;
+  text-shadow: 0 1px 8px rgba(8, 33, 79, .55)
+}
+
+.steps-marks .m-tick b {
+  font-weight: 500;
+  color: #fff
+}
+
+.steps-marks .m-corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 1px solid rgba(255, 255, 255, .85)
+}
+
+.steps-marks .m-corner.tl {
+  top: .9rem;
+  left: .9rem;
+  border-right: 0;
+  border-bottom: 0
+}
+
+.steps-marks .m-corner.br {
+  bottom: .9rem;
+  right: .9rem;
+  border-left: 0;
+  border-top: 0
+}
 
 /* big rolling counter under the frame */
-.steps-meta{display:flex;align-items:center;gap:1.1rem;margin-top:1.1rem}
-.steps-roller{
-  position:relative;width:3.6ch;height:2.7rem;overflow:hidden;flex:none;
-  font-family:var(--f-display);font-size:2.5rem;font-weight:600;letter-spacing:-.04em;
-  color:var(--blue-700);line-height:2.7rem;
+.steps-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  margin-top: 1.1rem
 }
-.steps-roller span{position:absolute;inset:0}
-.steps-meta .bar{position:relative;flex:1;height:2px;background:var(--line-strong);overflow:hidden}
-.steps-meta .bar i{position:absolute;inset:0;background:linear-gradient(90deg,var(--blue-500),var(--red));transform:scaleX(0);transform-origin:0 50%}
-.steps-meta .of{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.18em;color:var(--mute)}
+
+.steps-roller {
+  position: relative;
+  width: 3.6ch;
+  height: 2.7rem;
+  overflow: hidden;
+  flex: none;
+  font-family: var(--f-display);
+  font-size: 2.5rem;
+  font-weight: 600;
+  letter-spacing: -.04em;
+  color: var(--blue-700);
+  line-height: 2.7rem;
+}
+
+.steps-roller span {
+  position: absolute;
+  inset: 0
+}
+
+.steps-meta .bar {
+  position: relative;
+  flex: 1;
+  height: 2px;
+  background: var(--line-strong);
+  overflow: hidden
+}
+
+.steps-meta .bar i {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--blue-500), var(--red));
+  transform: scaleX(0);
+  transform-origin: 0 50%
+}
+
+.steps-meta .of {
+  font-family: var(--f-mono);
+  font-size: .72rem;
+  letter-spacing: .18em;
+  color: var(--mute)
+}
 
 /* --------------------------------------------------------------- the track */
-.steps-track{display:flex;flex-direction:column;gap:clamp(2.5rem,8vh,6rem);padding-block:4vh 6vh}
-.step{position:relative;padding-left:clamp(2.4rem,4vw,4.5rem)}
-.step-rail{position:absolute;left:0;top:.35rem;bottom:-.5rem;width:1px;background:var(--line)}
-.step-rail i{position:absolute;left:-3px;top:0;width:7px;height:7px;border-radius:50%;background:var(--line-strong);transition:background .4s,transform .4s}
-.step.is-active .step-rail i{background:var(--red);transform:scale(1.5)}
-.step-rail b{position:absolute;left:0;top:0;width:1px;height:0;background:var(--blue-500);transition:height .5s var(--ease)}
-.step.is-active .step-rail b{height:100%}
-.step-num{
-  display:block;font-family:var(--f-mono);font-size:.78rem;letter-spacing:.24em;color:var(--mute);
-  margin-bottom:.55rem;transition:color .4s;
+.steps-track {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 8vh, 6rem);
+  padding-block: 4vh 6vh
 }
-.step.is-active .step-num{color:var(--blue-500)}
-.step-title{font-family:var(--f-display);font-size:clamp(1.35rem,2.1vw,2rem);letter-spacing:-.03em;margin:0 0 .9rem;color:var(--ink)}
-.step .prose{color:var(--ink-2)}
-.step .prose p{margin:0 0 1rem}
-.step .prose p:last-child{margin-bottom:0}
-.step-inline{display:none}
+
+.step {
+  position: relative;
+  padding-left: clamp(2.4rem, 4vw, 4.5rem)
+}
+
+.step-rail {
+  position: absolute;
+  left: 0;
+  top: .35rem;
+  bottom: -.5rem;
+  width: 1px;
+  background: var(--line)
+}
+
+.step-rail i {
+  position: absolute;
+  left: -3px;
+  top: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--line-strong);
+  transition: background .4s, transform .4s
+}
+
+.step.is-active .step-rail i {
+  background: var(--red);
+  transform: scale(1.5)
+}
+
+.step-rail b {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 0;
+  background: var(--blue-500);
+  transition: height .5s var(--ease)
+}
+
+.step.is-active .step-rail b {
+  height: 100%
+}
+
+.step-num {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: .78rem;
+  letter-spacing: .24em;
+  color: var(--mute);
+  margin-bottom: .55rem;
+  transition: color .4s;
+}
+
+.step.is-active .step-num {
+  color: var(--blue-500)
+}
+
+.step-title {
+  font-family: var(--f-display);
+  font-size: clamp(1.35rem, 2.1vw, 2rem);
+  letter-spacing: -.03em;
+  margin: 0 0 .9rem;
+  color: var(--ink)
+}
+
+.step .prose {
+  color: var(--ink-2)
+}
+
+.step .prose p {
+  margin: 0 0 1rem
+}
+
+.step .prose p:last-child {
+  margin-bottom: 0
+}
+
+.step-inline {
+  display: none
+}
 
 /* ------------------------------------------------------- horizontal variant */
-.steps--h .steps-pin{position:relative;overflow:hidden;margin-inline:calc((100% - 100vw)/2);padding-inline:calc((100vw - var(--shell))/2)}
-.steps--h .steps-hrail{display:flex;gap:clamp(1.5rem,3vw,3rem);will-change:transform}
-.steps--h .h-panel{
-  flex:none;width:min(46vw,42rem);
-  display:grid;grid-template-rows:auto auto;gap:1.25rem;
-  border-top:1px solid var(--line);padding-top:1.25rem;
+.steps--h .steps-pin {
+  position: relative;
+  overflow: hidden;
+  margin-inline: calc((100% - 100vw)/2);
+  padding-inline: calc((100vw - var(--shell))/2)
 }
-.steps--h .h-media{position:relative;overflow:hidden;aspect-ratio:16/10;background:var(--blue-050)}
-.steps--h .h-media img{width:100%;height:112%;object-fit:cover}
-.steps--h .h-panel .step-num{margin-bottom:.35rem}
-.steps--h .h-copy{max-height:none}
-.steps-hbar{position:relative;height:2px;background:var(--line);margin-top:2rem}
-.steps-hbar i{position:absolute;inset:0;background:var(--blue-500);transform:scaleX(0);transform-origin:0 50%}
+
+.steps--h .steps-hrail {
+  display: flex;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  will-change: transform
+}
+
+.steps--h .h-panel {
+  flex: none;
+  width: min(46vw, 42rem);
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 1.25rem;
+  border-top: 1px solid var(--line);
+  padding-top: 1.25rem;
+}
+
+.steps--h .h-media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16/10;
+  background: var(--blue-050)
+}
+
+.steps--h .h-media img {
+  width: 100%;
+  height: 112%;
+  object-fit: cover;
+  object-position: 50% 12%
+}
+
+.steps--h .h-panel .step-num {
+  margin-bottom: .35rem
+}
+
+.steps--h .h-copy {
+  max-height: none
+}
+
+.steps-hbar {
+  position: relative;
+  height: 2px;
+  background: var(--line);
+  margin-top: 2rem
+}
+
+.steps-hbar i {
+  position: absolute;
+  inset: 0;
+  background: var(--blue-500);
+  transform: scaleX(0);
+  transform-origin: 0 50%
+}
 
 /* ------------------------------------------------------------------ mobile */
-@media (max-width: 960px){
-  .steps-grid,.steps--right .steps-grid{grid-template-columns:minmax(0,1fr);gap:0}
-  .steps--right .steps-stage,.steps--right .steps-track{order:0}
-  .steps-stage{display:none}
-  .steps-track{gap:3.25rem;padding-block:1rem 0}
-  .step{padding-left:2.1rem}
-  .step-inline{display:block;position:relative;overflow:hidden;aspect-ratio:16/11;margin:0 0 1.1rem;background:var(--blue-050)}
-  .step-inline img{width:100%;height:118%;object-fit:cover}
-  .step-inline::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:2px;background:var(--red);transform:scaleX(0);transform-origin:0 50%;transition:transform .8s var(--ease)}
-  .step.is-active .step-inline::after{transform:scaleX(1)}
-  .steps--h .steps-pin{margin-inline:0;padding-inline:0}
-  .steps--h .steps-hrail{flex-direction:column;gap:3rem;transform:none !important}
-  .steps--h .h-panel{width:100%}
-  .steps-hbar{display:none}
+@media (max-width: 960px) {
+
+  .steps-grid,
+  .steps--right .steps-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0
+  }
+
+  .steps--right .steps-stage,
+  .steps--right .steps-track {
+    order: 0
+  }
+
+  .steps-stage {
+    display: none
+  }
+
+  .steps-track {
+    gap: 3.25rem;
+    padding-block: 1rem 0
+  }
+
+  .step {
+    padding-left: 2.1rem
+  }
+
+  .step-inline {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16/11;
+    margin: 0 0 1.1rem;
+    background: var(--blue-050)
+  }
+
+  .step-inline img {
+    width: 100%;
+    height: 118%;
+    object-fit: cover;
+    object-position: 50% 12%
+  }
+
+  .step-inline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform .8s var(--ease)
+  }
+
+  .step.is-active .step-inline::after {
+    transform: scaleX(1)
+  }
+
+  .steps--h .steps-pin {
+    margin-inline: 0;
+    padding-inline: 0
+  }
+
+  .steps--h .steps-hrail {
+    flex-direction: column;
+    gap: 3rem;
+    transform: none !important
+  }
+
+  .steps--h .h-panel {
+    width: 100%
+  }
+
+  .steps-hbar {
+    display: none
+  }
 }
 
-@media (prefers-reduced-motion: reduce){
-  .steps-layer{opacity:1;visibility:visible;position:relative;margin-bottom:1rem}
-  .steps-frame{aspect-ratio:auto;clip-path:none}
-  .steps-layer img{position:relative;height:auto;transform:none;filter:none}
-  .steps-wipe{display:none}
+@media (prefers-reduced-motion: reduce) {
+  .steps-layer {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+    margin-bottom: 1rem
+  }
+
+  .steps-frame {
+    aspect-ratio: auto;
+    clip-path: none
+  }
+
+  .steps-layer img {
+    position: relative;
+    height: auto;
+    transform: none;
+    filter: none
+  }
+
+  .steps-wipe {
+    display: none
+  }
 }

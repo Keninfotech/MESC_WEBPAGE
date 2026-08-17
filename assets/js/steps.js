@@ -190,13 +190,15 @@
       var inL = layers[to], outL = layers[from];
       var inImg = inL.querySelector("img"), outImg = outL.querySelector("img");
       var dir = to > from ? 1 : -1;
-      var tl = gsap.timeline({ onComplete: function () { 
-        busy = false; 
-        if (queued !== -1) { 
-          var q = queued; queued = -1; 
-          transition(q); 
-        } 
-      } });
+      var tl = gsap.timeline({
+        onComplete: function () {
+          busy = false;
+          if (queued !== -1) {
+            var q = queued; queued = -1;
+            transition(q);
+          }
+        }
+      });
 
       gsap.set(inL, { autoAlpha: 1, zIndex: 3 });
       gsap.set(outL, { zIndex: 2 });
@@ -279,24 +281,12 @@
           clipPath: "inset(0 0 0% 0)", duration: 1, ease: "power4.out",
           scrollTrigger: { trigger: inline, start: "top 88%" }
         });
-        gsap.fromTo(inline.querySelector("img"), { yPercent: -6 }, {
-          yPercent: 6, ease: "none",
-          scrollTrigger: { trigger: inline, start: "top bottom", end: "bottom top", scrub: true }
-        });
+        /* continuous scroll-linked parallax removed — was still causing jitter */
       }
     });
 
     /* parallax inside the anchored frame + scroll-linked section tint */
-    layers.forEach(function (l) {
-      gsap.fromTo(l.querySelector("img"), { yPercent: -7 }, {
-        yPercent: 7, ease: "none",
-        scrollTrigger: { trigger: sec, start: "top bottom", end: "bottom top", scrub: true }
-      });
-    });
-    gsap.fromTo(frame, { y: 26 }, {
-      y: -26, ease: "none",
-      scrollTrigger: { trigger: sec, start: "top bottom", end: "bottom top", scrub: true }
-    });
+    /* continuous scroll-linked parallax removed — was still causing jitter */
     gsap.fromTo(sec, { backgroundColor: "#ffffff" }, {
       backgroundColor: "#eaf1fb", ease: "none",
       scrollTrigger: { trigger: sec, start: "top center", end: "center center", scrub: true }

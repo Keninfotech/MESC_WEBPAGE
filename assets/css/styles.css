@@ -1279,12 +1279,21 @@ body.menu-open {
   background: var(--paper-2)
 }
 
+/* Specific aspect ratio for leader portraits */
+#leaders .card-media {
+  aspect-ratio: 4/5;
+}
+
 .card-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform .9s var(--ease), filter .7s;
   filter: saturate(.85)
+}
+
+#leaders .card-media img {
+  object-position: top center;
 }
 
 .card:hover .card-media img {
