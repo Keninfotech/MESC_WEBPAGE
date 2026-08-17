@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
@@ -44,6 +44,9 @@
     gap: clamp(2.5rem, 5vw, 5rem);
     align-items: center;
     height: clamp(400px, 65vh, 750px);
+  }
+  .hc-fader-inner.is-reversed {
+    grid-template-columns: 1.1fr 1fr;
   }
   .hc-fader-media {
     position: relative;
@@ -142,17 +145,35 @@
     <div class="hc-fader-content">
       <div class="hc-fader-text is-active prose">
         <p>In the construction project management, MESC excels in the strategic planning, meticulous coordination, and comprehensive oversight of all facets of a construction project, from its inception to its successful completion. Our focus is on ensuring that healthcare facilities are not only built but optimized to precisely meet the diverse needs of both patients and staff.</p>
-        <p>A fundamental aspect of MESC&#x27;s construction project management is the adept management of timelines. We understand the critical nature of healthcare projects and the importance of delivering facilities on schedule. Our project management team employs effective scheduling strategies, milestones, and project timelines to ensure that construction progresses efficiently and aligns with predetermined deadlines. This commitment to timely delivery is paramount in meeting the urgent demands of the healthcare industry.</p>
-        <p>Budget management is another cornerstone of MESC&#x27;s construction project management philosophy. We recognize the financial constraints often associated with healthcare projects and are dedicated to efficient resource allocation. Our team meticulously plans and monitors budgets, implementing cost-effective strategies and identifying potential cost-saving measures without compromising the quality or functionality of the healthcare facilities being constructed.</p>
       </div>
       <div class="hc-fader-text prose">
+        <p>A fundamental aspect of MESC&#x27;s construction project management is the adept management of timelines. We understand the critical nature of healthcare projects and the importance of delivering facilities on schedule. Our project management team employs effective scheduling strategies, milestones, and project timelines to ensure that construction progresses efficiently and aligns with predetermined deadlines. This commitment to timely delivery is paramount in meeting the urgent demands of the healthcare industry.</p>
+      </div>
+      <div class="hc-fader-text prose">
+        <p>Budget management is another cornerstone of MESC&#x27;s construction project management philosophy. We recognize the financial constraints often associated with healthcare projects and are dedicated to efficient resource allocation. Our team meticulously plans and monitors budgets, implementing cost-effective strategies and identifying potential cost-saving measures without compromising the quality or functionality of the healthcare facilities being constructed.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hc-scroll-fader">
+  <div class="hc-fader-inner is-reversed">
+    <div class="hc-fader-content">
+      <div class="hc-fader-text is-active prose">
         <p>Resource management is intricately woven into the fabric of MESC&#x27;s construction project management approach. We leverage our expertise to optimize the use of labor, materials, and equipment, ensuring that resources are allocated efficiently to achieve project goals. This approach not only enhances project efficiency but also contributes to the overall cost-effectiveness of the construction process.</p>
+      </div>
+      <div class="hc-fader-text prose">
         <p>The unique needs of patients and healthcare staff are at the forefront of MESC&#x27;s construction project management considerations. Our approach involves a collaborative process where we engage closely with healthcare professionals, architects, and other stakeholders to ensure that the construction project aligns seamlessly with the functional and operational requirements of the healthcare facility. This includes considerations for patient care spaces, specialized equipment requirements, and ergonomic considerations for staff.</p>
       </div>
       <div class="hc-fader-text prose">
         <p>MESC&#x27;s commitment to excellence in construction project management extends beyond the physical structure. We recognize that the successful completion of a healthcare facility involves creating an environment that promotes healing, safety, and efficiency. As such, our project management team collaborates closely with all stakeholders to guarantee that the constructed facilities not only meet but exceed the expectations of patients, healthcare providers, and the broader community.</p>
         <p>MESC&#x27;s construction project management approach is characterized by its meticulous attention to timelines, budget efficiency, and resource optimization, all while prioritizing the unique needs of healthcare facilities. Through this holistic and collaborative approach, we ensure that the construction process contributes positively to the delivery of healthcare services, enhancing the overall well-being of communities we serve.</p>
       </div>
+    </div>
+    <div class="hc-fader-media">
+      <img src="assets/img/images---2023-12-21t003013.019.jpeg" alt="MESC Project Management" class="hc-fader-img is-active">
+      <img src="assets/img/images---2023-12-21t003152.135.jpeg" alt="MESC Project Management" class="hc-fader-img">
+      <img src="assets/img/images---2023-12-21t002803.595.jpeg" alt="MESC Project Management" class="hc-fader-img">
     </div>
   </div>
 </div>
@@ -210,26 +231,29 @@
 document.addEventListener("DOMContentLoaded", function() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
   
-  var fader = document.querySelector('.hc-scroll-fader');
-  if (!fader) return;
+  var faders = document.querySelectorAll('.hc-scroll-fader');
+  if (faders.length === 0) return;
   if (window.matchMedia("(max-width: 959px)").matches) return;
   
-  var imgs = fader.querySelectorAll('.hc-fader-img');
-  var texts = fader.querySelectorAll('.hc-fader-text');
-  
-  ScrollTrigger.create({
-    trigger: fader,
-    start: "top top+=10%",
-    end: "bottom bottom",
-    onUpdate: function(self) {
-      var progress = self.progress;
-      var idx = 0;
-      if (progress > 0.3) idx = 1;
-      if (progress > 0.65) idx = 2;
-      
-      imgs.forEach(function(img, i) { img.classList.toggle('is-active', i === idx); });
-      texts.forEach(function(txt, i) { txt.classList.toggle('is-active', i === idx); });
-    }
+  faders.forEach(function(fader) {
+    var imgs = fader.querySelectorAll('.hc-fader-img');
+    var texts = fader.querySelectorAll('.hc-fader-text');
+    
+    ScrollTrigger.create({
+      trigger: fader,
+      start: "top top+=10%",
+      end: "bottom bottom",
+      onUpdate: function(self) {
+        var progress = self.progress;
+        var total = imgs.length;
+        if(total === 0) return;
+        var idx = Math.floor(progress * total);
+        if(idx >= total) idx = total - 1;
+        
+        imgs.forEach(function(img, i) { img.classList.toggle('is-active', i === idx); });
+        texts.forEach(function(txt, i) { txt.classList.toggle('is-active', i === idx); });
+      }
+    });
   });
 });
 </script>
