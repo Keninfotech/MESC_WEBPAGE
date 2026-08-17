@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
@@ -44,6 +44,9 @@
     gap: clamp(2.5rem, 5vw, 5rem);
     align-items: center;
     height: clamp(400px, 65vh, 750px);
+  }
+  .hc-fader-inner.is-reversed {
+    grid-template-columns: 1.1fr 1fr;
   }
   .hc-fader-media {
     position: relative;
@@ -179,17 +182,35 @@
     <div class="hc-fader-content">
       <div class="hc-fader-text is-active prose">
         <p>Within the domain of healthcare engineering, MESC is dedicated to the meticulous design, construction, and maintenance of healthcare facilities, systems, and equipment. Our focus is on applying engineering principles to create infrastructure that not only meets but exceeds the standards of optimal performance and safety.</p>
-        <p>A fundamental aspect of MESC&#x27;s healthcare engineering approach is the integration of engineering principles into the development of healthcare infrastructure. This involves a comprehensive understanding of the unique requirements of healthcare facilities and the application of innovative engineering solutions to address these needs. Our team works closely with architects, healthcare professionals, and other stakeholders to ensure that the engineering design is aligned with the functional and operational demands of the healthcare environment.</p>
-        <p>Patient care is a paramount consideration in MESC&#x27;s healthcare engineering endeavors. Our designs prioritize the creation of facilities that enhance the patient experience, ensuring comfort, accessibility, and safety. From the layout of patient rooms to the design of medical equipment spaces, we aim to facilitate a seamless and positive experience for both patients and healthcare providers.</p>
       </div>
       <div class="hc-fader-text prose">
+        <p>A fundamental aspect of MESC&#x27;s healthcare engineering approach is the integration of engineering principles into the development of healthcare infrastructure. This involves a comprehensive understanding of the unique requirements of healthcare facilities and the application of innovative engineering solutions to address these needs. Our team works closely with architects, healthcare professionals, and other stakeholders to ensure that the engineering design is aligned with the functional and operational demands of the healthcare environment.</p>
+      </div>
+      <div class="hc-fader-text prose">
+        <p>Patient care is a paramount consideration in MESC&#x27;s healthcare engineering endeavors. Our designs prioritize the creation of facilities that enhance the patient experience, ensuring comfort, accessibility, and safety. From the layout of patient rooms to the design of medical equipment spaces, we aim to facilitate a seamless and positive experience for both patients and healthcare providers.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hc-scroll-fader">
+  <div class="hc-fader-inner is-reversed">
+    <div class="hc-fader-content">
+      <div class="hc-fader-text is-active prose">
         <p>Energy efficiency is a key element of our healthcare engineering philosophy. MESC actively seeks ways to improve the energy efficiency of healthcare facilities, incorporating sustainable design practices and utilizing advanced technologies to minimize resource consumption. This not only contributes to cost reduction for healthcare providers but also aligns with our commitment to environmental sustainability.</p>
+      </div>
+      <div class="hc-fader-text prose">
         <p>Cost reduction is another focal point in MESC&#x27;s healthcare engineering approach. By leveraging engineering expertise, we identify opportunities for efficiency, streamline construction processes, and optimize the use of resources to reduce overall project costs. This commitment to cost-effectiveness ensures that healthcare facilities can allocate resources more efficiently, ultimately benefiting both providers and patients.</p>
       </div>
       <div class="hc-fader-text prose">
         <p>Environmental impact mitigation is a core consideration in MESC&#x27;s healthcare engineering projects. We strive to minimize the ecological footprint of healthcare facilities through sustainable design, responsible construction practices, and the integration of eco-friendly technologies. This commitment to environmental responsibility aligns with global efforts to create greener and more sustainable healthcare infrastructure.</p>
         <p>In essence, MESC&#x27;s healthcare engineering endeavors encompass a comprehensive and forward-thinking approach. By blending engineering principles with a focus on patient care, energy efficiency, cost reduction, and environmental sustainability, we strive to create healthcare infrastructure that not only meets the highest standards of performance and safety but also contributes positively to the well-being of both individuals and the planet.</p>
       </div>
+    </div>
+    <div class="hc-fader-media">
+      <img src="assets/img/images---2023-12-21t003013.019.jpeg" alt="MESC Healthcare Engineering" class="hc-fader-img is-active">
+      <img src="assets/img/images---2023-12-21t003152.135.jpeg" alt="MESC Healthcare Engineering" class="hc-fader-img">
+      <img src="assets/img/images---2023-12-21t002803.595.jpeg" alt="MESC Healthcare Engineering" class="hc-fader-img">
     </div>
   </div>
 </div>
@@ -247,26 +268,29 @@
 document.addEventListener("DOMContentLoaded", function() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
   
-  var fader = document.querySelector('.hc-scroll-fader');
-  if (!fader) return;
+  var faders = document.querySelectorAll('.hc-scroll-fader');
+  if (faders.length === 0) return;
   if (window.matchMedia("(max-width: 959px)").matches) return;
   
-  var imgs = fader.querySelectorAll('.hc-fader-img');
-  var texts = fader.querySelectorAll('.hc-fader-text');
-  
-  ScrollTrigger.create({
-    trigger: fader,
-    start: "top top+=10%",
-    end: "bottom bottom",
-    onUpdate: function(self) {
-      var progress = self.progress;
-      var idx = 0;
-      if (progress > 0.3) idx = 1;
-      if (progress > 0.65) idx = 2;
-      
-      imgs.forEach(function(img, i) { img.classList.toggle('is-active', i === idx); });
-      texts.forEach(function(txt, i) { txt.classList.toggle('is-active', i === idx); });
-    }
+  faders.forEach(function(fader) {
+    var imgs = fader.querySelectorAll('.hc-fader-img');
+    var texts = fader.querySelectorAll('.hc-fader-text');
+    
+    ScrollTrigger.create({
+      trigger: fader,
+      start: "top top+=10%",
+      end: "bottom bottom",
+      onUpdate: function(self) {
+        var progress = self.progress;
+        var total = imgs.length;
+        if(total === 0) return;
+        var idx = Math.floor(progress * total);
+        if(idx >= total) idx = total - 1;
+        
+        imgs.forEach(function(img, i) { img.classList.toggle('is-active', i === idx); });
+        texts.forEach(function(txt, i) { txt.classList.toggle('is-active', i === idx); });
+      }
+    });
   });
 });
 </script>
