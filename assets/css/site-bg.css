@@ -1,0 +1,88 @@
+/* =========================================================================
+   MESC — Global abstract background (v1)
+   Blueprint / engineering-drafting motif: soft colour wash + drafting grid
+   + dot matrix + a corner tick, built from the site's existing palette.
+
+   Zero HTML changes required:
+   - The body wash is pure CSS on `body`.
+   - The grid/dot/corner layer rides on the `.grid-lines` div that's
+     already present near the top of every `.section` across the site, so
+     linking this file makes every page pick it up automatically.
+
+   Usage: add this AFTER styles.css in <head>, on every page —
+     <link rel="stylesheet" href="assets/css/styles.css">
+     <link rel="stylesheet" href="assets/css/site-bg.css">
+   ========================================================================= */
+
+/* ---------------------------------------------------------- page wash */
+body{
+  background:
+    radial-gradient(46rem 46rem at 104% -8%,  rgba(24,87,196,.12), transparent 60%),
+    radial-gradient(40rem 40rem at -8% 6%,    rgba(24,87,196,.08), transparent 55%),
+    radial-gradient(34rem 34rem at 60% 100%,  rgba(224,27,38,.05), transparent 60%),
+    var(--bg);
+  background-attachment: fixed, fixed, fixed, scroll;
+}
+
+/* --------------------------------------------------- drafting grid layer */
+/* replaces the single-layer rule already defined in styles.css — richer,
+   same restrained opacity, same masked fade top/bottom */
+.grid-lines{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(rgba(19,74,168,.15) 1px, transparent 1.6px),
+    repeating-linear-gradient(180deg, rgba(19,74,168,.045) 0 1px, transparent 1px 12.5%),
+    repeating-linear-gradient(90deg,  rgba(19,74,168,.06)  0 1px, transparent 1px 12.5%);
+  background-size: 26px 26px, auto, auto;
+  background-position: 13px 13px, 0 0, 0 0;
+  mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+}
+
+/* soft ambient blob glow, sits behind the grid within the same element */
+.grid-lines::before{
+  content:"";
+  position:absolute;
+  top:-15%; right:-8%;
+  width:38rem; height:38rem;
+  background: radial-gradient(circle, rgba(24,87,196,.10), transparent 68%);
+  pointer-events:none;
+}
+
+/* small drafting corner-mark accent, top right of each section */
+.grid-lines::after{
+  content:"";
+  position:absolute;
+  top:8%; right:6%;
+  width:26px; height:26px;
+  border-top:1px solid rgba(19,74,168,.28);
+  border-right:1px solid rgba(19,74,168,.28);
+  pointer-events:none;
+}
+
+/* dark sections (.section--deep) get an inverted, equally restrained version */
+.section--deep .grid-lines{
+  background:
+    radial-gradient(rgba(255,255,255,.10) 1px, transparent 1.6px),
+    repeating-linear-gradient(180deg, rgba(255,255,255,.04) 0 1px, transparent 1px 12.5%),
+    repeating-linear-gradient(90deg,  rgba(255,255,255,.08) 0 1px, transparent 1px 12.5%);
+  background-size: 26px 26px, auto, auto;
+  background-position: 13px 13px, 0 0, 0 0;
+}
+.section--deep .grid-lines::before{
+  background: radial-gradient(circle, rgba(255,255,255,.06), transparent 68%);
+}
+.section--deep .grid-lines::after{
+  border-top-color: rgba(255,255,255,.22);
+  border-right-color: rgba(255,255,255,.22);
+}
+
+/* the hero already hides .grid-lines (styles.css) — keep it hidden here too */
+.hero .grid-lines{ display:none; }
+
+@media (max-width:640px){
+  .grid-lines::before{ width:24rem; height:24rem; }
+  .grid-lines::after{ display:none; }
+}
