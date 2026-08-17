@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
@@ -22,6 +22,289 @@
   <link rel="stylesheet" href="assets/css/site-bg.css">
 <link rel="stylesheet" href="assets/css/steps.css">
 <link rel="stylesheet" href="assets/css/animations.css">
+<style>
+  /* ===== CLEAN-ROOM PAGE OVERRIDES ===== */
+  main, .section, .shell { overflow: visible !important; }
+  #progress { display: none !important; }
+
+  /* ===== 1. PHASE JOURNEY — sticky horizontal track ===== */
+  .cr-journey {
+    position: relative;
+    /* 100vh per phase + 60vh for the intro panel */
+    height: 560vh;
+    margin: 6rem 0;
+  }
+  .cr-journey-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .cr-journey-intro {
+    text-align: center;
+    padding: 0 clamp(1rem, 5vw, 4rem);
+    margin-bottom: 3rem;
+  }
+  .cr-journey-intro .eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blue-500);
+    margin-bottom: 1rem;
+  }
+  .cr-journey-intro h2 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    max-width: 28ch;
+    margin: 0 auto 1.2rem;
+  }
+  .cr-journey-intro p {
+    font-size: 1.05rem;
+    max-width: 60ch;
+    margin: 0 auto;
+    opacity: 0.75;
+    line-height: 1.7;
+  }
+
+  /* progress track */
+  .cr-progress-bar {
+    position: relative;
+    width: min(700px, 90vw);
+    margin: 0 auto 3rem;
+    height: 2px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 2px;
+  }
+  .cr-progress-fill {
+    position: absolute;
+    inset: 0;
+    background: var(--blue-500, #1a56db);
+    border-radius: 2px;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+  }
+  .cr-progress-dots {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    left: 0; right: 0;
+    transform: translateY(-50%);
+  }
+  .cr-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.15);
+    border: 2px solid white;
+    transition: background 0.4s ease, transform 0.4s ease;
+  }
+  .cr-dot.is-active {
+    background: var(--blue-500, #1a56db);
+    transform: scale(1.4);
+  }
+
+  /* phase cards track */
+  .cr-phases-track {
+    display: flex;
+    gap: 2rem;
+    width: min(700px, 90vw);
+    margin: 0 auto;
+    position: relative;
+  }
+  .cr-phase-card {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+    pointer-events: none;
+  }
+  .cr-phase-card.is-active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .cr-phase-card.is-past {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  .cr-phase-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--blue-500, #1a56db);
+    letter-spacing: 2px;
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+  .cr-phase-card h3 {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .cr-phase-card p {
+    font-size: 1rem;
+    line-height: 1.75;
+    opacity: 0.8;
+    max-width: 55ch;
+  }
+
+  /* ===== 2. APPROACH — parallax split panel ===== */
+  .cr-approach {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 90vh;
+    margin: 8rem 0;
+    overflow: hidden;
+    border-radius: var(--r-lg, 24px);
+  }
+  .cr-approach-media {
+    position: relative;
+    overflow: hidden;
+  }
+  .cr-approach-media img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transform: scale(1.15);
+    will-change: transform;
+  }
+  .cr-approach-content {
+    background: var(--blue-700, #1e40af);
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: clamp(3rem, 6vw, 6rem);
+  }
+  .cr-approach-inner {
+    max-width: 48ch;
+  }
+  .cr-approach-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+  .cr-approach-inner h2 {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.8rem;
+    color: white;
+  }
+  .cr-approach-line {
+    display: block;
+    overflow: hidden;
+    margin-bottom: 0.9rem;
+  }
+  .cr-approach-line span {
+    display: block;
+    font-size: 1rem;
+    line-height: 1.75;
+    opacity: 0.85;
+    transform: translateY(100%);
+    transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+  }
+  .cr-approach-line.is-revealed span {
+    transform: translateY(0);
+  }
+
+  /* ===== 3. PRINCIPLES — staggered cards ===== */
+  .cr-principles {
+    margin: 8rem 0;
+  }
+  .cr-principles-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .cr-principles-header .eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blue-500);
+    margin-bottom: 1rem;
+  }
+  .cr-principles-header h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .cr-principles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  .cr-principle-card {
+    background: var(--paper-2, #f4f6fb);
+    border-radius: var(--r-lg, 20px);
+    padding: 2.2rem 2rem;
+    border: 1px solid rgba(0,0,0,0.06);
+    opacity: 0;
+    transform: translateY(50px);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .cr-principle-card:hover {
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    border-color: rgba(26,86,219,0.2);
+  }
+  .cr-principle-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--blue-500, #1a56db);
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .cr-principle-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.35;
+    margin-bottom: 0.7rem;
+  }
+  .cr-principle-card p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 760px) {
+    .cr-approach {
+      grid-template-columns: 1fr;
+      min-height: auto;
+      border-radius: 16px;
+    }
+    .cr-approach-media { height: 50vw; }
+    .cr-phase-card p { font-size: 0.9rem; }
+    .cr-journey { height: auto; padding: 3rem 0; }
+    .cr-journey-sticky { position: relative; height: auto; }
+    .cr-phase-card {
+      position: relative;
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+      margin-bottom: 2.5rem;
+    }
+    .cr-phase-card.is-past { opacity: 1; transform: none; }
+    .cr-progress-bar { display: none; }
+  }
+</style>
 </head>
 <body class="page-service">
 <div class="progress" id="progress"></div>
@@ -50,113 +333,119 @@
   </div>
   <div class="hero-marks" aria-hidden="true"><div class="shell"><span></span><span></span><i class="rule"></i></div></div>
   <div class="shell" style="position:absolute;left:0;right:0;pointer-events:none"><span class="scroll-hint">Scroll</span></div>
-</section><section class="section"><div class="grid-lines"></div><div class="shell" style="position: relative;">
-    <!-- Chapter 01 -->
-    <div class="editorial-chapter" data-anim="fade">
-      <div class="editorial-bg-num">01</div>
-      <div class="editorial-media">
-        <img src="assets/img/images---2023-12-21t005017.905.jpeg" alt="MESC" loading="lazy">
-      </div>
-      <div class="editorial-content">
-        <span class="editorial-label">01 / OVERVIEW</span>
-        <div class="prose">
-          <p>In clean-room project management, MESC excels in the meticulous planning, designing, and construction of specialized environments that adhere to the most stringent requirements for cleanliness and sterility. Our approach is comprehensive, encompassing the management of the entire life cycle of clean-room projects, from initial design to validation, while ensuring strict compliance with regulatory standards and industry best practices.</p>
-        </div>
-        <ul class="lifecycle-timeline">
-          <li>
-            <span class="timeline-marker">01</span>
-            <div class="timeline-content">
-              <strong>Planning Phase</strong>
-              <p>MESC initiates clean-room project management with thorough planning, taking into account the unique requirements and specifications of the clean-room environment. This involves a collaborative process with clients, stakeholders, and regulatory authorities to define the scope, functional needs, and cleanliness standards. Our planning encompasses budgeting, scheduling, and resource allocation to ensure a streamlined and efficient project execution.</p>
-            </div>
-          </li>
-          <li>
-            <span class="timeline-marker">02</span>
-            <div class="timeline-content">
-              <strong>Design Phase</strong>
-              <p>The design of clean rooms is a critical aspect that directly impacts their functionality. MESC's project management involves working closely with architects, engineers, and specialized clean-room designers to create layouts that optimize cleanliness, airflow, and sterility. The design phase also considers the integration of necessary systems, such as HVAC, to maintain controlled environmental conditions.</p>
-            </div>
-          </li>
-          <li>
-            <span class="timeline-marker">03</span>
-            <div class="timeline-content">
-              <strong>Construction Phase</strong>
-              <p>During the construction phase, MESC oversees the implementation of the clean-room design, ensuring that the construction process aligns with the approved plans and specifications. Our project management team collaborates with skilled contractors and construction professionals to execute the construction with precision. This phase emphasizes adherence to cleanliness protocols and the installation of specialized materials and equipment required for maintaining sterility.</p>
-            </div>
-          </li>
-          <li>
-            <span class="timeline-marker">04</span>
-            <div class="timeline-content">
-              <strong>Validation and Compliance</strong>
-              <p>MESC places a strong emphasis on the validation of clean rooms to guarantee that they meet the stringent cleanliness and sterility standards. Our project management includes rigorous testing and validation processes to ensure that the clean-room environment performs as intended. Additionally, we are committed to ensuring compliance with regulatory standards and industry best practices throughout the entire project life cycle.</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
+</section>
 
-    <!-- Chapter 02 -->
-    <div class="editorial-chapter reverse" style="margin-top: 8rem;" data-anim="fade">
-      <div class="editorial-bg-num" style="right: 0; left: auto; text-align: right;">02</div>
-      <div class="editorial-content">
-        <span class="editorial-label">02 / APPROACH</span>
-        <div class="prose">
-          <p>MESC's clean-room project management is distinguished by a dedicated commitment to precision, adherence to cleanliness standards, and unwavering compliance with industry regulations. Through meticulous planning, collaborative design, vigilant construction oversight, and rigorous validation, we ensure that our clean-room facilities not only meet but exceed the expectations of clients and regulatory bodies. Our holistic approach goes beyond compliance, optimizing clean-room environments to serve the specific needs of industries. With a focus on excellence, we create facilities that stand as exemplars in cleanliness, sterility, and operational efficiency, meeting the demands of today and preparing for the challenges of the future.</p>
+<!-- ===================== SECTION 1: PHASE JOURNEY ===================== -->
+<section class="section" style="overflow:visible">
+  <div class="grid-lines"></div>
+  <div class="shell">
+    <div class="cr-journey" id="crJourney">
+      <div class="cr-journey-sticky">
+        <!-- Intro header -->
+        <div class="cr-journey-intro">
+          <span class="eyebrow">01 / Overview</span>
+          <h2>The Clean-Room Lifecycle</h2>
+          <p>In clean-room project management, MESC excels in the meticulous planning, designing, and construction of specialized environments that adhere to the most stringent requirements for cleanliness and sterility.</p>
+        </div>
+
+        <!-- Progress track -->
+        <div class="cr-progress-bar" id="crProgressBar">
+          <div class="cr-progress-fill" id="crProgressFill"></div>
+          <div class="cr-progress-dots">
+            <div class="cr-dot is-active" data-dot="0"></div>
+            <div class="cr-dot" data-dot="1"></div>
+            <div class="cr-dot" data-dot="2"></div>
+            <div class="cr-dot" data-dot="3"></div>
+          </div>
+        </div>
+
+        <!-- Phase cards -->
+        <div class="cr-phases-track" style="position:relative;height:clamp(220px,30vh,340px);">
+          <div class="cr-phase-card is-active" data-phase="0">
+            <span class="cr-phase-num">PHASE 01 / 04 &mdash; PLANNING</span>
+            <h3>Planning Phase</h3>
+            <p>MESC initiates clean-room project management with thorough planning, taking into account the unique requirements and specifications of the clean-room environment. This involves a collaborative process with clients, stakeholders, and regulatory authorities to define the scope, functional needs, and cleanliness standards. Our planning encompasses budgeting, scheduling, and resource allocation to ensure a streamlined and efficient project execution.</p>
+          </div>
+          <div class="cr-phase-card" data-phase="1">
+            <span class="cr-phase-num">PHASE 02 / 04 &mdash; DESIGN</span>
+            <h3>Design Phase</h3>
+            <p>The design of clean rooms is a critical aspect that directly impacts their functionality. MESC's project management involves working closely with architects, engineers, and specialized clean-room designers to create layouts that optimize cleanliness, airflow, and sterility. The design phase also considers the integration of necessary systems, such as HVAC, to maintain controlled environmental conditions.</p>
+          </div>
+          <div class="cr-phase-card" data-phase="2">
+            <span class="cr-phase-num">PHASE 03 / 04 &mdash; CONSTRUCTION</span>
+            <h3>Construction Phase</h3>
+            <p>During the construction phase, MESC oversees the implementation of the clean-room design, ensuring that the construction process aligns with the approved plans and specifications. Our project management team collaborates with skilled contractors and construction professionals to execute the construction with precision.</p>
+          </div>
+          <div class="cr-phase-card" data-phase="3">
+            <span class="cr-phase-num">PHASE 04 / 04 &mdash; VALIDATION</span>
+            <h3>Validation &amp; Compliance</h3>
+            <p>MESC places a strong emphasis on the validation of clean rooms to guarantee that they meet the stringent cleanliness and sterility standards. Our project management includes rigorous testing and validation processes to ensure that the clean-room environment performs as intended. Additionally, we are committed to ensuring compliance with regulatory standards and industry best practices throughout the entire project life cycle.</p>
+          </div>
+        </div>
+      </div><!-- end sticky -->
+    </div><!-- end cr-journey -->
+  </div>
+</section>
+
+<!-- ===================== SECTION 2: APPROACH ===================== -->
+<section class="section" style="overflow:visible">
+  <div class="shell">
+    <div class="cr-approach" id="crApproach">
+      <div class="cr-approach-media">
+        <img src="assets/img/cleanroom.jpeg" alt="MESC Clean-room Approach" loading="lazy" id="crApproachImg">
+      </div>
+      <div class="cr-approach-content">
+        <div class="cr-approach-inner">
+          <span class="cr-approach-eyebrow">02 / Approach</span>
+          <h2>Built on Precision.<br>Driven by Compliance.</h2>
+          <div class="cr-approach-line"><span>MESC's clean-room project management is distinguished by a dedicated commitment to precision, adherence to cleanliness standards, and unwavering compliance with industry regulations.</span></div>
+          <div class="cr-approach-line"><span>Through meticulous planning, collaborative design, vigilant construction oversight, and rigorous validation, we ensure that our clean-room facilities not only meet but exceed the expectations of clients and regulatory bodies.</span></div>
+          <div class="cr-approach-line"><span>Our holistic approach goes beyond compliance, optimizing clean-room environments to serve the specific needs of industries. With a focus on excellence, we create facilities that stand as exemplars in cleanliness, sterility, and operational efficiency.</span></div>
         </div>
       </div>
-      <div class="editorial-media">
-        <img src="assets/img/cleanroom.jpeg" alt="MESC" loading="lazy">
-      </div>
     </div>
+  </div>
+</section>
 
-    <!-- Chapter 03 -->
-    <div class="editorial-chapter" style="margin-top: 8rem;" data-anim="fade">
-      <div class="editorial-bg-num">03</div>
-      <div class="editorial-media">
-        <img src="assets/img/biomed.1200x630.webp" alt="MESC" loading="lazy">
+<!-- ===================== SECTION 3: KEY PRINCIPLES ===================== -->
+<section class="section" style="overflow:visible">
+  <div class="grid-lines"></div>
+  <div class="shell">
+    <div class="cr-principles">
+      <div class="cr-principles-header">
+        <span class="eyebrow">03 / Key Principles</span>
+        <h2>What Guides Our Clean-Room Excellence</h2>
       </div>
-      <div class="editorial-content">
-        <span class="editorial-label">03 / KEY PRINCIPLES</span>
-        <ul class="lifecycle-timeline">
-          <li>
-            <span class="timeline-marker">01</span>
-            <div class="timeline-content">
-              <strong>Precision and Attention to Detail</strong>
-              <p>MESC recognizes the critical importance of precision in clean-room environments.</p>
-            </div>
-          </li>
-          <li>
-            <span class="timeline-marker">02</span>
-            <div class="timeline-content">
-              <strong>Adherence to Cleanliness Standards</strong>
-              <p>Cleanliness is at the core of our clean-room project management.</p>
-            </div>
-          </li>
-          <li>
-            <span class="timeline-marker">03</span>
-            <div class="timeline-content">
-              <strong>Commitment to Compliance</strong>
-              <p>Compliance with regulatory standards is non-negotiable in MESC's clean-room projects.</p>
-            </div>
-          </li>
-          <li>
-            <span class="timeline-marker">04</span>
-            <div class="timeline-content">
-              <strong>Holistic Approach for Optimization</strong>
-              <p>MESC's holistic approach extends beyond compliance to optimization.</p>
-            </div>
-          </li>
-          <li>
-            <span class="timeline-marker">05</span>
-            <div class="timeline-content">
-              <strong>Effective Planning and Rigorous Validation</strong>
-              <p>The success of our clean-room projects hinges on effective planning and rigorous validation.</p>
-            </div>
-          </li>
-        </ul>
+      <div class="cr-principles-grid" id="crPrinciplesGrid">
+        <div class="cr-principle-card">
+          <span class="cr-principle-num">PRINCIPLE 01</span>
+          <h3>Precision and Attention to Detail</h3>
+          <p>MESC recognizes the critical importance of precision in clean-room environments.</p>
+        </div>
+        <div class="cr-principle-card">
+          <span class="cr-principle-num">PRINCIPLE 02</span>
+          <h3>Adherence to Cleanliness Standards</h3>
+          <p>Cleanliness is at the core of our clean-room project management.</p>
+        </div>
+        <div class="cr-principle-card">
+          <span class="cr-principle-num">PRINCIPLE 03</span>
+          <h3>Commitment to Compliance</h3>
+          <p>Compliance with regulatory standards is non-negotiable in MESC's clean-room projects.</p>
+        </div>
+        <div class="cr-principle-card">
+          <span class="cr-principle-num">PRINCIPLE 04</span>
+          <h3>Holistic Approach for Optimization</h3>
+          <p>MESC's holistic approach extends beyond compliance to optimization.</p>
+        </div>
+        <div class="cr-principle-card">
+          <span class="cr-principle-num">PRINCIPLE 05</span>
+          <h3>Effective Planning and Rigorous Validation</h3>
+          <p>The success of our clean-room projects hinges on effective planning and rigorous validation.</p>
+        </div>
       </div>
     </div>
-  </div></section><section class="section section--tight"><div class="shell">
+  </div>
+</section><section class="section section--tight"><div class="shell">
   <div class="cta-band" data-anim="scale">
     <div>
       <h2 class="h2" style="max-width:35ch; font-size:clamp(1.8rem, 3vw, 2.5rem); line-height:1.2;">Let’s build healthcare infrastructure that performs.</h2>
@@ -203,7 +492,86 @@
 <script src="assets/js/steps.js" defer></script>
 <script src="assets/js/animations.js" defer></script>
 <script>
-(function(){var p=document.getElementById('progress');function u(){var h=document.documentElement;var s=h.scrollTop/(h.scrollHeight-h.clientHeight||1);p.style.transform='scaleX('+s+')';}u();addEventListener('scroll',u,{passive:true});})();
+(function(){var p=document.getElementById('progress');function u(){var h=document.documentElement;var s=h.scrollTop/(h.scrollHeight-h.clientHeight||1);if(p)p.style.transform='scaleX('+s+')';}u();addEventListener('scroll',u,{passive:true});})();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ===== 1. PHASE JOURNEY =====
+  var isMobile = window.matchMedia('(max-width:760px)').matches;
+  if (!isMobile) {
+    var phases = document.querySelectorAll('.cr-phase-card');
+    var dots   = document.querySelectorAll('.cr-dot');
+    var fill   = document.getElementById('crProgressFill');
+    var journey= document.getElementById('crJourney');
+    var total  = phases.length;
+
+    ScrollTrigger.create({
+      trigger: journey,
+      start: 'top top',
+      end: 'bottom bottom',
+      onUpdate: function(self) {
+        var p = self.progress;
+        var idx = Math.min(Math.floor(p * total), total - 1);
+        // fill bar
+        if (fill) fill.style.transform = 'scaleX(' + (idx / (total - 1)) + ')';
+        // dots
+        dots.forEach(function(d, i) { d.classList.toggle('is-active', i <= idx); });
+        // cards
+        phases.forEach(function(c, i) {
+          c.classList.remove('is-active', 'is-past');
+          if (i === idx) c.classList.add('is-active');
+          else if (i < idx) c.classList.add('is-past');
+        });
+      }
+    });
+  }
+
+  // ===== 2. APPROACH — parallax image + line reveal =====
+  var approachImg = document.getElementById('crApproachImg');
+  if (approachImg) {
+    gsap.to(approachImg, {
+      yPercent: -10,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#crApproach',
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+  }
+  // Line reveal
+  var lines = document.querySelectorAll('.cr-approach-line');
+  lines.forEach(function(line, i) {
+    ScrollTrigger.create({
+      trigger: line,
+      start: 'top 85%',
+      onEnter: function() {
+        setTimeout(function() { line.classList.add('is-revealed'); }, i * 120);
+      }
+    });
+  });
+
+  // ===== 3. PRINCIPLES — staggered card cascade =====
+  var cards = document.querySelectorAll('.cr-principle-card');
+  gsap.fromTo(cards,
+    { y: 50, opacity: 0 },
+    {
+      y: 0,
+      opacity: 1,
+      duration: 0.7,
+      ease: 'power3.out',
+      stagger: 0.12,
+      scrollTrigger: {
+        trigger: '#crPrinciplesGrid',
+        start: 'top 80%'
+      }
+    }
+  );
+});
 </script>
 </body>
 </html>
