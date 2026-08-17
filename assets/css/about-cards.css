@@ -1,0 +1,338 @@
+/* Custom Styles for Journey & Mission Cards on About Us Page */
+
+.custom-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  margin: 0 !important;
+  transform: none !important;
+}
+
+.cards.cards--2 {
+  align-items: stretch !important;
+}
+
+@media (max-width: 768px) {
+  .custom-card {
+    padding: 1.5rem;
+  }
+}
+
+.custom-card-header {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.custom-card-header .h3 {
+  font-size: 2rem;
+  color: #0a2559;
+  margin-bottom: 0;
+  padding-top: 1rem;
+}
+
+.custom-card-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+}
+
+.custom-card.journey .custom-card-header::before {
+  background-color: #d32f2f; /* Red accent */
+}
+
+.custom-card.mission .custom-card-header::before {
+  background-color: #8bb4e7; /* Blue accent */
+}
+
+.custom-card-header-icon {
+  position: absolute;
+  top: -1rem;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  color: #0a2559;
+}
+
+/* Timeline */
+.journey-timeline {
+  position: relative;
+  padding-left: 2.5rem;
+  margin-top: 2rem;
+}
+
+.journey-timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 19px;
+  width: 2px;
+  background-image: linear-gradient(to bottom, #dbe6f5 50%, transparent 50%);
+  background-size: 100% 12px;
+  background-repeat: repeat-y;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2.5rem;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-icon {
+  position: absolute;
+  left: -2.5rem;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #0a2559;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-50%);
+}
+
+.timeline-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.timeline-content .year {
+  font-weight: 700;
+  color: #0a2559;
+}
+
+.company-box {
+  background: #ebf0fa;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  font-weight: 600;
+  color: #0a2559;
+}
+
+.company-box svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+/* Mission List */
+.mission-quote {
+  background: #f7f9fc;
+  border-radius: 8px;
+  padding: 1.5rem;
+  position: relative;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.mission-quote::before, .mission-quote::after {
+  content: '"';
+  font-family: serif;
+  font-size: 3rem;
+  color: #8bb4e7;
+  position: absolute;
+  line-height: 1;
+}
+
+.mission-quote::before {
+  top: 0.5rem;
+  left: 0.5rem;
+}
+
+.mission-quote::after {
+  bottom: -2rem;
+  right: 0.5rem;
+}
+
+.mission-quote p {
+  position: relative;
+  z-index: 1;
+  padding: 0 1rem;
+  margin: 0;
+  font-weight: 500;
+  color: #0a2559;
+}
+
+.mission-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.mission-list li {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.mission-list li:last-child {
+  border-bottom: none;
+}
+
+.mission-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  color: #557ba8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mission-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* Highlight Boxes / Footers */
+.card-footer-box {
+  margin-top: auto;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.journey-footer {
+  background: #0a2559;
+  color: #fff;
+  padding: 2rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  border-radius: 8px;
+}
+
+.journey-footer svg {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.journey-footer p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.commitment-box {
+  background: #f0f5fc;
+  border-radius: 12px;
+  padding: 0;
+  margin-top: 2rem;
+  overflow: hidden;
+}
+
+.commitment-content {
+  display: flex;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .commitment-content {
+    flex-direction: column;
+  }
+}
+
+.commitment-left {
+  flex: 1;
+}
+
+.commitment-left h4 {
+  color: #0a2559;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.commitment-left .shield-icon {
+  color: #0a2559;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 1rem;
+}
+
+.commitment-left p {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #0a2559;
+}
+
+.commitment-right {
+  flex: 1.5;
+  border-left: 1px solid rgba(0,0,0,0.1);
+  padding-left: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .commitment-right {
+    border-left: none;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding-left: 0;
+    padding-top: 2rem;
+  }
+}
+
+.commitment-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.commitment-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.commitment-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #0a2559;
+  font-weight: bold;
+}
+
+.commitment-bottom-bar {
+  background: #0a2559;
+  color: #fff;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  justify-content: center;
+}
+
+.commitment-bottom-bar svg {
+  width: 16px;
+  height: 16px;
+}
