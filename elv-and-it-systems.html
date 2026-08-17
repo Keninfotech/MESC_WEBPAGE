@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
@@ -22,6 +22,89 @@
   <link rel="stylesheet" href="assets/css/site-bg.css">
 <link rel="stylesheet" href="assets/css/steps.css">
 <link rel="stylesheet" href="assets/css/animations.css">
+<style>
+  main, .section, .shell, .has-steps,  .steps, .steps-grid, .steps-shell { 
+    overflow: visible !important; 
+    overflow-x: visible !important; 
+    overflow-y: visible !important; 
+  }
+  .steps-head, .steps-meta, .step-num, .step-rail, .steps-marks, .svc-progress, #progress { display: none !important; }
+
+  /* Custom fader interaction CSS */
+  .hc-scroll-fader {
+    position: relative;
+    height: 300vh;
+    margin: 4rem 0;
+  }
+  .hc-fader-inner {
+    position: sticky;
+    top: clamp(160px, 25vh, 250px);
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: clamp(2.5rem, 5vw, 5rem);
+    align-items: center;
+    height: clamp(400px, 65vh, 750px);
+  }
+  .hc-fader-inner.is-reversed {
+    grid-template-columns: 1.1fr 1fr;
+  }
+  .hc-fader-media {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--r-lg, 24px);
+    overflow: hidden;
+    background: var(--paper-2);
+  }
+  .hc-fader-img {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  .hc-fader-img.is-active {
+    opacity: 1;
+  }
+  .hc-fader-content {
+    position: relative;
+    height: 100%;
+  }
+  .hc-fader-text {
+    position: absolute;
+    top: 50%; left: 0; width: 100%;
+    transform: translateY(-40%);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.6s ease;
+  }
+  .hc-fader-text.is-active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(-50%);
+  }
+  .hc-fader-text p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  @media (max-width: 960px) {
+    .hc-scroll-fader { height: auto; margin: 3rem 0; display: flex; flex-direction: column; }
+    .hc-fader-inner { position: relative; top: 0; display: contents; }
+    .hc-fader-media, .hc-fader-content { display: contents; }
+    .hc-fader-text { position: relative !important; opacity: 1 !important; transform: none !important; pointer-events: auto !important; margin-top: 1.5rem; margin-bottom: 1.5rem; }
+    .hc-fader-img { position: relative !important; opacity: 1 !important; height: auto !important; max-height: 60vw; border-radius: 12px; }
+    .hc-fader-text:nth-child(1) { order: 1; }
+    .hc-fader-img:nth-child(1) { order: 2; }
+    .hc-fader-text:nth-child(2) { order: 3; }
+    .hc-fader-img:nth-child(2) { order: 4; }
+    .hc-fader-text:nth-child(3) { order: 5; }
+    .hc-fader-img:nth-child(3) { order: 6; }
+    .hc-fader-text:nth-child(4) { order: 7; }
+    .hc-fader-img:nth-child(4) { order: 8; }
+    .hc-fader-text:nth-child(5) { order: 9; }
+    .hc-fader-img:nth-child(5) { order: 10; }
+  }
+</style>
 </head>
 <body class="page-service">
 <div class="progress" id="progress"></div>
@@ -50,45 +133,45 @@
   </div>
   <div class="hero-marks" aria-hidden="true"><div class="shell"><span></span><span></span><i class="rule"></i></div></div>
   <div class="shell" style="position:absolute;left:0;right:0;pointer-events:none"><span class="scroll-hint">Scroll</span></div>
-</section><section class="section"><div class="grid-lines"></div><div class="shell" style="position: relative;">
-    <div class="editorial-chapter" data-anim="fade">
-      <div class="editorial-media">
-        <img src="assets/img/annual-testing-and-tagging.jpg" alt="ELV & IT Systems" loading="lazy">
-      </div>
-      <div class="editorial-content">
-        <div class="prose">
-          <p>MESC is a leader in both Electronic Low Voltage (ELV) systems and Information Technology (IT) systems. Their expertise spans a wide range of solutions, including security systems, access control, CCTV surveillance, fire detection, building automation, network infrastructure, data centers, cloud computing, cybersecurity, and software solutions. MESC's offerings are tailored to various industries and sectors, emphasizing safety, security, operational efficiency, and technological advancement. With a commitment to innovation, quality, and customer satisfaction, MESC delivers reliable, scalable, and future-proof solutions to clients worldwide.</p>
-          <p>MESC holds a prominent position as a leader in Electronic Low Voltage (ELV) systems and Information Technology (IT) systems. With extensive expertise in both fields, MESC offers comprehensive solutions tailored to the needs of various industries and sectors. With a commitment to innovation, quality, and customer satisfaction, MESC remains a trusted partner for ELV and IT system needs, providing reliable, scalable, and future-proof solutions to clients worldwide.</p>
-        </div>
-      </div>
-    </div>
-<!-- Card 01 converted -->
-    <div class="editorial-chapter reverse" style="margin-top: 8rem;" data-anim="fade">
-      <div class="editorial-bg-num" style="right: 0; left: auto; text-align: right;">01</div>
-      <div class="editorial-content">
-        <span class="editorial-label">01 / ELV SYSTEMS</span>
-        <div class="prose">
-          <p>In the realm of ELV systems, MESC excels in designing and implementing solutions such as security systems, access control, CCTV surveillance, fire detection, and building automation. These systems are meticulously crafted to enhance safety, security, and operational efficiency in diverse environments, ranging from commercial buildings to industrial facilities.</p>
-        </div>
-      </div>
-      <div class="editorial-media">
-        <img src="assets/img/capital-equipment-procurement-500x281.jpg" alt="ELV Systems" loading="lazy">
-      </div>
-    </div>
+</section><section class="section"><div class="grid-lines"></div><div class="shell">
 
-    <!-- Card 02 converted -->
-    <div class="editorial-chapter" style="margin-top: 8rem;" data-anim="fade">
-      <div class="editorial-bg-num">02</div>
-      <div class="editorial-media">
-        <img src="assets/img/emergency-department-of-newport-hospit-0dd9f01.jpg" alt="IT Systems" loading="lazy">
+<div class="hc-scroll-fader">
+  <div class="hc-fader-inner">
+    <div class="hc-fader-media">
+      <img src="assets/img/annual-testing-and-tagging.jpg" alt="MESC ELV & IT Systems" class="hc-fader-img is-active">
+      <img src="assets/img/capital-equipment-procurement-500x281.jpg" alt="MESC ELV & IT Systems" class="hc-fader-img">
+    </div>
+    <div class="hc-fader-content">
+      <div class="hc-fader-text is-active prose">
+        <p>MESC is a leader in both Electronic Low Voltage (ELV) systems and Information Technology (IT) systems. Their expertise spans a wide range of solutions, including security systems, access control, CCTV surveillance, fire detection, building automation, network infrastructure, data centers, cloud computing, cybersecurity, and software solutions. MESC's offerings are tailored to various industries and sectors, emphasizing safety, security, operational efficiency, and technological advancement. With a commitment to innovation, quality, and customer satisfaction, MESC delivers reliable, scalable, and future-proof solutions to clients worldwide.</p>
       </div>
-      <div class="editorial-content">
-        <span class="editorial-label">02 / IT SYSTEMS</span>
-        <div class="prose">
-          <p>Simultaneously, MESC's proficiency in IT systems encompasses network infrastructure, data centers, cloud computing, cybersecurity, and software solutions. By leveraging the latest technologies and best practices, MESC delivers robust IT infrastructure and software solutions that empower organizations to streamline operations, enhance productivity, and stay ahead in a rapidly evolving digital landscape.</p>
-        </div>
+      <div class="hc-fader-text prose">
+        <p>MESC holds a prominent position as a leader in Electronic Low Voltage (ELV) systems and Information Technology (IT) systems. With extensive expertise in both fields, MESC offers comprehensive solutions tailored to the needs of various industries and sectors. With a commitment to innovation, quality, and customer satisfaction, MESC remains a trusted partner for ELV and IT system needs, providing reliable, scalable, and future-proof solutions to clients worldwide.</p>
       </div>
-    </div></div></section><section class="section section--tight"><div class="shell">
+    </div>
+  </div>
+</div>
+
+<div class="hc-scroll-fader">
+  <div class="hc-fader-inner is-reversed">
+    <div class="hc-fader-content">
+      <div class="hc-fader-text is-active prose">
+        <span class="editorial-label" style="display:block;margin-bottom:1rem;color:var(--blue-500);font-weight:600;letter-spacing:1px;font-size:0.8rem">01 / ELV SYSTEMS</span>
+        <p>In the realm of ELV systems, MESC excels in designing and implementing solutions such as security systems, access control, CCTV surveillance, fire detection, and building automation. These systems are meticulously crafted to enhance safety, security, and operational efficiency in diverse environments, ranging from commercial buildings to industrial facilities.</p>
+      </div>
+      <div class="hc-fader-text prose">
+        <span class="editorial-label" style="display:block;margin-bottom:1rem;color:var(--blue-500);font-weight:600;letter-spacing:1px;font-size:0.8rem">02 / IT SYSTEMS</span>
+        <p>Simultaneously, MESC's proficiency in IT systems encompasses network infrastructure, data centers, cloud computing, cybersecurity, and software solutions. By leveraging the latest technologies and best practices, MESC delivers robust IT infrastructure and software solutions that empower organizations to streamline operations, enhance productivity, and stay ahead in a rapidly evolving digital landscape.</p>
+      </div>
+    </div>
+    <div class="hc-fader-media">
+      <img src="assets/img/emergency-department-of-newport-hospit-0dd9f01.jpg" alt="MESC ELV & IT Systems" class="hc-fader-img is-active">
+      <img src="assets/img/images---2023-12-21t003013.019.jpeg" alt="MESC ELV & IT Systems" class="hc-fader-img">
+    </div>
+  </div>
+</div>
+
+</div></section><section class="section section--tight"><div class="shell">
   <div class="cta-band" data-anim="scale">
     <div>
       <h2 class="h2" style="max-width:35ch; font-size:clamp(1.8rem, 3vw, 2.5rem); line-height:1.2;">Let’s build healthcare infrastructure that performs.</h2>
@@ -135,7 +218,37 @@
 <script src="assets/js/steps.js" defer></script>
 <script src="assets/js/animations.js" defer></script>
 <script>
-(function(){var p=document.getElementById('progress');function u(){var h=document.documentElement;var s=h.scrollTop/(h.scrollHeight-h.clientHeight||1);p.style.transform='scaleX('+s+')';}u();addEventListener('scroll',u,{passive:true});})();
+(function(){var p=document.getElementById('progress');function u(){var h=document.documentElement;var s=h.scrollTop/(h.scrollHeight-h.clientHeight||1);if(p)p.style.transform='scaleX('+s+')';}u();addEventListener('scroll',u,{passive:true});})();
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  
+  var faders = document.querySelectorAll('.hc-scroll-fader');
+  if (faders.length === 0) return;
+  if (window.matchMedia("(max-width: 959px)").matches) return;
+  
+  faders.forEach(function(fader) {
+    var imgs = fader.querySelectorAll('.hc-fader-img');
+    var texts = fader.querySelectorAll('.hc-fader-text');
+    
+    ScrollTrigger.create({
+      trigger: fader,
+      start: "top top+=10%",
+      end: "bottom bottom",
+      onUpdate: function(self) {
+        var progress = self.progress;
+        var total = imgs.length;
+        if(total === 0) return;
+        var idx = Math.floor(progress * total);
+        if(idx >= total) idx = total - 1;
+        
+        imgs.forEach(function(img, i) { img.classList.toggle('is-active', i === idx); });
+        texts.forEach(function(txt, i) { txt.classList.toggle('is-active', i === idx); });
+      }
+    });
+  });
+});
 </script>
 </body>
 </html>
