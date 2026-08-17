@@ -77,7 +77,7 @@
   document.querySelectorAll(".cards").forEach(function (wrap) {
     var cards = wrap.querySelectorAll(":scope > .card");
     if (cards.length < 2) return;
-    if (wrap.querySelector("a")) return;                 // link grids stay grids
+    if (wrap.querySelector("a:not(.card-social a)")) return;  // link grids stay grids
     var ok = true, steps = [];
     cards.forEach(function (card) {
       var idx = card.querySelector(".card-idx");
@@ -85,6 +85,7 @@
       if (!idx || !body || textLen(body) < 180) { ok = false; return; }
       steps.push({
         img: card.querySelector(".card-media img"),
+        social: card.querySelector(".card-social"),
         num: idx,
         title: body.querySelector("h2,h3,h4,.h3,.h4"),
         copy: body
@@ -123,6 +124,7 @@
     steps.forEach(function (st, i) {
       var layer = el("div", "steps-layer" + (i === 0 ? " is-active" : ""));
       if (st.img) layer.appendChild(st.img);
+      if (st.social) layer.appendChild(st.social);
       frame.appendChild(layer);
       layers.push(layer);
     });

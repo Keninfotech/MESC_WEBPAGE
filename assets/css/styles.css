@@ -1284,6 +1284,39 @@ body.menu-open {
   aspect-ratio: 4/5;
 }
 
+#leaders .card-social,
+.steps-layer .card-social {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 2;
+}
+#leaders .card-social a,
+.steps-layer .card-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  color: #0a2559;
+  transition: background .25s, transform .25s;
+}
+#leaders .card-social a:hover,
+.steps-layer .card-social a:hover {
+  background: #0a2559;
+  color: #fff;
+  transform: translateY(-2px);
+}
+#leaders .card-social svg,
+.steps-layer .card-social svg {
+  width: 16px;
+  height: 16px;
+}
+
 .card-media img {
   width: 100%;
   height: 100%;
