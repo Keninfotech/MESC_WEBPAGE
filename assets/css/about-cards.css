@@ -4,7 +4,7 @@
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  padding: 3rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -26,7 +26,7 @@
 
 .custom-card-header {
   position: relative;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .custom-card-header .h3 {
@@ -83,7 +83,7 @@
 
 .timeline-item {
   position: relative;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .timeline-item:last-child {
@@ -118,11 +118,11 @@
 .company-box {
   background: #ebf0fa;
   border-radius: 8px;
-  padding: 1rem 1.5rem;
+  padding: 0.75rem 1rem;
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin: 1.5rem 0;
+  margin: 1rem 0;
   font-weight: 600;
   color: #0a2559;
 }
@@ -137,10 +137,10 @@
 .mission-quote {
   background: #f7f9fc;
   border-radius: 8px;
-  padding: 1.5rem;
+  padding: 1rem 1.5rem;
   position: relative;
   color: #333;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .mission-quote::before, .mission-quote::after {
@@ -181,7 +181,7 @@
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  padding: 1.5rem 0;
+  padding: 1rem 0;
   border-bottom: 1px solid #eaeaea;
 }
 
@@ -216,7 +216,7 @@
 .journey-footer {
   background: #0a2559;
   color: #fff;
-  padding: 2rem;
+  padding: 1.5rem;
   position: relative;
   display: flex;
   align-items: center;
@@ -246,8 +246,8 @@
 
 .commitment-content {
   display: flex;
-  padding: 2rem;
-  gap: 2rem;
+  padding: 1.5rem;
+  gap: 1.5rem;
 }
 
 @media (max-width: 768px) {
