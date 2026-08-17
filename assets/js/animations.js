@@ -87,11 +87,9 @@
     if (index % 3 === 2) row.classList.add("svc-shape");
     if (media && (copy.textContent || "").length > 900) row.classList.add("svc-sticky"), unclip(media);
 
-    /* eyebrow: draws a red rule, then reveals the existing step number */
+    /* eyebrow: draws a red rule, then reveals the existing step number (REMOVED as requested) */
     var numNode = copy.querySelector(".frow-num, .card-idx");
-    var label = (numNode ? numNode.textContent.trim() : pad(index + 1)) + " / " + pad(total);
-    var eyebrow = el("div", "svc-eyebrow", "<i></i><b>" + label + "</b>");
-    copy.insertBefore(eyebrow, copy.firstChild);
+
 
     var heading = copy.querySelector("h2,h3,h4,.h2,.h3,.h4");
     var lines = reduced ? [] : splitLines(heading);
