@@ -127,60 +127,152 @@
     </section>
     <section class="section">
       <div class="grid-lines"></div>
+      
+      <style>
+        .about-intro-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 4rem;
+          align-items: flex-start;
+          padding-top: 2rem;
+        }
+        @media (max-width: 960px) {
+          .about-intro-grid {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+          }
+        }
+      </style>
+
       <div class="shell">
-        <div class="section-head" data-anim="blur">
-          <div class="prose lede">
-            <p>Mariam Engineering Services &amp; Consultants (MESC) was established in 2019 with a vision to provide reliable, technically driven engineering and consultancy solutions, with a strong focus on the healthcare sector.</p>
+        <div class="about-intro-grid">
+          
+          <!-- LEFT COLUMN -->
+          <div>
+            <div style="border-top: 3px solid var(--blue-700); width: 40px; margin-bottom: 1.5rem;"></div>
+            <p style="text-transform: uppercase; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; color: var(--fg-base); margin-bottom: 1.5rem;">ABOUT MARIAM ENGINEERING SERVICES &amp; CONSULTANTS (MESC)</p>
+            <h2 style="font-size: 3.5rem; color: var(--blue-900); line-height: 1.1; margin-bottom: 2rem; font-family: var(--f-display); font-weight: 700;">Engineering Better<br>Healthcare Solutions</h2>
+            
+            <div style="border-left: 3px solid var(--blue-700); padding-left: 1.5rem; margin-bottom: 2.5rem;">
+              <p style="font-size: 1.05rem; line-height: 1.6; color: var(--fg-base); margin: 0;">Mariam Engineering Services &amp; Consultants (MESC) was established in 2019 with a vision to provide reliable, technically driven engineering and consultancy solutions, with a strong focus on the healthcare sector.</p>
+            </div>
+            
+            <img src="assets/img/dgfwg3tq.jpg" style="width: 100%; border-radius: 12px; margin-bottom: 2rem; aspect-ratio: 16/10; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.1);" alt="MRI Machine">
+            
+            <div style="background: #fff; border: 1px solid #eaeaea; border-radius: 16px; padding: 1.5rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
+              
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <div style="width: 32px; height: 32px; color: var(--blue-700);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15l-3.5-3.5"/><path d="M12 15l3.5-3.5"/><path d="M12 15V3"/><path d="M5 21h14"/><path d="M5 18h14"/><path d="M8 18v3"/><path d="M16 18v3"/></svg></div>
+                <div style="font-size: 0.8rem; font-weight: 700; color: var(--blue-900); line-height: 1.3;">Established<br>2019</div>
+              </div>
+              
+              <div style="width: 1px; height: 30px; background: #eaeaea;"></div>
+              
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <div style="width: 32px; height: 32px; color: var(--blue-700);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                <div style="font-size: 0.8rem; font-weight: 700; color: var(--blue-900); line-height: 1.3;">Private Limited Company<br>(Incorporated 2026)</div>
+              </div>
+              
+              <div style="width: 1px; height: 30px; background: #eaeaea;"></div>
+              
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <div style="width: 32px; height: 32px; color: var(--blue-700);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><line x1="12" y1="9" x2="12" y2="15"/><line x1="9" y1="12" x2="15" y2="12"/></svg></div>
+                <div style="font-size: 0.8rem; font-weight: 700; color: var(--blue-900); line-height: 1.3;">Focus<br>Healthcare Sector</div>
+              </div>
+              
+              <div style="width: 1px; height: 30px; background: #eaeaea;"></div>
+              
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <div style="width: 32px; height: 32px; color: var(--blue-700);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg></div>
+                <div style="font-size: 0.8rem; font-weight: 700; color: var(--blue-900); line-height: 1.3;">End-to-End<br>Solutions</div>
+              </div>
+              
+            </div>
           </div>
-        </div>
-        <div class="frows">
-          <div class="frow">
-            <div class="frow-media" data-parallax data-reveal-img><img src="assets/img/dgfwg3tq.jpg" alt="MESC"
-                loading="lazy"></div>
-            <div class="frow-copy" data-anim="right">
 
+          <!-- RIGHT COLUMN -->
+          <div>
+            <div style="display: flex; flex-direction: column; gap: 2rem; margin-bottom: 3rem;">
+              
+              <!-- Block 1 -->
+              <div style="display: flex; gap: 1.5rem;">
+                <div style="width: 56px; height: 56px; border-radius: 50%; background: #f0f6fc; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--blue-700);">
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                </div>
+                <div>
+                  <h4 style="font-size: 1.1rem; color: var(--blue-900); margin-bottom: 0.5rem; font-weight: 700;">Continuous Progress, Lasting Impact</h4>
+                  <p style="font-size: 0.95rem; line-height: 1.5; color: var(--fg-base); margin: 0;">Over the years, MESC has grown through continuous progress, project experience, technical expertise and a commitment to quality, expanding its capabilities across healthcare engineering, MEP services, interiors, project management consultancy, turnkey project execution and healthcare facility development.</p>
+                </div>
+              </div>
+              
+              <!-- Block 2 -->
+              <div style="display: flex; gap: 1.5rem;">
+                <div style="width: 56px; height: 56px; border-radius: 50%; background: #f0f6fc; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--blue-700);">
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/></svg>
+                </div>
+                <div>
+                  <h4 style="font-size: 1.1rem; color: var(--blue-900); margin-bottom: 0.5rem; font-weight: 700;">Strong Foundation, Structured Growth</h4>
+                  <p style="font-size: 0.95rem; line-height: 1.5; color: var(--fg-base); margin: 0;">Building on this foundation and our continued growth, the organisation was formally incorporated as a Private Limited Company in 2026 under the name:<br><strong style="color: var(--blue-700);">Mariam Engineering Services and Consultants Private Limited (MESC)</strong></p>
+                </div>
+              </div>
 
-              <div class="prose">
-                <p>Over the years, MESC has grown through continuous progress, project experience, technical expertise and a commitment to quality, expanding its capabilities across healthcare engineering, MEP services, interiors, project management consultancy, turnkey project execution and healthcare facility development.</p>
-                <p>Building on this foundation and our continued growth, the organisation was formally incorporated as a Private Limited Company in 2026 under the name:</p>
-                <p><strong>Mariam Engineering Services and Consultants Private Limited (MESC)</strong><br>
-                Today, MESC brings together engineering expertise, healthcare planning, project execution, consultancy and management capabilities to deliver integrated solutions for hospitals and healthcare facilities.</p>
-                
-                <h3 style="margin-top: 2.5rem; margin-bottom: 1rem; font-size: 1.2rem; color: var(--blue-700);">FROM EXPERIENCE TO EXCELLENCE</h3>
-                <ul class="lifecycle-timeline" style="list-style: none;">
-                  <li>
-                    <div class="timeline-marker">01</div>
-                    <div class="timeline-content">
-                      <strong>2019 &mdash; Established</strong>
-                      <p>Mariam Engineering Services &amp; Consultants commenced operations with a focus on engineering and consultancy services.</p>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="timeline-marker">02</div>
-                    <div class="timeline-content">
-                      <strong>2019&ndash;2025 &mdash; Continuous Growth</strong>
-                      <p>Expanded capabilities, project experience and expertise across healthcare engineering, MEP, interiors, PMC and turnkey project delivery.</p>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="timeline-marker">03</div>
-                    <div class="timeline-content">
-                      <strong>2026 &mdash; Incorporated as a Private Limited Company</strong>
-                      <p>MESC evolved into Mariam Engineering Services and Consultants Private Limited, marking a new phase of structured growth, professionalisation and expansion.</p>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="timeline-marker">04</div>
-                    <div class="timeline-content">
-                      <strong>Today &mdash; Integrated Healthcare Solutions</strong>
-                      <p>MESC continues to build its capabilities to deliver end-to-end healthcare engineering, consultancy, project management and turnkey solutions.</p>
-                    </div>
-                  </li>
-                </ul>
-                
-                <p style="margin-top: 2.5rem; font-size: 1.15rem; color: var(--blue-700); font-weight: 500;">Built on experience. Driven by excellence.<br>Committed to transforming healthcare.</p>
+              <!-- Block 3 -->
+              <div style="display: flex; gap: 1.5rem;">
+                <div style="width: 56px; height: 56px; border-radius: 50%; background: #f0f6fc; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--blue-700);">
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div>
+                  <h4 style="font-size: 1.1rem; color: var(--blue-900); margin-bottom: 0.5rem; font-weight: 700;">Delivering Integrated Healthcare Solutions</h4>
+                  <p style="font-size: 0.95rem; line-height: 1.5; color: var(--fg-base); margin: 0;">Today, MESC brings together engineering expertise, healthcare planning, project execution, consultancy and management capabilities to deliver integrated solutions for hospitals and healthcare facilities.</p>
+                </div>
+              </div>
+
+            </div>
+
+            <div style="height: 1px; background: #eaeaea; margin-bottom: 2rem;"></div>
+
+            <h3 style="font-size: 0.9rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em; color: var(--blue-900); margin-bottom: 1.5rem;">FROM EXPERIENCE TO EXCELLENCE</h3>
+            
+            <ul class="lifecycle-timeline" style="list-style: none; padding-left: 0;">
+              <li>
+                <div class="timeline-marker">01</div>
+                <div class="timeline-content">
+                  <strong>2019 &mdash; Established</strong>
+                  <p>Mariam Engineering Services &amp; Consultants commenced operations with a focus on engineering and consultancy services.</p>
+                </div>
+              </li>
+              <li>
+                <div class="timeline-marker">02</div>
+                <div class="timeline-content">
+                  <strong>2019&ndash;2025 &mdash; Continuous Growth</strong>
+                  <p>Expanded capabilities, project experience and expertise across healthcare engineering, MEP, interiors, PMC and turnkey project delivery.</p>
+                </div>
+              </li>
+              <li>
+                <div class="timeline-marker">03</div>
+                <div class="timeline-content">
+                  <strong>2026 &mdash; Incorporated as a Private Limited Company</strong>
+                  <p>MESC evolved into Mariam Engineering Services and Consultants Private Limited, marking a new phase of structured growth, professionalisation and expansion.</p>
+                </div>
+              </li>
+              <li>
+                <div class="timeline-marker">04</div>
+                <div class="timeline-content">
+                  <strong>Today &mdash; Integrated Healthcare Solutions</strong>
+                  <p>MESC continues to build its capabilities to deliver end-to-end healthcare engineering, consultancy, project management and turnkey solutions.</p>
+                </div>
+              </li>
+            </ul>
+
+            <div style="background: var(--blue-900); border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; gap: 1.5rem; margin-top: 2rem; color: #fff;">
+              <div style="width: 48px; height: 48px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polygon points="12 11 10.32 11.88 10.64 10 9.27 8.66 11.16 8.39 12 6.67 12.84 8.39 14.73 8.66 13.36 10 13.68 11.88 12 11"/></svg>
+              </div>
+              <div style="font-size: 1.05rem; line-height: 1.4;">
+                Built on experience. Driven by excellence.<br><strong>Committed to transforming healthcare.</strong>
               </div>
             </div>
+            
           </div>
         </div>
       </div>
@@ -272,25 +364,75 @@
             </ul>
 
             <div class="card-footer-box">
-              <div class="commitment-box">
-                <div class="commitment-content">
-                  <div class="commitment-left">
-                    <h4>OUR COMMITMENT</h4>
-                    <svg class="shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-                    <p>We don't just build healthcare facilities.</p>
-                    <p>We help build healthcare institutions.</p>
+              <div class="commitment-box" style="background: #f0f6fc; border-radius: 40px; padding: 1.5rem 2.5rem; margin-top: 2rem; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                <h4 style="color: #0a2559; font-size: 1.5rem; margin-bottom: 0.25rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.02em;">OUR COMMITMENT</h4>
+                <p style="color: #0a2559; font-size: 1.05rem; margin-bottom: 1.5rem; font-weight: 500; line-height: 1.5;">We don't just build healthcare facilities.<br>We help build healthcare institutions.</p>
+                
+                <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between; gap: 1.5rem; width: 100%; margin: 0 auto; text-align: left;">
+                  
+                  <!-- Item 1 -->
+                  <div style="display: flex; align-items: flex-start; gap: 1rem; flex: 1; min-width: 200px;">
+                    <div style="width: 48px; height: 48px; border-radius: 50%; background: #e1ecfa; display: flex; align-items: center; justify-content: center; color: #0a2559; flex-shrink: 0;">
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <div>
+                      <div style="color: #0a2559; font-weight: 700; font-size: 0.95rem; line-height: 1.3; margin-bottom: 0.4rem;">
+                        Collaborative<br>Approach
+                      </div>
+                      <div style="color: #444; font-size: 0.85rem; line-height: 1.4;">
+                        Design and project management working as one.
+                      </div>
+                    </div>
                   </div>
-                  <div class="commitment-right">
-                    <ul class="commitment-list">
-                      <li>From Vision to Planning.</li>
-                      <li>From Planning to Execution.</li>
-                      <li>From Execution to Commissioning.</li>
-                      <li>From Commissioning to Operational Excellence.</li>
-                    </ul>
+                  
+                  <!-- Item 2 -->
+                  <div style="display: flex; align-items: flex-start; gap: 1rem; flex: 1; min-width: 200px;">
+                    <div style="width: 48px; height: 48px; border-radius: 50%; background: #e1ecfa; display: flex; align-items: center; justify-content: center; color: #0a2559; flex-shrink: 0;">
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                    </div>
+                    <div>
+                      <div style="color: #0a2559; font-weight: 700; font-size: 0.95rem; line-height: 1.3; margin-bottom: 0.4rem;">
+                        End-to-End<br>Excellence
+                      </div>
+                      <div style="color: #444; font-size: 0.85rem; line-height: 1.4;">
+                        From concept to implementation and beyond.
+                      </div>
+                    </div>
                   </div>
+                  
+                  <!-- Item 3 -->
+                  <div style="display: flex; align-items: flex-start; gap: 1rem; flex: 1; min-width: 200px;">
+                    <div style="width: 48px; height: 48px; border-radius: 50%; background: #e1ecfa; display: flex; align-items: center; justify-content: center; color: #0a2559; flex-shrink: 0;">
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    </div>
+                    <div>
+                      <div style="color: #0a2559; font-weight: 700; font-size: 0.95rem; line-height: 1.3; margin-bottom: 0.4rem;">
+                        Innovation<br>Driven
+                      </div>
+                      <div style="color: #444; font-size: 0.85rem; line-height: 1.4;">
+                        Continuous improvement through shared insights.
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Item 4 -->
+                  <div style="display: flex; align-items: flex-start; gap: 1rem; flex: 1; min-width: 200px;">
+                    <div style="width: 48px; height: 48px; border-radius: 50%; background: #e1ecfa; display: flex; align-items: center; justify-content: center; color: #0a2559; flex-shrink: 0;">
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                    </div>
+                    <div>
+                      <div style="color: #0a2559; font-weight: 700; font-size: 0.95rem; line-height: 1.3; margin-bottom: 0.4rem;">
+                        Operational<br>Commitment
+                      </div>
+                      <div style="color: #444; font-size: 0.85rem; line-height: 1.4;">
+                        Supporting operations, training and long-term success.
+                      </div>
+                    </div>
+                  </div>
+                  
                 </div>
-                <div class="commitment-bottom-bar">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+
+                <div style="margin-top: 2rem; color: #0a2559; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; border-top: 2px solid #e1ecfa; padding-top: 1rem; width: 100%;">
                   MESC — Engineering Healthcare. Enabling Excellence. Transforming Care.
                 </div>
               </div>
