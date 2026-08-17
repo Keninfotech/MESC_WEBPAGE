@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
@@ -22,6 +22,298 @@
   <link rel="stylesheet" href="assets/css/site-bg.css">
 <link rel="stylesheet" href="assets/css/steps.css">
 <link rel="stylesheet" href="assets/css/animations.css">
+<style>
+  /* ===== MEP PAGE OVERRIDES ===== */
+  main, .section, .shell { overflow: visible !important; }
+  #progress { display: none !important; }
+
+  /* ===== 1. PHASE JOURNEY — full-bleed sticky with bg images ===== */
+  .cr-journey {
+    position: relative;
+    height: 420vh;
+    margin: 0;
+  }
+  .cr-journey-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    margin-left: calc(-50vw + 50%);
+    width: 100vw;
+  }
+  .cr-bg-layer {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    z-index: 0;
+    transform: scale(1.05);
+    transition: opacity 1s ease, transform 8s ease;
+  }
+  .cr-bg-layer.is-active {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .cr-journey-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      to right,
+      rgba(5, 12, 40, 0.85) 0%,
+      rgba(5, 12, 40, 0.65) 55%,
+      rgba(5, 12, 40, 0.25) 100%
+    );
+  }
+  .cr-journey-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: 0 clamp(1.5rem, 8vw, 8rem);
+    max-width: 900px;
+  }
+  .cr-journey-intro {
+    text-align: left;
+    padding: 0;
+    margin-bottom: 3rem;
+  }
+  .cr-journey-intro .eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 1rem;
+  }
+  .cr-journey-intro h2 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    max-width: 28ch;
+    margin: 0 0 1.2rem;
+    color: white;
+  }
+  .cr-journey-intro p {
+    font-size: 1.05rem;
+    max-width: 55ch;
+    margin: 0;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
+  }
+  .cr-progress-bar {
+    position: relative;
+    width: min(500px, 80vw);
+    margin: 0 0 3rem;
+    height: 2px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 2px;
+  }
+  .cr-progress-fill {
+    position: absolute;
+    inset: 0;
+    background: white;
+    border-radius: 2px;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+  }
+  .cr-progress-dots {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    left: 0; right: 0;
+    transform: translateY(-50%);
+  }
+  .cr-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    border: 2px solid rgba(255,255,255,0.6);
+    transition: background 0.4s ease, transform 0.4s ease;
+  }
+  .cr-dot.is-active {
+    background: white;
+    transform: scale(1.4);
+  }
+  .cr-phases-track {
+    width: min(620px, 80vw);
+    margin: 0;
+    position: relative;
+  }
+  .cr-phase-card {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+    pointer-events: none;
+  }
+  .cr-phase-card.is-active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  .cr-phase-card.is-past  { opacity: 0; transform: translateY(-40px); }
+  .cr-phase-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 2px;
+    margin-bottom: 0.6rem;
+    display: block;
+  }
+  .cr-phase-card h3 {
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    color: white;
+  }
+  .cr-phase-card p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.82);
+    max-width: 55ch;
+  }
+
+  /* ===== 2. APPROACH — parallax split panel ===== */
+  .cr-approach {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 80vh;
+    margin: 8rem 0;
+    overflow: hidden;
+    border-radius: var(--r-lg, 24px);
+  }
+  .cr-approach-media {
+    position: relative;
+    overflow: hidden;
+  }
+  .cr-approach-media img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transform: scale(1.15);
+    will-change: transform;
+  }
+  .cr-approach-content {
+    background: var(--blue-700, #1e40af);
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: clamp(3rem, 6vw, 6rem);
+  }
+  .cr-approach-inner { max-width: 48ch; }
+  .cr-approach-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+  .cr-approach-inner h2 {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.8rem;
+    color: white;
+  }
+  .cr-approach-line {
+    display: block;
+    overflow: hidden;
+    margin-bottom: 0.9rem;
+  }
+  .cr-approach-line span {
+    display: block;
+    font-size: 1rem;
+    line-height: 1.75;
+    opacity: 0.85;
+    transform: translateY(100%);
+    transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+  }
+  .cr-approach-line.is-revealed span { transform: translateY(0); }
+
+  /* ===== 3. COMPREHENSIVE SOLUTIONS — staggered cards ===== */
+  .cr-principles { margin: 8rem 0; }
+  .cr-principles-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .cr-principles-header .eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blue-500);
+    margin-bottom: 1rem;
+  }
+  .cr-principles-header h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .cr-principles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+  .cr-principle-card {
+    background: var(--paper-2, #f4f6fb);
+    border-radius: var(--r-lg, 20px);
+    padding: 2.2rem 2rem;
+    border: 1px solid rgba(0,0,0,0.06);
+    opacity: 0;
+    transform: translateY(50px);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .cr-principle-card:hover {
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    border-color: rgba(26,86,219,0.2);
+  }
+  .cr-principle-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--blue-500, #1a56db);
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .cr-principle-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.35;
+    margin-bottom: 0.7rem;
+  }
+  .cr-principle-card p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 760px) {
+    .cr-approach { grid-template-columns: 1fr; min-height: auto; border-radius: 16px; }
+    .cr-approach-media { height: 50vw; }
+    .cr-journey { height: auto; padding: 3rem 0; }
+    .cr-journey-sticky { position: relative; height: auto; margin-left: 0; width: 100%; }
+    .cr-journey-content { padding: 3rem 1.5rem; }
+    .cr-phase-card { position: relative; opacity: 1; transform: none; pointer-events: auto; margin-bottom: 2.5rem; }
+    .cr-phase-card.is-past { opacity: 1; transform: none; }
+    .cr-progress-bar { display: none; }
+  }
+</style>
 </head>
 <body class="page-service">
 <div class="progress" id="progress"></div>
@@ -50,85 +342,117 @@
   </div>
   <div class="hero-marks" aria-hidden="true"><div class="shell"><span></span><span></span><i class="rule"></i></div></div>
   <div class="shell" style="position:absolute;left:0;right:0;pointer-events:none"><span class="scroll-hint">Scroll</span></div>
-</section><section class="section"><div class="grid-lines"></div><div class="shell" style="position: relative;">
-    <!-- Chapter 01 -->
-    <div class="editorial-chapter" data-anim="fade">
-      <div class="editorial-bg-num">01</div>
-      <div class="editorial-media">
-        <img src="assets/img/2022-08-17-2---copy.jpg" alt="MEP Project Management" loading="lazy">
-      </div>
-      <div class="editorial-content">
-        <span class="editorial-label">01 / PROJECT MANAGEMENT</span>
-        <h2 class="h2">MEP Project Management</h2>
-        <div class="prose" style="margin-top: 1.5rem;">
-          <p>In our MEP (Mechanical, Electrical, and Plumbing) project management system at MESC, we take on the responsibility of overseeing the entire lifecycle of crucial infrastructure elements, including the design, installation, and maintenance of HVAC (Heating, Ventilation, and Air Conditioning), electrical, and plumbing systems specifically tailored for hospital environments.</p>
-        </div>
-        <ul class="lifecycle-timeline">
-          <li>
-            <span class="timeline-marker">01</span>
-            <div class="timeline-content">
-              <strong>DESIGN PHASE</strong>
+</section>
+
+<!-- ===== SECTION 1: MEP LIFECYCLE PHASES ===== -->
+<section class="section" style="overflow:visible;padding:0">
+  <div class="shell">
+    <div class="cr-journey" id="crJourney">
+      <div class="cr-journey-sticky">
+
+        <!-- Background image layers (one per phase) -->
+        <div class="cr-bg-layer is-active" style="background-image:url('assets/img/2022-08-17-2---copy.jpg')" data-bg="0"></div>
+        <div class="cr-bg-layer" style="background-image:url('assets/img/images---2023-12-21t005057.532.jpeg')" data-bg="1"></div>
+        <div class="cr-bg-layer" style="background-image:url('assets/img/img-20240124-wa0027-6cdd422.jpg')" data-bg="2"></div>
+
+        <!-- Dark scrim -->
+        <div class="cr-journey-scrim"></div>
+
+        <!-- Content -->
+        <div class="cr-journey-content">
+          <div class="cr-journey-intro">
+            <span class="eyebrow">01 / MEP Project Management</span>
+            <h2>MEP Project Management</h2>
+            <p>In our MEP (Mechanical, Electrical, and Plumbing) project management system at MESC, we take on the responsibility of overseeing the entire lifecycle of crucial infrastructure elements, including the design, installation, and maintenance of HVAC, electrical, and plumbing systems specifically tailored for hospital environments.</p>
+          </div>
+
+          <div class="cr-progress-bar" id="crProgressBar">
+            <div class="cr-progress-fill" id="crProgressFill"></div>
+            <div class="cr-progress-dots">
+              <div class="cr-dot is-active" data-dot="0"></div>
+              <div class="cr-dot" data-dot="1"></div>
+              <div class="cr-dot" data-dot="2"></div>
+            </div>
+          </div>
+
+          <div class="cr-phases-track" style="position:relative;height:clamp(220px,30vh,340px);">
+            <div class="cr-phase-card is-active" data-phase="0">
+              <span class="cr-phase-num">PHASE 01 / 03 &mdash; DESIGN</span>
+              <h3>Design Phase</h3>
               <p>Our project management begins with a comprehensive design phase where we collaborate closely with architects, engineers, and healthcare professionals to create MEP systems that are not only efficient but also specifically tailored to the unique requirements of hospitals. This involves detailed planning for HVAC systems to maintain optimal air quality and temperature, electrical systems for seamless and reliable power distribution, and plumbing systems to ensure a consistent and safe water supply.</p>
             </div>
-          </li>
-          <li>
-            <span class="timeline-marker">02</span>
-            <div class="timeline-content">
-              <strong>INSTALLATION PHASE</strong>
+            <div class="cr-phase-card" data-phase="1">
+              <span class="cr-phase-num">PHASE 02 / 03 &mdash; INSTALLATION</span>
+              <h3>Installation Phase</h3>
               <p>MESC is dedicated to the meticulous installation of MEP systems in hospital facilities. Our project management team coordinates with skilled professionals and contractors to ensure that the installation process adheres to the highest industry standards and regulatory requirements. This phase involves careful integration of HVAC, electrical, and plumbing components to create a cohesive and fully functional infrastructure that meets the demanding needs of healthcare environments.</p>
             </div>
-          </li>
-          <li>
-            <span class="timeline-marker">03</span>
-            <div class="timeline-content">
-              <strong>MAINTENANCE PHASE</strong>
+            <div class="cr-phase-card" data-phase="2">
+              <span class="cr-phase-num">PHASE 03 / 03 &mdash; MAINTENANCE</span>
+              <h3>Maintenance Phase</h3>
               <p>Beyond the initial installation, MESC is committed to the ongoing maintenance of MEP systems in hospitals. Our project management system includes proactive measures for regular inspections, preventive maintenance, and timely repairs. This ensures the continuous and reliable operation of HVAC, electrical, and plumbing systems, minimizing downtime and contributing to the overall efficiency and safety of the healthcare facility.</p>
             </div>
-          </li>
-        </ul>
-      </div>
-    </div>
+          </div>
+        </div><!-- end cr-journey-content -->
 
-    <!-- Chapter 02 -->
-    <div class="editorial-chapter reverse" style="margin-top: 8rem;" data-anim="fade">
-      <div class="editorial-bg-num" style="right: 0; left: auto; text-align: right;">02</div>
-      <div class="editorial-content">
-        <span class="editorial-label">02 / INTEGRATED SYSTEM</span>
-        <h2 class="h2">Seamless Integration</h2>
-        <div class="prose" style="margin-top: 1.5rem;">
-          <p>Our MEP project management system is designed to be holistic, addressing the interconnected nature of these critical systems. We recognize the importance of seamless integration to support the day-to-day operations of hospitals, where precision and reliability are non-negotiable. Through each phase, we prioritize the optimization of energy efficiency, adherence to safety protocols, and compliance with regulatory standards to create a sustainable and high-performing healthcare environment.</p>
+      </div><!-- end sticky -->
+    </div><!-- end cr-journey -->
+  </div>
+</section>
+
+<!-- ===== SECTION 2: SEAMLESS INTEGRATION ===== -->
+<section class="section" style="overflow:visible">
+  <div class="shell">
+    <div class="cr-approach" id="crApproach">
+      <div class="cr-approach-media">
+        <img src="assets/img/images---2023-12-21t005057.532.jpeg" alt="MEP Seamless Integration" loading="lazy" id="crApproachImg">
+      </div>
+      <div class="cr-approach-content">
+        <div class="cr-approach-inner">
+          <span class="cr-approach-eyebrow">02 / Integrated System</span>
+          <h2>Seamless Integration</h2>
+          <div class="cr-approach-line"><span>Our MEP project management system is designed to be holistic, addressing the interconnected nature of these critical systems.</span></div>
+          <div class="cr-approach-line"><span>We recognize the importance of seamless integration to support the day-to-day operations of hospitals, where precision and reliability are non-negotiable.</span></div>
+          <div class="cr-approach-line"><span>Through each phase, we prioritize the optimization of energy efficiency, adherence to safety protocols, and compliance with regulatory standards to create a sustainable and high-performing healthcare environment.</span></div>
         </div>
       </div>
-      <div class="editorial-media">
-        <img src="assets/img/images---2023-12-21t005057.532.jpeg" alt="Integrated System" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 3: COMPREHENSIVE SOLUTIONS ===== -->
+<section class="section" style="overflow:visible">
+  <div class="grid-lines"></div>
+  <div class="shell">
+    <div class="cr-principles">
+      <div class="cr-principles-header">
+        <span class="eyebrow">03 / Long-term Functionality</span>
+        <h2>Comprehensive Solutions</h2>
+      </div>
+      <div class="cr-principles-grid" id="crPrinciplesGrid">
+        <div class="cr-principle-card">
+          <span class="cr-principle-num">HVAC SYSTEMS</span>
+          <h3>Heating, Ventilation &amp; Air Conditioning</h3>
+          <p>MESC designs and maintains HVAC systems that ensure optimal air quality, temperature control, and infection prevention across all healthcare zones.</p>
+        </div>
+        <div class="cr-principle-card">
+          <span class="cr-principle-num">ELECTRICAL SYSTEMS</span>
+          <h3>Reliable Power Distribution</h3>
+          <p>Our electrical systems are engineered for seamless, reliable power distribution with fail-safe redundancy to support critical hospital operations 24/7.</p>
+        </div>
+        <div class="cr-principle-card">
+          <span class="cr-principle-num">PLUMBING SYSTEMS</span>
+          <h3>Safe Water Supply</h3>
+          <p>MESC's plumbing solutions provide consistent and safe water supply and drainage, meeting stringent healthcare hygiene and safety standards.</p>
+        </div>
+        <div class="cr-principle-card">
+          <span class="cr-principle-num">LONG-TERM VALUE</span>
+          <h3>Comprehensive Solutions</h3>
+          <p>MESC&#x27;s MEP project management system is a comprehensive solution that ensures the successful implementation of HVAC, electrical, and plumbing systems in hospitals, emphasizing the ongoing maintenance and optimization necessary for the long-term functionality of these critical infrastructure elements.</p>
+        </div>
       </div>
     </div>
   </div>
-
-<div class="philosophy-grid" style="margin-top: 6rem; margin-bottom: 2rem;">
-  <div class="philosophy-media">
-    <div class="philosophy-dots"></div>
-    <div class="philosophy-img-wrapper">
-      <img src="../Mesc%20images/OUR%20PHILOSOPHY.webp" alt="MEP Project Management" loading="lazy">
-      <div class="philosophy-badge">
-        <span class="badge-num">01</span>
-        <span class="badge-line"></span>
-      </div>
-    </div>
-  </div>
-  <div class="philosophy-content">
-    <div class="eyebrow-container">
-      <div class="eyebrow-line"></div>
-      <span class="eyebrow-text">LONG-TERM FUNCTIONALITY</span>
-    </div>
-    <h3 class="h3" style="color: var(--blue-700); margin-bottom: 1.5rem;">Comprehensive Solutions</h3>
-    <div class="prose">
-      <p>MESC&#x27;s MEP project management system is a comprehensive solution that not only ensures the successful implementation of HVAC, electrical, and plumbing systems in hospitals but also emphasizes the ongoing maintenance and optimization necessary for the long-term functionality of these critical infrastructure elements.</p>
-    </div>
-  </div>
-</div>
-
-</div></section><section class="section section--tight"><div class="shell">
+</section><section class="section section--tight"><div class="shell">
   <div class="cta-band" data-anim="scale">
     <div>
       <h2 class="h2" style="max-width:35ch; font-size:clamp(1.8rem, 3vw, 2.5rem); line-height:1.2;">Let’s build healthcare infrastructure that performs.</h2>
@@ -175,7 +499,67 @@
 <script src="assets/js/steps.js" defer></script>
 <script src="assets/js/animations.js" defer></script>
 <script>
-(function(){var p=document.getElementById('progress');function u(){var h=document.documentElement;var s=h.scrollTop/(h.scrollHeight-h.clientHeight||1);p.style.transform='scaleX('+s+')';}u();addEventListener('scroll',u,{passive:true});})();
+(function(){var p=document.getElementById('progress');function u(){var h=document.documentElement;var s=h.scrollTop/(h.scrollHeight-h.clientHeight||1);if(p)p.style.transform='scaleX('+s+')';}u();addEventListener('scroll',u,{passive:true});})();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ===== 1. PHASE JOURNEY =====
+  var isMobile = window.matchMedia('(max-width:760px)').matches;
+  if (!isMobile) {
+    var phases = document.querySelectorAll('.cr-phase-card');
+    var dots   = document.querySelectorAll('.cr-dot');
+    var fill   = document.getElementById('crProgressFill');
+    var journey= document.getElementById('crJourney');
+    var bgs    = document.querySelectorAll('.cr-bg-layer');
+    var total  = phases.length;
+
+    ScrollTrigger.create({
+      trigger: journey,
+      start: 'top top',
+      end: 'bottom bottom',
+      onUpdate: function(self) {
+        var p = self.progress;
+        var idx = Math.min(Math.floor(p * total), total - 1);
+        if (fill) fill.style.transform = 'scaleX(' + (idx / (total - 1)) + ')';
+        dots.forEach(function(d, i) { d.classList.toggle('is-active', i <= idx); });
+        phases.forEach(function(c, i) {
+          c.classList.remove('is-active', 'is-past');
+          if (i === idx) c.classList.add('is-active');
+          else if (i < idx) c.classList.add('is-past');
+        });
+        bgs.forEach(function(bg, i) { bg.classList.toggle('is-active', i === idx); });
+      }
+    });
+  }
+
+  // ===== 2. APPROACH — parallax image + line reveal =====
+  var approachImg = document.getElementById('crApproachImg');
+  if (approachImg) {
+    gsap.to(approachImg, {
+      yPercent: -10,
+      ease: 'none',
+      scrollTrigger: { trigger: '#crApproach', start: 'top bottom', end: 'bottom top', scrub: true }
+    });
+  }
+  document.querySelectorAll('.cr-approach-line').forEach(function(line, i) {
+    ScrollTrigger.create({
+      trigger: line,
+      start: 'top 85%',
+      onEnter: function() { setTimeout(function() { line.classList.add('is-revealed'); }, i * 120); }
+    });
+  });
+
+  // ===== 3. COMPREHENSIVE SOLUTIONS — staggered cards =====
+  gsap.fromTo('.cr-principle-card',
+    { y: 50, opacity: 0 },
+    { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out', stagger: 0.12,
+      scrollTrigger: { trigger: '#crPrinciplesGrid', start: 'top 80%' }
+    }
+  );
+});
 </script>
 </body>
 </html>

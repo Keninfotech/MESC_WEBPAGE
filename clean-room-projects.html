@@ -27,12 +27,11 @@
   main, .section, .shell { overflow: visible !important; }
   #progress { display: none !important; }
 
-  /* ===== 1. PHASE JOURNEY — sticky horizontal track ===== */
+  /* ===== 1. PHASE JOURNEY — full-bleed sticky with bg images ===== */
   .cr-journey {
     position: relative;
-    /* 100vh per phase + 60vh for the intro panel */
     height: 560vh;
-    margin: 6rem 0;
+    margin: 0;
   }
   .cr-journey-sticky {
     position: sticky;
@@ -42,10 +41,56 @@
     flex-direction: column;
     justify-content: center;
     overflow: hidden;
+    /* stretch full width past the shell */
+    margin-left: calc(-50vw + 50%);
+    width: 100vw;
   }
+
+  /* Background image layers */
+  .cr-bg-layer {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease;
+    z-index: 0;
+    transform: scale(1.05);
+    transition: opacity 1s ease, transform 8s ease;
+  }
+  .cr-bg-layer.is-active {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Dark gradient scrim for readability */
+  .cr-journey-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      to right,
+      rgba(5, 12, 40, 0.82) 0%,
+      rgba(5, 12, 40, 0.65) 55%,
+      rgba(5, 12, 40, 0.25) 100%
+    );
+  }
+
+  /* Content lives above the scrim */
+  .cr-journey-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    padding: 0 clamp(1.5rem, 8vw, 8rem);
+    max-width: 900px;
+  }
+
   .cr-journey-intro {
-    text-align: center;
-    padding: 0 clamp(1rem, 5vw, 4rem);
+    text-align: left;
+    padding: 0;
     margin-bottom: 3rem;
   }
   .cr-journey-intro .eyebrow {
@@ -54,7 +99,7 @@
     font-weight: 600;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--blue-500);
+    color: rgba(255,255,255,0.6);
     margin-bottom: 1rem;
   }
   .cr-journey-intro h2 {
@@ -62,29 +107,30 @@
     font-weight: 700;
     line-height: 1.15;
     max-width: 28ch;
-    margin: 0 auto 1.2rem;
+    margin: 0 auto 1.2rem 0;
+    color: white;
   }
   .cr-journey-intro p {
     font-size: 1.05rem;
-    max-width: 60ch;
-    margin: 0 auto;
-    opacity: 0.75;
+    max-width: 55ch;
+    margin: 0;
+    color: rgba(255,255,255,0.75);
     line-height: 1.7;
   }
 
   /* progress track */
   .cr-progress-bar {
     position: relative;
-    width: min(700px, 90vw);
-    margin: 0 auto 3rem;
+    width: min(500px, 80vw);
+    margin: 0 0 3rem 0;
     height: 2px;
-    background: rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.2);
     border-radius: 2px;
   }
   .cr-progress-fill {
     position: absolute;
     inset: 0;
-    background: var(--blue-500, #1a56db);
+    background: white;
     border-radius: 2px;
     transform-origin: left;
     transform: scaleX(0);
@@ -102,21 +148,19 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: rgba(0,0,0,0.15);
-    border: 2px solid white;
+    background: rgba(255,255,255,0.3);
+    border: 2px solid rgba(255,255,255,0.6);
     transition: background 0.4s ease, transform 0.4s ease;
   }
   .cr-dot.is-active {
-    background: var(--blue-500, #1a56db);
+    background: white;
     transform: scale(1.4);
   }
 
   /* phase cards track */
   .cr-phases-track {
-    display: flex;
-    gap: 2rem;
-    width: min(700px, 90vw);
-    margin: 0 auto;
+    width: min(620px, 80vw);
+    margin: 0;
     position: relative;
   }
   .cr-phase-card {
@@ -141,21 +185,22 @@
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.78rem;
     font-weight: 500;
-    color: var(--blue-500, #1a56db);
+    color: rgba(255,255,255,0.6);
     letter-spacing: 2px;
     margin-bottom: 0.6rem;
     display: block;
   }
   .cr-phase-card h3 {
-    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
     font-weight: 700;
     margin-bottom: 1rem;
     line-height: 1.2;
+    color: white;
   }
   .cr-phase-card p {
     font-size: 1rem;
     line-height: 1.75;
-    opacity: 0.8;
+    color: rgba(255,255,255,0.82);
     max-width: 55ch;
   }
 
@@ -293,7 +338,8 @@
     .cr-approach-media { height: 50vw; }
     .cr-phase-card p { font-size: 0.9rem; }
     .cr-journey { height: auto; padding: 3rem 0; }
-    .cr-journey-sticky { position: relative; height: auto; }
+    .cr-journey-sticky { position: relative; height: auto; margin-left: 0; width: 100%; }
+    .cr-journey-content { padding: 3rem 1.5rem; }
     .cr-phase-card {
       position: relative;
       opacity: 1;
@@ -336,52 +382,65 @@
 </section>
 
 <!-- ===================== SECTION 1: PHASE JOURNEY ===================== -->
-<section class="section" style="overflow:visible">
-  <div class="grid-lines"></div>
+<section class="section" style="overflow:visible;padding:0">
   <div class="shell">
     <div class="cr-journey" id="crJourney">
       <div class="cr-journey-sticky">
-        <!-- Intro header -->
-        <div class="cr-journey-intro">
-          <span class="eyebrow">01 / Overview</span>
-          <h2>The Clean-Room Lifecycle</h2>
-          <p>In clean-room project management, MESC excels in the meticulous planning, designing, and construction of specialized environments that adhere to the most stringent requirements for cleanliness and sterility.</p>
-        </div>
 
-        <!-- Progress track -->
-        <div class="cr-progress-bar" id="crProgressBar">
-          <div class="cr-progress-fill" id="crProgressFill"></div>
-          <div class="cr-progress-dots">
-            <div class="cr-dot is-active" data-dot="0"></div>
-            <div class="cr-dot" data-dot="1"></div>
-            <div class="cr-dot" data-dot="2"></div>
-            <div class="cr-dot" data-dot="3"></div>
-          </div>
-        </div>
+        <!-- Background image layers (one per phase) -->
+        <div class="cr-bg-layer is-active" style="background-image:url('assets/img/images---2023-12-21t005017.905.jpeg')" data-bg="0"></div>
+        <div class="cr-bg-layer" style="background-image:url('assets/img/images---2023-12-21t005050.545.jpeg')" data-bg="1"></div>
+        <div class="cr-bg-layer" style="background-image:url('assets/img/images---2023-12-21t004906.358.jpeg')" data-bg="2"></div>
+        <div class="cr-bg-layer" style="background-image:url('assets/img/cleanroom.jpeg')" data-bg="3"></div>
 
-        <!-- Phase cards -->
-        <div class="cr-phases-track" style="position:relative;height:clamp(220px,30vh,340px);">
-          <div class="cr-phase-card is-active" data-phase="0">
-            <span class="cr-phase-num">PHASE 01 / 04 &mdash; PLANNING</span>
-            <h3>Planning Phase</h3>
-            <p>MESC initiates clean-room project management with thorough planning, taking into account the unique requirements and specifications of the clean-room environment. This involves a collaborative process with clients, stakeholders, and regulatory authorities to define the scope, functional needs, and cleanliness standards. Our planning encompasses budgeting, scheduling, and resource allocation to ensure a streamlined and efficient project execution.</p>
+        <!-- Dark scrim for readability -->
+        <div class="cr-journey-scrim"></div>
+
+        <!-- All text content above the scrim -->
+        <div class="cr-journey-content">
+          <!-- Intro header -->
+          <div class="cr-journey-intro">
+            <span class="eyebrow">01 / Overview</span>
+            <h2>The Clean-Room Lifecycle</h2>
+            <p>In clean-room project management, MESC excels in the meticulous planning, designing, and construction of specialized environments that adhere to the most stringent requirements for cleanliness and sterility.</p>
           </div>
-          <div class="cr-phase-card" data-phase="1">
-            <span class="cr-phase-num">PHASE 02 / 04 &mdash; DESIGN</span>
-            <h3>Design Phase</h3>
-            <p>The design of clean rooms is a critical aspect that directly impacts their functionality. MESC's project management involves working closely with architects, engineers, and specialized clean-room designers to create layouts that optimize cleanliness, airflow, and sterility. The design phase also considers the integration of necessary systems, such as HVAC, to maintain controlled environmental conditions.</p>
+
+          <!-- Progress track -->
+          <div class="cr-progress-bar" id="crProgressBar">
+            <div class="cr-progress-fill" id="crProgressFill"></div>
+            <div class="cr-progress-dots">
+              <div class="cr-dot is-active" data-dot="0"></div>
+              <div class="cr-dot" data-dot="1"></div>
+              <div class="cr-dot" data-dot="2"></div>
+              <div class="cr-dot" data-dot="3"></div>
+            </div>
           </div>
-          <div class="cr-phase-card" data-phase="2">
-            <span class="cr-phase-num">PHASE 03 / 04 &mdash; CONSTRUCTION</span>
-            <h3>Construction Phase</h3>
-            <p>During the construction phase, MESC oversees the implementation of the clean-room design, ensuring that the construction process aligns with the approved plans and specifications. Our project management team collaborates with skilled contractors and construction professionals to execute the construction with precision.</p>
+
+          <!-- Phase cards -->
+          <div class="cr-phases-track" style="position:relative;height:clamp(220px,30vh,340px);">
+            <div class="cr-phase-card is-active" data-phase="0">
+              <span class="cr-phase-num">PHASE 01 / 04 &mdash; PLANNING</span>
+              <h3>Planning Phase</h3>
+              <p>MESC initiates clean-room project management with thorough planning, taking into account the unique requirements and specifications of the clean-room environment. This involves a collaborative process with clients, stakeholders, and regulatory authorities to define the scope, functional needs, and cleanliness standards. Our planning encompasses budgeting, scheduling, and resource allocation to ensure a streamlined and efficient project execution.</p>
+            </div>
+            <div class="cr-phase-card" data-phase="1">
+              <span class="cr-phase-num">PHASE 02 / 04 &mdash; DESIGN</span>
+              <h3>Design Phase</h3>
+              <p>The design of clean rooms is a critical aspect that directly impacts their functionality. MESC's project management involves working closely with architects, engineers, and specialized clean-room designers to create layouts that optimize cleanliness, airflow, and sterility. The design phase also considers the integration of necessary systems, such as HVAC, to maintain controlled environmental conditions.</p>
+            </div>
+            <div class="cr-phase-card" data-phase="2">
+              <span class="cr-phase-num">PHASE 03 / 04 &mdash; CONSTRUCTION</span>
+              <h3>Construction Phase</h3>
+              <p>During the construction phase, MESC oversees the implementation of the clean-room design, ensuring that the construction process aligns with the approved plans and specifications. Our project management team collaborates with skilled contractors and construction professionals to execute the construction with precision.</p>
+            </div>
+            <div class="cr-phase-card" data-phase="3">
+              <span class="cr-phase-num">PHASE 04 / 04 &mdash; VALIDATION</span>
+              <h3>Validation &amp; Compliance</h3>
+              <p>MESC places a strong emphasis on the validation of clean rooms to guarantee that they meet the stringent cleanliness and sterility standards. Our project management includes rigorous testing and validation processes to ensure that the clean-room environment performs as intended. Additionally, we are committed to ensuring compliance with regulatory standards and industry best practices throughout the entire project life cycle.</p>
+            </div>
           </div>
-          <div class="cr-phase-card" data-phase="3">
-            <span class="cr-phase-num">PHASE 04 / 04 &mdash; VALIDATION</span>
-            <h3>Validation &amp; Compliance</h3>
-            <p>MESC places a strong emphasis on the validation of clean rooms to guarantee that they meet the stringent cleanliness and sterility standards. Our project management includes rigorous testing and validation processes to ensure that the clean-room environment performs as intended. Additionally, we are committed to ensuring compliance with regulatory standards and industry best practices throughout the entire project life cycle.</p>
-          </div>
-        </div>
+        </div><!-- end cr-journey-content -->
+
       </div><!-- end sticky -->
     </div><!-- end cr-journey -->
   </div>
@@ -506,6 +565,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var dots   = document.querySelectorAll('.cr-dot');
     var fill   = document.getElementById('crProgressFill');
     var journey= document.getElementById('crJourney');
+    var bgs    = document.querySelectorAll('.cr-bg-layer');
     var total  = phases.length;
 
     ScrollTrigger.create({
@@ -525,6 +585,8 @@ document.addEventListener('DOMContentLoaded', function() {
           if (i === idx) c.classList.add('is-active');
           else if (i < idx) c.classList.add('is-past');
         });
+        // background images — crossfade to matching phase image
+        bgs.forEach(function(bg, i) { bg.classList.toggle('is-active', i === idx); });
       }
     });
   }
