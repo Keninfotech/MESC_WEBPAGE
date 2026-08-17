@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
@@ -22,6 +22,89 @@
   <link rel="stylesheet" href="assets/css/site-bg.css">
 <link rel="stylesheet" href="assets/css/steps.css">
 <link rel="stylesheet" href="assets/css/animations.css">
+<style>
+  main, .section, .shell, .has-steps,  .steps, .steps-grid, .steps-shell { 
+    overflow: visible !important; 
+    overflow-x: visible !important; 
+    overflow-y: visible !important; 
+  }
+  .steps-head, .steps-meta, .step-num, .step-rail, .steps-marks, .svc-progress, #progress { display: none !important; }
+
+  /* Custom fader interaction CSS */
+  .hc-scroll-fader {
+    position: relative;
+    height: 300vh;
+    margin: 4rem 0;
+  }
+  .hc-fader-inner {
+    position: sticky;
+    top: clamp(160px, 25vh, 250px);
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: clamp(2.5rem, 5vw, 5rem);
+    align-items: center;
+    height: clamp(400px, 65vh, 750px);
+  }
+  .hc-fader-inner.is-reversed {
+    grid-template-columns: 1.1fr 1fr;
+  }
+  .hc-fader-media {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--r-lg, 24px);
+    overflow: hidden;
+    background: var(--paper-2);
+  }
+  .hc-fader-img {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  .hc-fader-img.is-active {
+    opacity: 1;
+  }
+  .hc-fader-content {
+    position: relative;
+    height: 100%;
+  }
+  .hc-fader-text {
+    position: absolute;
+    top: 50%; left: 0; width: 100%;
+    transform: translateY(-40%);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.6s ease;
+  }
+  .hc-fader-text.is-active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(-50%);
+  }
+  .hc-fader-text p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  @media (max-width: 960px) {
+    .hc-scroll-fader { height: auto; margin: 3rem 0; display: flex; flex-direction: column; }
+    .hc-fader-inner { position: relative; top: 0; display: contents; }
+    .hc-fader-media, .hc-fader-content { display: contents; }
+    .hc-fader-text { position: relative !important; opacity: 1 !important; transform: none !important; pointer-events: auto !important; margin-top: 1.5rem; margin-bottom: 1.5rem; }
+    .hc-fader-img { position: relative !important; opacity: 1 !important; height: auto !important; max-height: 60vw; border-radius: 12px; }
+    .hc-fader-text:nth-child(1) { order: 1; }
+    .hc-fader-img:nth-child(1) { order: 2; }
+    .hc-fader-text:nth-child(2) { order: 3; }
+    .hc-fader-img:nth-child(2) { order: 4; }
+    .hc-fader-text:nth-child(3) { order: 5; }
+    .hc-fader-img:nth-child(3) { order: 6; }
+    .hc-fader-text:nth-child(4) { order: 7; }
+    .hc-fader-img:nth-child(4) { order: 8; }
+    .hc-fader-text:nth-child(5) { order: 9; }
+    .hc-fader-img:nth-child(5) { order: 10; }
+  }
+</style>
 </head>
 <body class="page-service">
 <div class="progress" id="progress"></div>
@@ -50,28 +133,52 @@
   </div>
   <div class="hero-marks" aria-hidden="true"><div class="shell"><span></span><span></span><i class="rule"></i></div></div>
   <div class="shell" style="position:absolute;left:0;right:0;pointer-events:none"><span class="scroll-hint">Scroll</span></div>
-</section><section class="section"><div class="grid-lines"></div><div class="shell"><div class="frows"><div class="frow">
-  <div class="frow-media" data-parallax data-reveal-img><img src="assets/img/20221128_051113.jpg" alt="MESC" loading="lazy"></div>
-  <div class="frow-copy" data-anim="right">
-    <span class="frow-num">01</span>
-    
-    <div class="prose"><p>In turnkey projects, MESC takes on a holistic and end-to-end role, overseeing every facet of the project&#x27;s lifecycle. From the initial design conceptualization to the final commissioning and handover, we shoulder the responsibility for the project&#x27;s successful execution. This comprehensive approach is designed to provide clients with a seamless and integrated experience, offering a single point of contact for all project-related matters.</p><p>The turnkey model begins with a detailed and collaborative design phase, where MESC works closely with clients to understand their needs, goals, and specifications. Our team of experts ensures that the design not only aligns with the client&#x27;s vision but also adheres to industry standards and regulations.</p><p>Moving into the construction phase, MESC manages the entire building process, coordinating with various contractors, suppliers, and specialists. This integrated management ensures a synchronized workflow, minimizing the potential for miscommunication and optimizing efficiency. By assuming control of the construction process, MESC is positioned to address any challenges promptly, keeping the project on track.</p></div>
+</section><section class="section"><div class="grid-lines"></div><div class="shell">
+
+<div class="hc-scroll-fader">
+  <div class="hc-fader-inner">
+    <div class="hc-fader-media">
+      <img src="assets/img/20221128_051113.jpg" alt="MESC Turnkey Projects" class="hc-fader-img is-active">
+      <img src="assets/img/mesc-18.png" alt="MESC Turnkey Projects" class="hc-fader-img">
+      <img src="assets/img/mesc-27.png" alt="MESC Turnkey Projects" class="hc-fader-img">
+    </div>
+    <div class="hc-fader-content">
+      <div class="hc-fader-text is-active prose">
+        <p>In turnkey projects, MESC takes on a holistic and end-to-end role, overseeing every facet of the project&#x27;s lifecycle. From the initial design conceptualization to the final commissioning and handover, we shoulder the responsibility for the project&#x27;s successful execution. This comprehensive approach is designed to provide clients with a seamless and integrated experience, offering a single point of contact for all project-related matters.</p>
+      </div>
+      <div class="hc-fader-text prose">
+        <p>The turnkey model begins with a detailed and collaborative design phase, where MESC works closely with clients to understand their needs, goals, and specifications. Our team of experts ensures that the design not only aligns with the client&#x27;s vision but also adheres to industry standards and regulations.</p>
+      </div>
+      <div class="hc-fader-text prose">
+        <p>Moving into the construction phase, MESC manages the entire building process, coordinating with various contractors, suppliers, and specialists. This integrated management ensures a synchronized workflow, minimizing the potential for miscommunication and optimizing efficiency. By assuming control of the construction process, MESC is positioned to address any challenges promptly, keeping the project on track.</p>
+      </div>
+    </div>
   </div>
-</div><div class="frow">
-  <div class="frow-media" data-parallax data-reveal-img><img src="assets/img/mesc-18.png" alt="MESC" loading="lazy"></div>
-  <div class="frow-copy" data-anim="left">
-    <span class="frow-num">02</span>
-    
-    <div class="prose"><p>The commissioning phase involves thorough testing and validation to ensure that all systems and components function as intended. MESC&#x27;s commitment to quality is demonstrated through rigorous testing protocols, guaranteeing that the final product meets or exceeds the client&#x27;s expectations and industry standards.</p><p>The handover marks the culmination of the turnkey project, where MESC delivers a fully operational and meticulously executed project to the client. This comprehensive approach not only simplifies the project delivery process but also provides clients with the confidence that every aspect of the project has been managed with precision and accountability.</p></div>
+</div>
+
+<div class="hc-scroll-fader">
+  <div class="hc-fader-inner is-reversed">
+    <div class="hc-fader-content">
+      <div class="hc-fader-text is-active prose">
+        <p>The commissioning phase involves thorough testing and validation to ensure that all systems and components function as intended. MESC&#x27;s commitment to quality is demonstrated through rigorous testing protocols, guaranteeing that the final product meets or exceeds the client&#x27;s expectations and industry standards.</p>
+      </div>
+      <div class="hc-fader-text prose">
+        <p>The handover marks the culmination of the turnkey project, where MESC delivers a fully operational and meticulously executed project to the client. This comprehensive approach not only simplifies the project delivery process but also provides clients with the confidence that every aspect of the project has been managed with precision and accountability.</p>
+      </div>
+      <div class="hc-fader-text prose">
+        <p>The advantages of the turnkey approach extend beyond project completion. Clients benefit from a streamlined communication channel throughout the project, minimizing the risk of misunderstandings or delays. Additionally, the single point of contact allows for a more efficient resolution of issues that may arise during the project lifecycle.</p>
+        <p>Ultimately, MESC&#x27;s turnkey project management ensures a seamless and efficient process from inception to completion, providing clients with a comprehensive solution that is not only reliable but also tailored to meet their specific needs and expectations.</p>
+      </div>
+    </div>
+    <div class="hc-fader-media">
+      <img src="assets/img/emergency-department-of-newport-hospital-4-102.jpg" alt="MESC Turnkey Projects" class="hc-fader-img is-active">
+      <img src="assets/img/img-20240124-wa0035.jpg" alt="MESC Turnkey Projects" class="hc-fader-img">
+      <img src="assets/img/capital-equipment-procurement-500x281.jpg" alt="MESC Turnkey Projects" class="hc-fader-img">
+    </div>
   </div>
-</div><div class="frow">
-  <div class="frow-media" data-parallax data-reveal-img><img src="assets/img/mesc-27.png" alt="MESC" loading="lazy"></div>
-  <div class="frow-copy" data-anim="right">
-    <span class="frow-num">03</span>
-    
-    <div class="prose"><p>The advantages of the turnkey approach extend beyond project completion. Clients benefit from a streamlined communication channel throughout the project, minimizing the risk of misunderstandings or delays. Additionally, the single point of contact allows for a more efficient resolution of issues that may arise during the project lifecycle.</p><p>Ultimately, MESC&#x27;s turnkey project management ensures a seamless and efficient process from inception to completion, providing clients with a comprehensive solution that is not only reliable but also tailored to meet their specific needs and expectations.</p></div>
-  </div>
-</div></div></div></section><section class="section section--tight"><div class="shell">
+</div>
+
+</div></section><section class="section section--tight"><div class="shell">
   <div class="cta-band" data-anim="scale">
     <div>
       <h2 class="h2" style="max-width:35ch; font-size:clamp(1.8rem, 3vw, 2.5rem); line-height:1.2;">Let’s build healthcare infrastructure that performs.</h2>
@@ -118,7 +225,37 @@
 <script src="assets/js/steps.js" defer></script>
 <script src="assets/js/animations.js" defer></script>
 <script>
-(function(){var p=document.getElementById('progress');function u(){var h=document.documentElement;var s=h.scrollTop/(h.scrollHeight-h.clientHeight||1);p.style.transform='scaleX('+s+')';}u();addEventListener('scroll',u,{passive:true});})();
+(function(){var p=document.getElementById('progress');function u(){var h=document.documentElement;var s=h.scrollTop/(h.scrollHeight-h.clientHeight||1);if(p)p.style.transform='scaleX('+s+')';}u();addEventListener('scroll',u,{passive:true});})();
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  
+  var faders = document.querySelectorAll('.hc-scroll-fader');
+  if (faders.length === 0) return;
+  if (window.matchMedia("(max-width: 959px)").matches) return;
+  
+  faders.forEach(function(fader) {
+    var imgs = fader.querySelectorAll('.hc-fader-img');
+    var texts = fader.querySelectorAll('.hc-fader-text');
+    
+    ScrollTrigger.create({
+      trigger: fader,
+      start: "top top+=10%",
+      end: "bottom bottom",
+      onUpdate: function(self) {
+        var progress = self.progress;
+        var total = imgs.length;
+        if(total === 0) return;
+        var idx = Math.floor(progress * total);
+        if(idx >= total) idx = total - 1;
+        
+        imgs.forEach(function(img, i) { img.classList.toggle('is-active', i === idx); });
+        texts.forEach(function(txt, i) { txt.classList.toggle('is-active', i === idx); });
+      }
+    });
+  });
+});
 </script>
 </body>
 </html>
