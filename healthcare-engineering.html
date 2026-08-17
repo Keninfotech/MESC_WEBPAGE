@@ -101,7 +101,44 @@
     .hc-fader-text:nth-child(5) { order: 9; }
     .hc-fader-img:nth-child(5) { order: 10; }
   }
+  
 </style>
+  <style>
+    /* Normalize hero--fixed to match global hero styles */
+    .hero--fixed .hero-media {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 65%;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .hero--fixed .hero-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        90deg,
+        var(--blue-700) 0%,
+        rgba(14, 55, 129, 0.65) 18%,
+        rgba(14, 55, 129, 0) 55%
+      );
+      box-shadow: inset 2px 0 0 var(--blue-700);
+      z-index: 2;
+      transition: opacity .6s ease;
+    }
+    .hero--fixed .hero-media img {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: right center;
+    }
+  </style>
 </head>
 <body class="page-service">
 <div class="progress" id="progress"></div>
@@ -119,8 +156,8 @@
     </div>
   </div>
 </header>
-<div class="drawer" id="drawer"><div class="drawer-group"><a href="index.html">Home</a></div><div class="drawer-group"><button type="button">About Us<span class="plus">+</span></button><div class="drawer-sub"><div class="drawer-inner"><a href="about-us.html">About Us</a><a href="why-mesc.html">Why MESC?</a><a href="leaders.html">Leaders</a><a href="awards-and-gallery.html">Awards &amp; Gallery</a></div></div></div><div class="drawer-group"><a href="our-projects.html">Our Projects</a></div><div class="drawer-group"><button type="button">Healthcare<span class="plus">+</span></button><div class="drawer-sub"><div class="drawer-inner"><a href="healthcare-planning.html">Healthcare Planning</a><a href="operation-theatres.html">Operation Theatres</a><a href="healthcare-designing.html">Healthcare Designing</a><a href="healthcare-engineering.html">Healthcare Engineering</a><a href="clean-room-projects.html">Clean-room Projects</a><a href="turnkey-projects.html">Turnkey Projects</a></div></div></div><div class="drawer-group"><button type="button">Engineering<span class="plus">+</span></button><div class="drawer-sub"><div class="drawer-inner"><a href="facility-management.html">Facility Management</a><a href="mep-project-management.html">MEP Project Management</a><a href="mgps-engineering.html">MGPS Engineering</a><a href="project-management.html">Project Management</a><a href="elv-and-it-systems.html">ELV &amp; IT Systems</a><a href="ac-and-ventilation-systems.html">AC &amp; Ventilation Systems</a></div></div></div><div class="drawer-group"><a href="contact-us.html">Contact Us</a></div></div><main><section class="hero hero--inner">
-  <div class="hero-media"><img src="assets/img/capital-equipment-procurement-500x281.jpg" alt=""></div>
+<div class="drawer" id="drawer"><div class="drawer-group"><a href="index.html">Home</a></div><div class="drawer-group"><button type="button">About Us<span class="plus">+</span></button><div class="drawer-sub"><div class="drawer-inner"><a href="about-us.html">About Us</a><a href="why-mesc.html">Why MESC?</a><a href="leaders.html">Leaders</a><a href="awards-and-gallery.html">Awards &amp; Gallery</a></div></div></div><div class="drawer-group"><a href="our-projects.html">Our Projects</a></div><div class="drawer-group"><button type="button">Healthcare<span class="plus">+</span></button><div class="drawer-sub"><div class="drawer-inner"><a href="healthcare-planning.html">Healthcare Planning</a><a href="operation-theatres.html">Operation Theatres</a><a href="healthcare-designing.html">Healthcare Designing</a><a href="healthcare-engineering.html">Healthcare Engineering</a><a href="clean-room-projects.html">Clean-room Projects</a><a href="turnkey-projects.html">Turnkey Projects</a></div></div></div><div class="drawer-group"><button type="button">Engineering<span class="plus">+</span></button><div class="drawer-sub"><div class="drawer-inner"><a href="facility-management.html">Facility Management</a><a href="mep-project-management.html">MEP Project Management</a><a href="mgps-engineering.html">MGPS Engineering</a><a href="project-management.html">Project Management</a><a href="elv-and-it-systems.html">ELV &amp; IT Systems</a><a href="ac-and-ventilation-systems.html">AC &amp; Ventilation Systems</a></div></div></div><div class="drawer-group"><a href="contact-us.html">Contact Us</a></div></div><main><section class="hero hero--inner hero--fixed">
+  <div class="hero-media"><img src="assets/img/HERO IMAGES/healthcare engineering.jpg" alt="" style="transform: translateY(10%); object-position: right center;"></div>
   <div class="shell hero-inner">
     <p class="eyebrow" data-hero-fade>MESC</p>
     <h1 class="display" data-hero-text>Healthcare Engineering</h1>
