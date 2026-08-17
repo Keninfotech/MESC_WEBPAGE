@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
@@ -44,6 +44,9 @@
     gap: clamp(2.5rem, 5vw, 5rem);
     align-items: center;
     height: clamp(400px, 65vh, 750px);
+  }
+  .hc-fader-inner.is-reversed {
+    grid-template-columns: 1.1fr 1fr;
   }
   .hc-fader-media {
     position: relative;
@@ -130,20 +133,30 @@
   </div>
   <div class="hero-marks" aria-hidden="true"><div class="shell"><span></span><span></span><i class="rule"></i></div></div>
   <div class="shell" style="position:absolute;left:0;right:0;pointer-events:none"><span class="scroll-hint">Scroll</span></div>
-</section><section class="section"><div class="grid-lines"></div><div class="shell"><div class="frows"><div class="frow">
-  <div class="frow-media" data-parallax data-reveal-img><img src="assets/img/broken-down.jpg" alt="MESC" loading="lazy"></div>
-  <div class="frow-copy" data-anim="right">
-    
-    <div class="prose"><p>In healthcare planning, MESC adopts a multifaceted approach that encompasses the design, development, and implementation of comprehensive strategies tailored to meet the specific healthcare needs of a given population. Central to our methodology is the identification of gaps within the existing healthcare system, a crucial step that guides our subsequent actions.</p><p>MESC is committed to developing innovative and effective solutions to bridge these identified gaps. This involves a meticulous process of analysis, where we assess the current healthcare landscape, pinpoint areas of deficiency, and formulate targeted strategies to address these shortcomings. Our team of experts employs a forward-thinking mindset to anticipate future healthcare challenges and ensure that our solutions are not only immediate but also sustainable in the long run.</p><p>Crucially, collaboration with stakeholders is integral to the success of MESC&#x27;s healthcare planning endeavors. We recognize the importance of engaging with a diverse range of stakeholders, including healthcare professionals, government agencies, community leaders, and other relevant entities. This collaborative approach ensures that our strategies are not only well-informed but also aligned with the broader healthcare ecosystem.</p></div>
-  </div>
-</div></div>
+</section><section class="section"><div class="grid-lines"></div><div class="shell">
 
-<div class="hc-scroll-fader">
+<div class="hc-scroll-fader" style="height: 300vh;">
   <div class="hc-fader-inner">
     <div class="hc-fader-media">
-      <img src="assets/img/images_-31-.jpeg" alt="MESC Healthcare Planning" class="hc-fader-img is-active">
-      <img src="assets/img/images---2023-12-21t005150.796.jpeg" alt="MESC Healthcare Planning" class="hc-fader-img">
+      <img src="assets/img/broken-down.jpg" alt="MESC Healthcare Planning" class="hc-fader-img is-active">
+      <img src="assets/img/healthcare.jpg" alt="MESC Healthcare Planning" class="hc-fader-img">
+      <img src="assets/img/healthtech.jpg" alt="MESC Healthcare Planning" class="hc-fader-img">
     </div>
+    <div class="hc-fader-content">
+      <div class="hc-fader-text is-active prose">
+        <p>In healthcare planning, MESC adopts a multifaceted approach that encompasses the design, development, and implementation of comprehensive strategies tailored to meet the specific healthcare needs of a given population. Central to our methodology is the identification of gaps within the existing healthcare system, a crucial step that guides our subsequent actions.</p>
+      </div>
+      <div class="hc-fader-text prose">
+        <p>MESC is committed to developing innovative and effective solutions to bridge these identified gaps. This involves a meticulous process of analysis, where we assess the current healthcare landscape, pinpoint areas of deficiency, and formulate targeted strategies to address these shortcomings. Our team of experts employs a forward-thinking mindset to anticipate future healthcare challenges and ensure that our solutions are not only immediate but also sustainable in the long run.</p>
+      </div>
+      <div class="hc-fader-text prose">
+        <p>Crucially, collaboration with stakeholders is integral to the success of MESC&#x27;s healthcare planning endeavors. We recognize the importance of engaging with a diverse range of stakeholders, including healthcare professionals, government agencies, community leaders, and other relevant entities. This collaborative approach ensures that our strategies are not only well-informed but also aligned with the broader healthcare ecosystem.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="hc-scroll-fader">
+  <div class="hc-fader-inner is-reversed">
     <div class="hc-fader-content">
       <div class="hc-fader-text is-active prose">
         <p>MESC's commitment extends beyond the theoretical framework of planning, as we actively participate in the execution and implementation of healthcare projects. By working closely with stakeholders, we navigate challenges, adapt strategies to evolving circumstances, and ensure the seamless integration of our healthcare solutions into the existing infrastructure.</p>
@@ -151,6 +164,10 @@
       <div class="hc-fader-text prose">
         <p>In essence, healthcare planning at MESC goes beyond the traditional scope. It is a dynamic and collaborative process that combines innovative thinking, strategic analysis, and proactive engagement to create tangible and lasting improvements in healthcare delivery for the benefit of the communities we serve.</p>
       </div>
+    </div>
+    <div class="hc-fader-media">
+      <img src="assets/img/images_-31-.jpeg" alt="MESC Healthcare Planning" class="hc-fader-img is-active">
+      <img src="assets/img/images---2023-12-21t005150.796.jpeg" alt="MESC Healthcare Planning" class="hc-fader-img">
     </div>
   </div>
 </div>
@@ -208,24 +225,29 @@
 document.addEventListener("DOMContentLoaded", function() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
   
-  var fader = document.querySelector('.hc-scroll-fader');
-  if (!fader) return;
+  var faders = document.querySelectorAll('.hc-scroll-fader');
+  if (faders.length === 0) return;
   if (window.matchMedia("(max-width: 959px)").matches) return;
   
-  var imgs = fader.querySelectorAll('.hc-fader-img');
-  var texts = fader.querySelectorAll('.hc-fader-text');
-  
-  ScrollTrigger.create({
-    trigger: fader,
-    start: "top top+=10%",
-    end: "bottom bottom",
-    onUpdate: function(self) {
-      var progress = self.progress;
-      var idx = progress >= 0.5 ? 1 : 0;
-      
-      imgs.forEach(function(img, i) { img.classList.toggle('is-active', i === idx); });
-      texts.forEach(function(txt, i) { txt.classList.toggle('is-active', i === idx); });
-    }
+  faders.forEach(function(fader) {
+    var imgs = fader.querySelectorAll('.hc-fader-img');
+    var texts = fader.querySelectorAll('.hc-fader-text');
+    
+    ScrollTrigger.create({
+      trigger: fader,
+      start: "top top+=10%",
+      end: "bottom bottom",
+      onUpdate: function(self) {
+        var progress = self.progress;
+        var total = imgs.length;
+        if(total === 0) return;
+        var idx = Math.floor(progress * total);
+        if(idx >= total) idx = total - 1;
+        
+        imgs.forEach(function(img, i) { img.classList.toggle('is-active', i === idx); });
+        texts.forEach(function(txt, i) { txt.classList.toggle('is-active', i === idx); });
+      }
+    });
   });
 });
 </script>
