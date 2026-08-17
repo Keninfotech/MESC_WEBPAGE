@@ -304,14 +304,43 @@
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 760px) {
-    .cr-approach { grid-template-columns: 1fr; min-height: auto; border-radius: 16px; }
-    .cr-approach-media { height: 50vw; }
-    .cr-journey { height: auto; padding: 3rem 0; }
-    .cr-journey-sticky { position: relative; height: auto; margin-left: 0; width: 100%; }
-    .cr-journey-content { padding: 3rem 1.5rem; }
-    .cr-phase-card { position: relative; opacity: 1; transform: none; pointer-events: auto; margin-bottom: 2.5rem; }
-    .cr-phase-card.is-past { opacity: 1; transform: none; }
+    /* --- Phase journey --- */
+    .cr-journey { height: auto; margin: 0; padding: 0; }
+    .cr-journey-sticky {
+      position: relative;
+      height: auto;
+      min-height: 100vw;
+      margin-left: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+    .cr-bg-layer { position: absolute; inset: 0; }
+    .cr-journey-scrim {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(5,12,40,0.90) 0%, rgba(5,12,40,0.82) 100%);
+    }
+    .cr-journey-content { position: relative; z-index: 2; padding: 3rem 1.5rem 2.5rem; height: auto; max-width: 100%; }
+    .cr-journey-intro { margin-bottom: 2rem; }
+    .cr-journey-intro h2 { font-size: clamp(1.5rem, 6vw, 2rem); }
+    .cr-journey-intro p { font-size: 0.9rem; }
     .cr-progress-bar { display: none; }
+    .cr-phases-track { width: 100%; height: auto !important; }
+    .cr-phase-card { position: relative !important; opacity: 1 !important; transform: none !important; pointer-events: auto !important; margin-bottom: 2rem; }
+    .cr-phase-card.is-past { opacity: 1 !important; transform: none !important; }
+    .cr-phase-num { font-size: 0.7rem; }
+    .cr-phase-card h3 { font-size: 1.3rem; }
+    .cr-phase-card p { font-size: 0.9rem; }
+
+    /* --- Approach panel --- */
+    .cr-approach { grid-template-columns: 1fr; min-height: auto; border-radius: 16px; margin: 4rem 0; }
+    .cr-approach-media { height: 56vw; min-height: 200px; }
+    .cr-approach-content { padding: 2rem 1.5rem; }
+    .cr-approach-line span { transform: translateY(0) !important; }
+
+    /* --- Principle cards --- */
+    .cr-principles { margin: 4rem 0; }
+    .cr-principles-grid { grid-template-columns: 1fr; }
+    .cr-principle-card { opacity: 1 !important; transform: translateY(0) !important; }
   }
 </style>
 </head>
