@@ -1559,6 +1559,15 @@ body.menu-open {
     gap: clamp(2.5rem, 5vw, 5rem);
     align-items: start
   }
+  .story.story--flipped {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+  }
+  .story.story--flipped .story-list {
+    order: 2;
+  }
+  .story.story--flipped .story-visual {
+    order: 1;
+  }
 }
 
 .story-list {
