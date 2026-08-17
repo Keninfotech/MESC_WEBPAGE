@@ -3078,7 +3078,7 @@ html.no-js [data-hero-fade] {
 .lifecycle-timeline {
   list-style: none;
   padding: 0;
-  margin: 3rem 0 0 0;
+  margin: 1.5rem 0 0 0;
   position: relative;
 }
 
@@ -3095,7 +3095,7 @@ html.no-js [data-hero-fade] {
 .lifecycle-timeline li {
   position: relative;
   padding-left: 3rem;
-  padding-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
 }
 
 .lifecycle-timeline li:last-child {
