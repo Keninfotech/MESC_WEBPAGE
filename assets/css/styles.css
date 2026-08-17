@@ -2232,7 +2232,7 @@ body.menu-open {
 }
 
 .site-foot .lede {
-  color: #a9bbd2
+  color: var(--blue-100)
 }
 
 .foot-grid {
