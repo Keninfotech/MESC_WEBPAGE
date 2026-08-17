@@ -3193,3 +3193,46 @@ html.no-js [data-hero-fade] {
   .story-item:nth-child(6) { order: 11; }
   .story-visual figure:nth-child(6) { order: 12; }
 }
+
+/* --------------------------------------------------------------- Projects Tabs */
+.projects-tabs-container input[type="radio"] {
+  display: none;
+}
+.projects-tabs-container .tab-content {
+  display: none;
+}
+#tab-completed:checked ~ #content-completed,
+#tab-ongoing:checked ~ #content-ongoing {
+  display: block;
+  animation: fadeIn 0.4s ease-in-out;
+}
+.projects-tabs-container .tabs-nav {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+.projects-tabs-container .tab-btn {
+  padding: 0.8rem 2.5rem;
+  border: 1px solid var(--blue-100);
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--blue-100);
+  transition: all 0.3s;
+  background: transparent;
+  user-select: none;
+  font-size: 0.95rem;
+}
+.projects-tabs-container .tab-btn:hover {
+  background: #f0f5fc;
+}
+#tab-completed:checked ~ .tabs-nav label[for="tab-completed"],
+#tab-ongoing:checked ~ .tabs-nav label[for="tab-ongoing"] {
+  background: var(--blue-100);
+  color: #fff;
+  border-color: var(--blue-100);
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}

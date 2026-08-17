@@ -48,7 +48,21 @@
   </div>
   <div class="hero-marks" aria-hidden="true"><div class="shell"><span></span><span></span><i class="rule"></i></div></div>
   <div class="shell" style="position:absolute;left:0;right:0;pointer-events:none"><span class="scroll-hint">Scroll</span></div>
-</section><section class="section section--paper" style="overflow: visible;"><div class="grid-lines"></div><div class="shell">
+</section>
+
+<!-- PROJECTS TABS CONTAINER -->
+<div class="projects-tabs-container" style="position: relative; z-index: 10;">
+  <input type="radio" id="tab-completed" name="project-status" checked>
+  <input type="radio" id="tab-ongoing" name="project-status">
+  
+  <div class="tabs-nav shell" style="padding-top: 3rem; padding-bottom: 1rem;">
+    <label for="tab-completed" class="tab-btn">Completed Projects</label>
+    <label for="tab-ongoing" class="tab-btn">Ongoing Projects</label>
+  </div>
+  
+  <div class="tab-content" id="content-completed">
+
+<section class="section section--paper" style="overflow: visible;"><div class="grid-lines"></div><div class="shell">
   <div class="section-head"><span class="eyebrow">01 / Track record</span>
   <h2 class="h2" data-anim="text">A journey across South India</h2>
   <div class="prose lede" data-anim="blur"><p>From Chennai's diabetic-care clinics to Kerala's coastal wards — scroll through the route we've built, city by city.</p></div></div>
@@ -149,7 +163,25 @@
     </div>
     <div><a class="btn" href="contact-us.html">Get in touch <span class="arw">&rarr;</span></a></div>
   </div>
-</div></section></main><footer class="site-foot">
+</div></section>
+
+  </div> <!-- /#content-completed -->
+
+  <div class="tab-content" id="content-ongoing">
+    <section class="section section--paper" style="min-height: 50vh;">
+      <div class="grid-lines"></div>
+      <div class="shell">
+        <div class="section-head">
+          <span class="eyebrow">Coming Soon</span>
+          <h2 class="h2" data-anim="text">Ongoing Projects</h2>
+          <div class="prose lede" data-anim="blur"><p>Content for ongoing projects will be added here shortly.</p></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div> <!-- /.projects-tabs-container -->
+
+</main><footer class="site-foot">
   <div class="shell">
     <div class="foot-grid">
       <div>
