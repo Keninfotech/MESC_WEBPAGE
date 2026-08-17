@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
@@ -44,6 +44,9 @@
     gap: clamp(2.5rem, 5vw, 5rem);
     align-items: center;
     height: clamp(400px, 65vh, 750px);
+  }
+  .hc-fader-inner.is-reversed {
+    grid-template-columns: 1.1fr 1fr;
   }
   .hc-fader-media {
     position: relative;
@@ -142,16 +145,34 @@
     <div class="hc-fader-content">
       <div class="hc-fader-text is-active prose">
         <p>At MESC, we take pride in offering comprehensive end-to-end medical gas pipeline installation services with an unwavering commitment to safety and hygienic standards. Our approach involves a meticulous process that ensures the reliability and efficiency of medical gas delivery systems, meeting the stringent requirements of healthcare environments.</p>
+      </div>
+      <div class="hc-fader-text prose">
         <p>A key element of our installation services is the use of non-ferrous or non-deteriorating plastic saddles, carefully selected to match the diameter of the pipes. This choice of materials not only ensures durability but also contributes to the prevention of corrosion, maintaining the integrity of the medical gas pipeline system over the long term. Our commitment to quality materials is rooted in the understanding that the reliability of medical gas delivery is critical to patient care.</p>
       </div>
       <div class="hc-fader-text prose">
         <p>Following the installation, our thorough process includes a comprehensive cleaning or purging of the system with gas. This step is crucial for eliminating contaminants and ensuring the purity of the medical gases being delivered. The cleaning or purging process is executed with precision to meet the highest hygiene standards, aligning with the critical nature of healthcare environments where patient safety is paramount.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hc-scroll-fader">
+  <div class="hc-fader-inner is-reversed">
+    <div class="hc-fader-content">
+      <div class="hc-fader-text is-active prose">
         <p>To validate the integrity of the installed medical gas pipeline system, we conduct rigorous testing procedures. The system undergoes a meticulous 24-hour testing phase to assess its performance, identifying and rectifying any potential issues. This testing phase is a crucial step in our commitment to delivering a reliable and fully operational medical gas delivery infrastructure.</p>
       </div>
       <div class="hc-fader-text prose">
         <p>Our end-to-end approach is designed to provide healthcare facilities with a seamlessly integrated medical gas pipeline system that aligns with industry standards and regulatory requirements. We understand the importance of precision and attention to detail in the installation of such critical infrastructure, and our team of experts ensures that every step is executed with the highest level of professionalism and expertise.</p>
+      </div>
+      <div class="hc-fader-text prose">
         <p>MESC&#x27;s medical gas pipeline installation services go beyond the installation process itself. They encompass a comprehensive commitment to safety, hygiene, and quality assurance, ensuring that the healthcare facilities we serve have a reliable and efficient medical gas delivery system that meets the highest industry standards.</p>
       </div>
+    </div>
+    <div class="hc-fader-media">
+      <img src="assets/img/images---2023-12-21t003013.019.jpeg" alt="MESC MGPS Engineering" class="hc-fader-img is-active">
+      <img src="assets/img/images---2023-12-21t003152.135.jpeg" alt="MESC MGPS Engineering" class="hc-fader-img">
+      <img src="assets/img/images---2023-12-21t002803.595.jpeg" alt="MESC MGPS Engineering" class="hc-fader-img">
     </div>
   </div>
 </div>
@@ -209,26 +230,29 @@
 document.addEventListener("DOMContentLoaded", function() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
   
-  var fader = document.querySelector('.hc-scroll-fader');
-  if (!fader) return;
+  var faders = document.querySelectorAll('.hc-scroll-fader');
+  if (faders.length === 0) return;
   if (window.matchMedia("(max-width: 959px)").matches) return;
   
-  var imgs = fader.querySelectorAll('.hc-fader-img');
-  var texts = fader.querySelectorAll('.hc-fader-text');
-  
-  ScrollTrigger.create({
-    trigger: fader,
-    start: "top top+=10%",
-    end: "bottom bottom",
-    onUpdate: function(self) {
-      var progress = self.progress;
-      var idx = 0;
-      if (progress > 0.3) idx = 1;
-      if (progress > 0.65) idx = 2;
-      
-      imgs.forEach(function(img, i) { img.classList.toggle('is-active', i === idx); });
-      texts.forEach(function(txt, i) { txt.classList.toggle('is-active', i === idx); });
-    }
+  faders.forEach(function(fader) {
+    var imgs = fader.querySelectorAll('.hc-fader-img');
+    var texts = fader.querySelectorAll('.hc-fader-text');
+    
+    ScrollTrigger.create({
+      trigger: fader,
+      start: "top top+=10%",
+      end: "bottom bottom",
+      onUpdate: function(self) {
+        var progress = self.progress;
+        var total = imgs.length;
+        if(total === 0) return;
+        var idx = Math.floor(progress * total);
+        if(idx >= total) idx = total - 1;
+        
+        imgs.forEach(function(img, i) { img.classList.toggle('is-active', i === idx); });
+        texts.forEach(function(txt, i) { txt.classList.toggle('is-active', i === idx); });
+      }
+    });
   });
 });
 </script>
