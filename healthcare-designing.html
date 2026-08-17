@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
@@ -44,6 +44,9 @@
     gap: clamp(2.5rem, 5vw, 5rem);
     align-items: center;
     height: clamp(400px, 65vh, 750px);
+  }
+  .hc-fader-inner.is-reversed {
+    grid-template-columns: 1.1fr 1fr;
   }
   .hc-fader-media {
     position: relative;
@@ -142,16 +145,34 @@
     <div class="hc-fader-content">
       <div class="hc-fader-text is-active prose">
         <p>In healthcare designing, MESC places a strong emphasis on crafting physical spaces that seamlessly align with the functional and aesthetic requirements of healthcare facilities. Our approach involves a holistic understanding of the intricate balance between form and function, with the overarching goal of creating environments that enhance patient well-being, ensure staff efficiency, and integrate cutting-edge medical technology.</p>
+      </div>
+      <div class="hc-fader-text prose">
         <p>At the core of MESC&#x27;s healthcare design philosophy is a commitment to promoting patient comfort and safety. We recognize the profound impact that the physical environment has on the overall healthcare experience, and as such, we meticulously plan and design spaces that prioritize the well-being and ease of patients. From waiting areas to patient rooms, our designs are crafted to foster a sense of calm, privacy, and accessibility, ultimately contributing to positive patient outcomes.</p>
       </div>
       <div class="hc-fader-text prose">
         <p>In tandem with patient-centric design, MESC places a premium on improving staff efficiency and productivity. We understand the dynamic nature of healthcare operations and design spaces that facilitate seamless workflows, ensuring that healthcare professionals can deliver optimal care with precision and effectiveness. Our designs take into account the unique needs of different healthcare disciplines, creating environments that support collaboration and streamline daily operations.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hc-scroll-fader">
+  <div class="hc-fader-inner is-reversed">
+    <div class="hc-fader-content">
+      <div class="hc-fader-text is-active prose">
         <p>In essence, MESC&#x27;s healthcare designing is a comprehensive and collaborative endeavor that goes beyond aesthetics, focusing on creating spaces that are not only visually appealing but also functionally efficient, technologically advanced, and compliant with the highest industry standards.</p>
       </div>
       <div class="hc-fader-text prose">
         <p>The integration of the latest medical technology and equipment is a cornerstone of MESC&#x27;s healthcare design strategy. We stay abreast of advancements in medical technology, collaborating closely with manufacturers and industry experts to incorporate state-of-the-art equipment seamlessly into our designs. This not only enhances the functionality of healthcare spaces but also ensures that facilities remain at the forefront of medical innovation.</p>
+      </div>
+      <div class="hc-fader-text prose">
         <p>Adhering to regulatory standards is non-negotiable in MESC&#x27;s healthcare designing process. We work in close collaboration with regulatory bodies to ensure that our designs meet and exceed industry standards, promoting both safety and compliance. This collaborative approach extends to our engagement with a diverse range of stakeholders, including architects, engineers, healthcare providers, and patients, ensuring that the final designs reflect a harmonious integration of expertise and user needs.</p>
       </div>
+    </div>
+    <div class="hc-fader-media">
+      <img src="assets/img/images---2023-12-21t004906.358.jpeg" alt="MESC Healthcare Designing" class="hc-fader-img is-active">
+      <img src="assets/img/images---2023-12-21t004912.960.jpeg" alt="MESC Healthcare Designing" class="hc-fader-img">
+      <img src="assets/img/images---2023-12-21t005017.905.jpeg" alt="MESC Healthcare Designing" class="hc-fader-img">
     </div>
   </div>
 </div>
@@ -209,26 +230,29 @@
 document.addEventListener("DOMContentLoaded", function() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
   
-  var fader = document.querySelector('.hc-scroll-fader');
-  if (!fader) return;
+  var faders = document.querySelectorAll('.hc-scroll-fader');
+  if (faders.length === 0) return;
   if (window.matchMedia("(max-width: 959px)").matches) return;
   
-  var imgs = fader.querySelectorAll('.hc-fader-img');
-  var texts = fader.querySelectorAll('.hc-fader-text');
-  
-  ScrollTrigger.create({
-    trigger: fader,
-    start: "top top+=10%",
-    end: "bottom bottom",
-    onUpdate: function(self) {
-      var progress = self.progress;
-      var idx = 0;
-      if (progress > 0.3) idx = 1;
-      if (progress > 0.65) idx = 2;
-      
-      imgs.forEach(function(img, i) { img.classList.toggle('is-active', i === idx); });
-      texts.forEach(function(txt, i) { txt.classList.toggle('is-active', i === idx); });
-    }
+  faders.forEach(function(fader) {
+    var imgs = fader.querySelectorAll('.hc-fader-img');
+    var texts = fader.querySelectorAll('.hc-fader-text');
+    
+    ScrollTrigger.create({
+      trigger: fader,
+      start: "top top+=10%",
+      end: "bottom bottom",
+      onUpdate: function(self) {
+        var progress = self.progress;
+        var total = imgs.length;
+        if(total === 0) return;
+        var idx = Math.floor(progress * total);
+        if(idx >= total) idx = total - 1;
+        
+        imgs.forEach(function(img, i) { img.classList.toggle('is-active', i === idx); });
+        texts.forEach(function(txt, i) { txt.classList.toggle('is-active', i === idx); });
+      }
+    });
   });
 });
 </script>
