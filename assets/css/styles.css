@@ -56,7 +56,7 @@ html {
 html,
 body {
   max-width: 100%;
-  overflow-x: hidden
+  overflow-x: clip
 }
 
 body {
@@ -3237,3 +3237,6 @@ html.no-js [data-hero-fade] {
   from { opacity: 0; transform: translateY(5px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+main { overflow-x: clip; }
+
