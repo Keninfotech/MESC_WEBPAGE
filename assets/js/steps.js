@@ -107,7 +107,7 @@
     var sec = el("div", "steps steps--" + variant + (flip ? " steps--right" : ""));
     var shell = el("div", "steps-shell");
     sec.appendChild(shell);
-
+    
     var head = el("div", "steps-head");
     head.appendChild(el("div", "steps-kicker", "<i></i><span>Sequence</span>"));
     head.appendChild(el("div", "steps-count", "01 — " + pad(steps.length)));
