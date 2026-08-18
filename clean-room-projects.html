@@ -300,11 +300,36 @@
     border: 1px solid rgba(0,0,0,0.06);
     opacity: 0;
     transform: translateY(50px);
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    transition: box-shadow 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .cr-principle-card::before {
+    content: '';
+    position: absolute;
+    inset: -50%;
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(100, 200, 255, 0.15) 60deg, rgba(255, 100, 255, 0.15) 120deg, transparent 180deg, transparent 360deg);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 0;
   }
   .cr-principle-card:hover {
-    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
-    border-color: rgba(26,86,219,0.2);
+    box-shadow: 0 15px 45px rgba(0,0,0,0.1), 0 0 0 1px rgba(255,255,255,0.5) inset;
+    border-color: rgba(26,86,219,0.3);
+    transform: translateY(-6px);
+  }
+  .cr-principle-card:hover::before {
+    opacity: 1;
+    animation: hologramSpin 4s linear infinite;
+  }
+  .cr-principle-card > * {
+    position: relative;
+    z-index: 1;
+  }
+  @keyframes hologramSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
   }
   .cr-principle-num {
     font-family: 'IBM Plex Mono', monospace;
