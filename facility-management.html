@@ -86,12 +86,14 @@
     height: 100%;
     padding: 0 clamp(1.5rem, 8vw, 8rem);
     max-width: 900px;
+    /* prevent overflow on short viewports */
+    overflow: hidden;
   }
 
   .fm-journey-intro {
     text-align: left;
     padding: 0;
-    margin-bottom: 3rem;
+    margin-bottom: clamp(1rem, 2.5vh, 3rem);
   }
   .fm-journey-intro .eyebrow {
     display: inline-block;
@@ -100,29 +102,42 @@
     letter-spacing: 3px;
     text-transform: uppercase;
     color: rgba(255,255,255,0.6);
-    margin-bottom: 1rem;
+    margin-bottom: clamp(0.4rem, 1vh, 1rem);
   }
   .fm-journey-intro h2 {
-    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-size: clamp(1.4rem, 3vw, 3rem);
     font-weight: 700;
     line-height: 1.15;
     max-width: 28ch;
-    margin: 0 auto 1.2rem 0;
+    margin: 0 auto clamp(0.5rem, 1vh, 1.2rem) 0;
     color: white;
   }
   .fm-journey-intro p {
-    font-size: 1.05rem;
+    font-size: clamp(0.82rem, 1.1vw, 1.05rem);
     max-width: 55ch;
     margin: 0;
     color: rgba(255,255,255,0.75);
-    line-height: 1.7;
+    line-height: 1.6;
+    /* hide on very short viewports so phase cards aren't clipped */
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* On short laptop screens, collapse the intro paragraph */
+  @media (max-height: 750px) and (min-width: 761px) {
+    .fm-journey-intro p { display: none; }
+    .fm-journey-intro { margin-bottom: clamp(0.5rem, 1.5vh, 1.5rem); }
+    .fm-journey-intro h2 { font-size: clamp(1.2rem, 2.5vw, 2.2rem); }
+    .fm-progress-bar { margin: 0 0 clamp(0.5rem, 1.5vh, 1.5rem) 0; }
   }
 
   /* progress track */
   .fm-progress-bar {
     position: relative;
     width: min(500px, 80vw);
-    margin: 0 0 3rem 0;
+    margin: 0 0 clamp(1rem, 2.5vh, 3rem) 0;
     height: 2px;
     background: rgba(255,255,255,0.2);
     border-radius: 2px;
@@ -187,21 +202,26 @@
     font-weight: 500;
     color: rgba(255,255,255,0.6);
     letter-spacing: 2px;
-    margin-bottom: 0.6rem;
+    margin-bottom: clamp(0.3rem, 0.8vh, 0.6rem);
     display: block;
   }
   .fm-phase-card h3 {
-    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-size: clamp(1.1rem, 2.5vw, 2.2rem);
     font-weight: 700;
-    margin-bottom: 1rem;
+    margin-bottom: clamp(0.4rem, 1vh, 1rem);
     line-height: 1.2;
     color: white;
   }
   .fm-phase-card p {
-    font-size: 1rem;
-    line-height: 1.75;
+    font-size: clamp(0.82rem, 1.1vw, 1rem);
+    line-height: 1.65;
     color: rgba(255,255,255,0.82);
     max-width: 55ch;
+    /* clamp lines on short viewports */
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   /* ===== 2. APPROACH — parallax split panel ===== */
@@ -334,27 +354,54 @@
     .fm-journey-sticky {
       position: relative;
       height: auto;
-      min-height: 100vw;
+      min-height: unset;
       margin-left: 0;
       width: 100%;
-      overflow: hidden;
+      overflow: visible;
+      display: block;
     }
-    .fm-bg-layer { position: absolute; inset: 0; }
+    .fm-bg-layer {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+    }
     .fm-journey-scrim {
-      position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(5,12,40,0.90) 0%, rgba(5,12,40,0.82) 100%);
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: rgba(5,12,40,0.88);
     }
-    .fm-journey-content { position: relative; z-index: 2; padding: 3rem 1.5rem 2.5rem; height: auto; max-width: 100%; }
+    .fm-journey-content {
+      position: relative;
+      z-index: 2;
+      padding: 3rem 1.5rem 3rem;
+      height: auto;
+      max-width: 100%;
+      background: linear-gradient(to bottom, rgba(5,12,40,0.88) 0%, rgba(5,12,40,0.92) 100%);
+    }
     .fm-journey-intro { margin-bottom: 2rem; }
     .fm-journey-intro h2 { font-size: clamp(1.5rem, 6vw, 2rem); }
-    .fm-journey-intro p { font-size: 0.9rem; }
+    .fm-journey-intro p { font-size: 0.9rem; line-height: 1.65; }
     .fm-progress-bar { display: none; }
-    .fm-phases-track { width: 100%; height: auto !important; }
-    .fm-phase-card { position: relative !important; opacity: 1 !important; transform: none !important; pointer-events: auto !important; margin-bottom: 2rem; }
+    .fm-phases-track {
+      width: 100%;
+      height: auto !important;
+      position: relative !important;
+    }
+    .fm-phase-card {
+      position: relative !important;
+      opacity: 1 !important;
+      transform: none !important;
+      pointer-events: auto !important;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+    .fm-phase-card:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
     .fm-phase-card.is-past { opacity: 1 !important; transform: none !important; }
     .fm-phase-num { font-size: 0.7rem; }
-    .fm-phase-card h3 { font-size: 1.3rem; }
-    .fm-phase-card p { font-size: 0.9rem; }
+    .fm-phase-card h3 { font-size: 1.25rem; line-height: 1.3; }
+    .fm-phase-card p { font-size: 0.88rem; line-height: 1.65; }
 
     .fm-approach { grid-template-columns: 1fr; min-height: auto; border-radius: 16px; margin: 4rem 0; }
     .fm-approach-media { height: 56vw; min-height: 200px; }
