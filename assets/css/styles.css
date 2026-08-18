@@ -1834,8 +1834,8 @@ body.menu-open {
 }
 
 .marquee-track img {
-  height: 90px;
-  width: 200px;
+  height: 180px;
+  width: 340px;
   object-fit: contain;
   opacity: 1;
   transition: transform .4s;
@@ -2502,8 +2502,8 @@ body.menu-open {
   }
 
   .marquee-track img {
-    height: 64px;
-    width: 140px;
+    height: 110px;
+    width: 230px;
   }
 }
 
