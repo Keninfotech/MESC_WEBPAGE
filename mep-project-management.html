@@ -48,7 +48,7 @@
     position: absolute;
     inset: 0;
     background-size: cover;
-    background-position: center;
+    background-position: right center;
     opacity: 0;
     z-index: 0;
     transform: scale(1.05);
@@ -77,7 +77,7 @@
     justify-content: center;
     height: 100%;
     padding: 0 clamp(1.5rem, 8vw, 8rem);
-    max-width: 900px;
+    max-width: 760px;
   }
   .cr-journey-intro {
     text-align: left;
@@ -100,6 +100,7 @@
     max-width: 28ch;
     margin: 0 0 1.2rem;
     color: white;
+    text-wrap: balance;
   }
   .cr-journey-intro p {
     font-size: 1.05rem;
@@ -149,6 +150,8 @@
     width: min(620px, 80vw);
     margin: 0;
     position: relative;
+    min-height: 240px;
+    height: auto;
   }
   .cr-phase-card {
     position: absolute;
@@ -176,6 +179,7 @@
     margin-bottom: 1rem;
     line-height: 1.2;
     color: white;
+    text-wrap: balance;
   }
   .cr-phase-card p {
     font-size: 1rem;
@@ -432,7 +436,7 @@
             </div>
           </div>
 
-          <div class="cr-phases-track" style="position:relative;height:clamp(220px,30vh,340px);">
+          <div class="cr-phases-track">
             <div class="cr-phase-card is-active" data-phase="0">
               <span class="cr-phase-num">PHASE 01 / 03 &mdash; DESIGN</span>
               <h3>Design Phase</h3>
