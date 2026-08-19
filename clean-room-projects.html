@@ -443,6 +443,62 @@
       margin: 0;
     }
 
+    /* ===== SHORT-VIEWPORT FIX =====
+       On laptops the visible browser height is often much shorter than the
+       screen this was designed on (URL bar / bookmarks bar / smaller panel
+       eat into it). The phase-journey text used to stay full-size and just
+       get clipped off the top/bottom of the screen. These rules shrink the
+       spacing and type first, so the whole block keeps fitting inside the
+       pinned viewport instead of being cut off. */
+    @media (min-width: 761px) and (max-height: 820px) {
+      .cr-journey-intro {
+        margin-bottom: 1.4rem;
+      }
+
+      .cr-journey-intro h2 {
+        font-size: clamp(1.5rem, 3vw, 2.2rem);
+        margin-bottom: .6rem;
+      }
+
+      .cr-journey-intro p {
+        font-size: .92rem;
+        line-height: 1.55;
+      }
+
+      .cr-progress-bar {
+        margin-bottom: 1.4rem;
+      }
+
+      .cr-phase-num {
+        margin-bottom: .4rem;
+      }
+
+      .cr-phase-card h3 {
+        font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+        margin-bottom: .5rem;
+      }
+
+      .cr-phase-card p {
+        font-size: .88rem;
+        line-height: 1.55;
+      }
+    }
+
+    @media (min-width: 761px) and (max-height: 680px) {
+      .cr-journey-content {
+        justify-content: flex-start;
+        padding-top: clamp(4rem, 12vh, 6rem);
+      }
+
+      .cr-journey-intro p {
+        display: none;
+      }
+
+      .cr-journey-intro {
+        margin-bottom: 1rem;
+      }
+    }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 760px) {
 
@@ -908,6 +964,28 @@
     document.addEventListener('DOMContentLoaded', function () {
       if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
       gsap.registerPlugin(ScrollTrigger);
+
+      // ===== 0. Size the phase-text box to the tallest phase so no phase's
+      // text ever gets clipped, and re-check on resize/orientation change =====
+      function sizePhaseTrack() {
+        var track = document.querySelector('.cr-phases-track');
+        if (!track) return;
+        var cards = track.querySelectorAll('.cr-phase-card');
+        var max = 0;
+        cards.forEach(function (c) { max = Math.max(max, c.offsetHeight); });
+        if (max && window.innerWidth > 760) {
+          track.style.minHeight = max + 'px';
+        } else {
+          track.style.minHeight = '';
+        }
+      }
+      sizePhaseTrack();
+      window.addEventListener('load', sizePhaseTrack);
+      var resizeTO;
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTO);
+        resizeTO = setTimeout(sizePhaseTrack, 150);
+      });
 
       // ===== 1. PHASE JOURNEY =====
       var isMobile = window.matchMedia('(max-width:760px)').matches;
