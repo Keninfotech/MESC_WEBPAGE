@@ -182,18 +182,47 @@
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         gap: 1.25rem;
+        position: relative;
+        z-index: 2;
       }
       .principle-card {
-        background-color: #e6f0fa;
+        background-color: #f0f7ff;
+        border: 1px solid rgba(19, 74, 168, 0.05);
         border-radius: 16px;
         padding: 2rem 1.5rem;
         display: flex;
         flex-direction: column;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+      }
+      .principle-card::before {
+        content: '';
+        position: absolute;
+        inset: -50%;
+        background: conic-gradient(from 0deg, transparent 0deg, rgba(100, 200, 255, 0.15) 60deg, rgba(255, 100, 255, 0.15) 120deg, transparent 180deg, transparent 360deg);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s ease;
+        z-index: 0;
       }
       .principle-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(19, 74, 168, 0.1);
+        border-color: rgba(19, 74, 168, 0.15);
+        background-color: #ffffff;
+      }
+      .principle-card:hover::before {
+        opacity: 1;
+        animation: hologramSpin 4s linear infinite;
+      }
+      .principle-card > * {
+        position: relative;
+        z-index: 1;
+      }
+      @keyframes hologramSpin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
       }
       .principle-eyebrow {
         font-size: 0.75rem;
