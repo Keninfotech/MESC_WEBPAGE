@@ -202,7 +202,100 @@
   </div>
 </div>
 
-</div></section><section class="section section--tight"><div class="shell">
+</div></section>
+
+<section class="section">
+  <div class="grid-lines"></div>
+  <div class="shell">
+    <style>
+      .principles-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1.25rem;
+      }
+      .principle-card {
+        background-color: #e6f0fa;
+        border-radius: 16px;
+        padding: 2rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .principle-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      }
+      .principle-eyebrow {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--blue-700);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+      }
+      .principle-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--blue-900);
+        margin-bottom: 1rem;
+        line-height: 1.3;
+      }
+      .principle-desc {
+        font-size: 0.9rem;
+        color: #4a5568;
+        line-height: 1.6;
+      }
+      @media (max-width: 1024px) {
+        .principles-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media (max-width: 768px) {
+        .principles-grid {
+          grid-template-columns: repeat(1, 1fr);
+        }
+      }
+    </style>
+
+    <div style="text-align: center; margin-bottom: 4rem;">
+      <h2 class="h2" style="font-size: clamp(2rem, 4vw, 2.75rem); color: var(--blue-900);">What Guides Our Planning Excellence</h2>
+    </div>
+
+    <div class="principles-grid">
+      <div class="principle-card">
+        <span class="principle-eyebrow">PRINCIPLE 01</span>
+        <h3 class="principle-title">Patient-Centric Workflow</h3>
+        <p class="principle-desc">Prioritizing patient safety and experience by streamlining clinical workflows and ensuring optimal navigation within the facility.</p>
+      </div>
+      
+      <div class="principle-card">
+        <span class="principle-eyebrow">PRINCIPLE 02</span>
+        <h3 class="principle-title">Evidence-Based Design</h3>
+        <p class="principle-desc">Utilizing research and best practices to design environments that directly contribute to improved clinical outcomes.</p>
+      </div>
+      
+      <div class="principle-card">
+        <span class="principle-eyebrow">PRINCIPLE 03</span>
+        <h3 class="principle-title">Future-Proof Adaptability</h3>
+        <p class="principle-desc">Designing flexible spaces that can adapt to evolving medical technologies, expanding services, and changing needs.</p>
+      </div>
+      
+      <div class="principle-card">
+        <span class="principle-eyebrow">PRINCIPLE 04</span>
+        <h3 class="principle-title">Operational Efficiency</h3>
+        <p class="principle-desc">Maximizing resource utilization and minimizing waste through strategic layout planning and reduced transit times.</p>
+      </div>
+      
+      <div class="principle-card">
+        <span class="principle-eyebrow">PRINCIPLE 05</span>
+        <h3 class="principle-title">Regulatory Compliance</h3>
+        <p class="principle-desc">Ensuring every aspect of the facility meets or exceeds stringent healthcare regulations and international safety standards.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight"><div class="shell">
   <div class="cta-band" data-anim="scale">
     <div>
       <h2 class="h2" style="max-width:35ch; font-size:clamp(1.8rem, 3vw, 2.5rem); line-height:1.2;">Let’s build healthcare infrastructure that performs.</h2>
