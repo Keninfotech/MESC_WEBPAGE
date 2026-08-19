@@ -771,21 +771,22 @@ body.menu-open {
   z-index: 50;
 }
 .hero--inner {
-  height: 100svh;
+  min-height: 100svh;
+  height: auto;
   padding: 6rem 0 2rem
 }
 
 /* smaller laptops — reduce hero height so content doesn't clip */
-@media(max-width:1350px) and (min-width:821px) {
+@media(max-width:1600px) and (min-width:821px) {
   .hero {
     height: auto;
-    min-height: 88svh;
+    min-height: min(88svh, 100svh);
     padding-top: 7rem
   }
 
   .hero--inner {
     height: auto;
-    min-height: 80svh
+    min-height: min(80svh, 100svh)
   }
 }
 
@@ -2370,6 +2371,12 @@ body.menu-open {
 }
 
 /* --------------------------------------------------------------- responsive */
+@media(max-width:1200px) {
+  .nav-cta {
+    display: none
+  }
+}
+
 @media(max-width:1100px) {
   .mainnav {
     display: none
@@ -2397,7 +2404,7 @@ body.menu-open {
 /* ---- 14-inch laptop tweaks (1100–1350px) ---- */
 @media(max-width:1350px) and (min-width:1101px) {
   .hero-media {
-    width: 50%;
+    width: 65%;
     clip-path: none
   }
 
@@ -2428,6 +2435,14 @@ body.menu-open {
 
   .pc-body {
     padding: 2.5rem 3rem
+  }
+
+  .philosophy-grid {
+    gap: clamp(2.5rem, 4vw, 4rem)
+  }
+
+  .philosophy-features {
+    padding: clamp(1.5rem, 3vw, 2rem) clamp(1.5rem, 4vw, 2.5rem)
   }
 }
 
@@ -2781,16 +2796,16 @@ html.no-js [data-hero-fade] {
 
 /* Philosophy Section Redesign */
 .philosophy-section {
-  padding: 6rem 0;
+  padding: clamp(3rem, 6vw, 6rem) 0;
   overflow: hidden;
 }
 
 .philosophy-grid {
   display: grid;
   grid-template-columns: 5fr 7fr;
-  gap: 6rem;
+  gap: clamp(2.5rem, 5vw, 6rem);
   align-items: center;
-  margin-bottom: 5rem;
+  margin-bottom: clamp(2.5rem, 4vw, 5rem);
 }
 
 .philosophy-media {
@@ -2899,11 +2914,11 @@ html.no-js [data-hero-fade] {
 
 .philosophy-features {
   background: linear-gradient(145deg, #ffffff, #e1eefa);
-  border-radius: 100px;
-  padding: 3rem 4rem;
+  border-radius: clamp(30px, 5vw, 100px);
+  padding: clamp(1.5rem, 3vw, 3rem) clamp(1.5rem, 4vw, 4rem);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
+  gap: clamp(1rem, 2vw, 2rem);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
 }
 
@@ -3060,7 +3075,7 @@ html.no-js [data-hero-fade] {
   top: -10%;
   left: -5%;
   font-family: var(--f-display);
-  font-size: clamp(12rem, 30vw, 30rem);
+  font-size: clamp(8rem, 18vw, 20rem);
   font-weight: 700;
   line-height: 1;
   color: var(--blue-700);
@@ -3068,6 +3083,8 @@ html.no-js [data-hero-fade] {
   z-index: -1;
   pointer-events: none;
   user-select: none;
+  overflow: hidden;
+  max-width: 100%;
 }
 
 .editorial-media {
