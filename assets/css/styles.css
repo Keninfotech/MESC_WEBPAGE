@@ -723,7 +723,10 @@ body.menu-open {
   grid-template-rows: 1fr
 }
 
-.drawer-sub>* { overflow: hidden; min-height: 0; }
+.drawer-sub>* {
+  overflow: hidden;
+  min-height: 0;
+}
 
 .drawer-sub {
   overflow: hidden
@@ -749,11 +752,12 @@ body.menu-open {
 /* ------------------------------------------------------------------ hero */
 .hero {
   position: relative;
-  height: 100svh;
+  min-height: 100svh;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 6.5rem 0 2rem;
+  padding: clamp(6.5rem, 5rem + 6vh, 8.5rem) 0 clamp(2rem, 1rem + 3vh, 3.5rem);
   overflow: hidden;
   background: var(--blue-700);
   color: #fff;
@@ -770,24 +774,11 @@ body.menu-open {
   background: #ffffff;
   z-index: 50;
 }
+
 .hero--inner {
   min-height: 100svh;
   height: auto;
-  padding: 6rem 0 2rem
-}
-
-/* smaller laptops — reduce hero height so content doesn't clip */
-@media(max-width:1600px) and (min-width:821px) {
-  .hero {
-    height: auto;
-    min-height: min(88svh, 100svh);
-    padding-top: 7rem
-  }
-
-  .hero--inner {
-    height: auto;
-    min-height: min(80svh, 100svh)
-  }
+  padding: clamp(6rem, 4.5rem + 6vh, 8rem) 0 clamp(2rem, 1rem + 3vh, 3.5rem)
 }
 
 .hero-inner {
@@ -812,12 +803,10 @@ body.menu-open {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(
-    90deg,
-    var(--blue-700) 0%,
-    rgba(14, 55, 129, 0.65) 18%,
-    rgba(14, 55, 129, 0) 55%
-  );
+  background: linear-gradient(90deg,
+      var(--blue-700) 0%,
+      rgba(14, 55, 129, 0.65) 18%,
+      rgba(14, 55, 129, 0) 55%);
   box-shadow: inset 2px 0 0 var(--blue-700);
   z-index: 2;
 }
@@ -1304,6 +1293,7 @@ body.menu-open {
   gap: 0.5rem;
   z-index: 2;
 }
+
 #leaders .card-social a,
 .steps-layer .card-social a {
   display: flex;
@@ -1312,16 +1302,18 @@ body.menu-open {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.92);
+  background: rgba(255, 255, 255, 0.92);
   color: #0a2559;
   transition: background .25s, transform .25s;
 }
+
 #leaders .card-social a:hover,
 .steps-layer .card-social a:hover {
   background: #0a2559;
   color: #fff;
   transform: translateY(-2px);
 }
+
 #leaders .card-social svg,
 .steps-layer .card-social svg {
   width: 16px;
@@ -1570,12 +1562,15 @@ body.menu-open {
     gap: clamp(2.5rem, 5vw, 5rem);
     align-items: start
   }
+
   .story.story--flipped {
     grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
   }
+
   .story.story--flipped .story-list {
     order: 2;
   }
+
   .story.story--flipped .story-visual {
     order: 1;
   }
@@ -3104,13 +3099,17 @@ html.no-js [data-hero-fade] {
 }
 
 .editorial-media::before {
-  top: -10px; bottom: -10px;
-  left: 20px; right: 20px;
+  top: -10px;
+  bottom: -10px;
+  left: 20px;
+  right: 20px;
 }
 
 .editorial-media::after {
-  top: 20px; bottom: 20px;
-  left: -10px; right: -10px;
+  top: 20px;
+  bottom: 20px;
+  left: -10px;
+  right: -10px;
 }
 
 .editorial-media img {
@@ -3208,12 +3207,13 @@ html.no-js [data-hero-fade] {
 }
 
 @media (max-width: 960px) {
+
   .editorial-chapter,
   .editorial-chapter.reverse {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
-  
+
   .editorial-chapter.reverse .editorial-content {
     order: 0;
   }
@@ -3223,19 +3223,24 @@ html.no-js [data-hero-fade] {
     order: -1;
   }
 }
+
 @media (max-width: 959px) {
   .story {
     display: flex;
     flex-direction: column;
     gap: 0;
   }
-  .story-list, .story-visual {
+
+  .story-list,
+  .story-visual {
     display: contents;
   }
+
   .story-visual {
     background: transparent;
     max-height: none;
   }
+
   .story-visual figure {
     position: relative;
     opacity: 1 !important;
@@ -3243,24 +3248,61 @@ html.no-js [data-hero-fade] {
     border-radius: var(--r-md);
     overflow: hidden;
   }
+
   .story-item {
     opacity: 1 !important;
     padding-left: 0 !important;
     margin-top: 2rem !important;
     margin-bottom: 1rem !important;
   }
-  .story-item:nth-child(1) { order: 1; }
-  .story-visual figure:nth-child(1) { order: 2; }
-  .story-item:nth-child(2) { order: 3; }
-  .story-visual figure:nth-child(2) { order: 4; }
-  .story-item:nth-child(3) { order: 5; }
-  .story-visual figure:nth-child(3) { order: 6; }
-  .story-item:nth-child(4) { order: 7; }
-  .story-visual figure:nth-child(4) { order: 8; }
-  .story-item:nth-child(5) { order: 9; }
-  .story-visual figure:nth-child(5) { order: 10; }
-  .story-item:nth-child(6) { order: 11; }
-  .story-visual figure:nth-child(6) { order: 12; }
+
+  .story-item:nth-child(1) {
+    order: 1;
+  }
+
+  .story-visual figure:nth-child(1) {
+    order: 2;
+  }
+
+  .story-item:nth-child(2) {
+    order: 3;
+  }
+
+  .story-visual figure:nth-child(2) {
+    order: 4;
+  }
+
+  .story-item:nth-child(3) {
+    order: 5;
+  }
+
+  .story-visual figure:nth-child(3) {
+    order: 6;
+  }
+
+  .story-item:nth-child(4) {
+    order: 7;
+  }
+
+  .story-visual figure:nth-child(4) {
+    order: 8;
+  }
+
+  .story-item:nth-child(5) {
+    order: 9;
+  }
+
+  .story-visual figure:nth-child(5) {
+    order: 10;
+  }
+
+  .story-item:nth-child(6) {
+    order: 11;
+  }
+
+  .story-visual figure:nth-child(6) {
+    order: 12;
+  }
 }
 
 
@@ -3268,19 +3310,23 @@ html.no-js [data-hero-fade] {
 .projects-tabs-container input[type="radio"] {
   display: none;
 }
+
 .projects-tabs-container .tab-content {
   display: none;
 }
-#tab-completed:checked ~ #content-completed,
-#tab-ongoing:checked ~ #content-ongoing {
+
+#tab-completed:checked~#content-completed,
+#tab-ongoing:checked~#content-ongoing {
   display: block;
   animation: fadeIn 0.4s ease-in-out;
 }
+
 .projects-tabs-container .tabs-nav {
   display: flex;
   gap: 1rem;
   justify-content: center;
 }
+
 .projects-tabs-container .tab-btn {
   padding: 0.8rem 2.5rem;
   border: 1px solid var(--blue-700);
@@ -3293,19 +3339,30 @@ html.no-js [data-hero-fade] {
   user-select: none;
   font-size: 0.95rem;
 }
+
 .projects-tabs-container .tab-btn:hover {
   background: #f0f5fc;
 }
-#tab-completed:checked ~ .tabs-nav label[for="tab-completed"],
-#tab-ongoing:checked ~ .tabs-nav label[for="tab-ongoing"] {
+
+#tab-completed:checked~.tabs-nav label[for="tab-completed"],
+#tab-ongoing:checked~.tabs-nav label[for="tab-ongoing"] {
   background: var(--blue-700);
   color: #fff;
   border-color: var(--blue-700);
 }
+
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(5px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-main { overflow-x: clip; }
-
+main {
+  overflow-x: clip;
+}
